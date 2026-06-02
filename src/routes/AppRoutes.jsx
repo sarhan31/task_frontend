@@ -40,9 +40,9 @@ const FiredAccount = () => {
   };
 
   return (
-    <div className="min-h-screen bg-red-950 px-6 py-10 text-white">
+    <div className="min-h-screen bg-red-950 px-3 py-4 text-white sm:px-6 sm:py-10">
       <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-3xl items-center">
-        <div className="w-full rounded-[28px] border border-red-300/30 bg-white/10 p-8 shadow-[0_24px_80px_rgba(0,0,0,0.32)] backdrop-blur">
+        <div className="w-full rounded-[24px] border border-red-300/30 bg-white/10 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.32)] backdrop-blur sm:rounded-[28px] sm:p-8">
           <p className="text-xs font-bold uppercase tracking-[0.28em] text-red-100">
             Account Terminated
           </p>

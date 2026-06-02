@@ -52,7 +52,7 @@ export const Toaster = () => {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50 space-y-2">
+    <div className="fixed inset-x-3 top-3 z-[1000] space-y-2 sm:left-auto sm:right-4 sm:top-4 sm:w-auto">
       <AnimatePresence>
         {toasts.map((toast) => {
           const Icon = icons[toast.type];
@@ -62,7 +62,7 @@ export const Toaster = () => {
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className={`flex items-center gap-3 p-4 rounded-lg border shadow-lg min-w-[300px] ${colors[toast.type]}`}
+              className={`flex w-full items-center gap-3 rounded-lg border p-3 shadow-lg sm:min-w-[300px] sm:max-w-md sm:p-4 ${colors[toast.type]}`}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
               <p className="flex-1 text-sm font-medium">{toast.message}</p>

@@ -28,7 +28,7 @@ const ForgotPassword = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-10 relative z-10"
+        className="relative z-10 w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl sm:p-10"
       >
         {!sent ? (
           <>

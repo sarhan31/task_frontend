@@ -366,7 +366,7 @@ const UserManagement = () => {
           </Table.Body>
         </Table>
       ) : (
-        <div className="bg-white/80 border border-[#ead8cb] rounded-[28px] p-12 text-center max-w-md mx-auto space-y-3">
+        <div className="mx-auto max-w-md space-y-3 rounded-[28px] border border-[#ead8cb] bg-white/80 p-6 text-center sm:p-12">
           <p className="text-slate-800 font-bold">No teammates found</p>
           <p className="text-xs text-slate-400">
             Create a user or adjust filters above to match team rosters.

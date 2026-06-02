@@ -313,7 +313,7 @@ const Reports = () => {
                 key="placeholder"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="bg-white/80 border border-[#ead8cb] rounded-[28px] p-12 text-center max-w-sm mx-auto space-y-3"
+                className="mx-auto max-w-sm space-y-3 rounded-[28px] border border-[#ead8cb] bg-white/80 p-6 text-center sm:p-12"
               >
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-50 text-slate-400 border border-[#e6d6ca]">
                   <BarChart3 className="h-5 w-5" />

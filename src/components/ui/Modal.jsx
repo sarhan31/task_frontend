@@ -34,20 +34,20 @@ const Modal = ({ isOpen, onClose, title, children, size = 'md', hideHeader = fal
             className="fixed inset-0 bg-black bg-opacity-50 z-40"
           />
           <div className="fixed inset-0 z-50 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4">
+            <div className="flex min-h-full items-end justify-center p-2 sm:items-center sm:p-4">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 className={cn(
-                  'bg-white rounded-[24px] shadow-xl w-full overflow-hidden',
+                  'max-h-[calc(100vh-1rem)] w-full overflow-y-auto rounded-t-[24px] bg-white shadow-xl sm:max-h-[calc(100vh-2rem)] sm:rounded-[24px]',
                   sizes[size],
                   className
                 )}
               >
                 {!hideHeader && (
-                  <div className="flex items-center justify-between p-6 border-b border-gray-100">
-                    <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+                  <div className="flex items-center justify-between gap-3 border-b border-gray-100 p-4 sm:p-6">
+                    <h3 className="min-w-0 truncate text-lg font-bold text-gray-900 sm:text-xl">{title}</h3>
                     <button
                       onClick={onClose}
                       className="text-gray-400 hover:text-gray-600 transition-colors bg-gray-50 hover:bg-gray-100 rounded-full p-2"
@@ -56,7 +56,7 @@ const Modal = ({ isOpen, onClose, title, children, size = 'md', hideHeader = fal
                     </button>
                   </div>
                 )}
-                <div className={cn(!noPadding && "p-6")}>{children}</div>
+                <div className={cn(!noPadding && "p-4 sm:p-6")}>{children}</div>
               </motion.div>
             </div>
           </div>

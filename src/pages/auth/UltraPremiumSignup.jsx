@@ -73,7 +73,7 @@ const UltraPremiumSignup = () => {
   };
 
   return (
-    <div className="h-screen bg-[#f7e3cf] flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="relative flex min-h-screen items-center justify-center overflow-x-hidden bg-[#f7e3cf] p-3 sm:p-4">
       <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-[#efbf91]/30 rounded-full blur-3xl opacity-60 animate-float" />
       <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#13856f]/10 rounded-full blur-3xl opacity-80 animate-float animation-delay-400" />
 
@@ -83,9 +83,9 @@ const UltraPremiumSignup = () => {
         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-full max-w-5xl overflow-hidden rounded-[2rem] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.12)]"
       >
-        <div className="grid min-h-[640px] lg:grid-cols-2">
+        <div className="grid lg:min-h-[640px] lg:grid-cols-2">
           {/* LEFT – illustration (same as login) */}
-          <div className="relative flex flex-col justify-between overflow-hidden bg-[linear-gradient(180deg,_#fff6ee_0%,_#ffe7d6_100%)] p-10">
+          <div className="relative hidden flex-col justify-between overflow-hidden bg-[linear-gradient(180deg,_#fff6ee_0%,_#ffe7d6_100%)] p-10 lg:flex">
             <div className="absolute -top-20 -right-20 w-72 h-72 bg-white/50 rounded-full" />
             <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-[#13856f]/10 rounded-full" />
 
@@ -134,7 +134,7 @@ const UltraPremiumSignup = () => {
           </div>
 
           {/* RIGHT – form */}
-          <div className="flex flex-col justify-center px-10 py-8 overflow-hidden">
+          <div className="flex flex-col justify-center overflow-hidden px-5 py-7 sm:px-8 lg:px-10 lg:py-8">
             <motion.div
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
@@ -145,7 +145,7 @@ const UltraPremiumSignup = () => {
               }}
             >
               <div className="mb-5">
-                <h2 className="text-4xl font-display font-bold text-gray-900 mb-2">
+                <h2 className="mb-2 text-3xl font-display font-bold text-gray-900 sm:text-4xl">
                   Create Account
                 </h2>
                 <p className="text-gray-500">Start your free trial today</p>

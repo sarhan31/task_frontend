@@ -44,8 +44,8 @@ const Drawer = ({
             )}
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-[#f4ddd0] px-6 py-5 bg-white/60 backdrop-blur-sm sticky top-0 z-10">
-              <h2 className="text-lg font-bold text-slate-800 font-display">
+            <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-[#f4ddd0] bg-white/60 px-4 py-4 backdrop-blur-sm sm:px-6 sm:py-5">
+              <h2 className="min-w-0 truncate text-base font-bold text-slate-800 font-display sm:text-lg">
                 {title || 'Details'}
               </h2>
               <button
@@ -57,7 +57,7 @@ const Drawer = ({
             </div>
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto px-6 py-6 custom-scrollbar relative z-0">
+            <div className="relative z-0 flex-1 overflow-y-auto px-4 py-4 custom-scrollbar sm:px-6 sm:py-6">
               {children}
             </div>
           </motion.div>

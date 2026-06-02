@@ -86,7 +86,7 @@ const PendingApprovalsPanel = () => {
 
   if (pendingTasks.length === 0) {
     return (
-      <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-10 text-center">
+      <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-6 text-center sm:p-10">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#e8f6f2]">
           <CheckCircle className="h-8 w-8 text-[#13856f]" />
         </div>

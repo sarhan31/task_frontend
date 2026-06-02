@@ -110,7 +110,7 @@ const UltraDashboard = () => {
       <div
         className={cn(
           "transition-all duration-300",
-          sidebarCollapsed ? "ml-20" : "ml-72",
+          sidebarCollapsed ? "lg:ml-20" : "lg:ml-72",
         )}
       >
         <div className="sticky top-0 z-40 border-b border-[#ead8cb] bg-[#fff8f3]/90 backdrop-blur-sm">

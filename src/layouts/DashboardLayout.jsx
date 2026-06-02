@@ -55,7 +55,7 @@ const DashboardLayout = () => {
         style={{ paddingLeft: isMobile ? 0 : (sidebarOpen ? 256 : 80) }}
       >
         <Navbar onToggleSidebar={() => setSidebarOpen((prev) => !prev)} />
-        <main className="flex-1 overflow-y-auto px-6 py-6 custom-scrollbar">
+        <main className="flex-1 overflow-y-auto px-3 py-4 custom-scrollbar sm:px-4 sm:py-5 lg:px-6 lg:py-6">
           <Outlet />
         </main>
       </div>

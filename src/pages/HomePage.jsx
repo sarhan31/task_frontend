@@ -245,11 +245,11 @@ const HomePage = () => {
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="w-full max-w-[1320px] rounded-[28px] border border-white/80 bg-white/90 px-5 py-4 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+            className="w-full max-w-[1320px] rounded-[22px] border border-white/80 bg-white/90 px-3 py-3 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:rounded-[28px] sm:px-5 sm:py-4"
           >
             <div className="flex items-center justify-between gap-4">
-              <Link to="/" className="flex items-center">
-                <BrandLogo />
+              <Link to="/" className="flex min-w-0 items-center">
+                <BrandLogo size="sm" />
               </Link>
 
               <nav className="hidden items-center gap-8 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-5 py-2.5 lg:flex">
@@ -265,7 +265,7 @@ const HomePage = () => {
                 ))}
               </nav>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
                 <Link
                   to={isAuthenticated ? dashboardPath : '/login'}
                   className="hidden rounded-2xl px-4 py-2.5 text-base font-semibold text-slate-700 transition hover:bg-[#f6efe8] sm:inline-flex"
@@ -274,7 +274,7 @@ const HomePage = () => {
                 </Link>
                 <Link
                   to={isAuthenticated ? dashboardPath : '/signup'}
-                  className="inline-flex items-center justify-center rounded-2xl bg-[#0f6c57] px-5 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(15,108,87,0.24)] transition hover:bg-[#0c5d4b]"
+                  className="inline-flex items-center justify-center rounded-2xl bg-[#0f6c57] px-3 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(15,108,87,0.24)] transition hover:bg-[#0c5d4b] sm:px-5 sm:py-3 sm:text-base"
                 >
                   {isAuthenticated ? 'Open Workspace' : 'Start Free'}
                 </Link>
@@ -296,7 +296,7 @@ const HomePage = () => {
                 Automation Engine
               </div>
 
-              <h1 className="mt-6 font-display text-[3.05rem] font-black leading-[0.94] text-[#07111f] sm:text-[4.35rem] xl:text-[5.1rem]">
+              <h1 className="mt-6 font-display text-[2.45rem] font-black leading-[0.98] text-[#07111f] sm:text-[4.35rem] sm:leading-[0.94] xl:text-[5.1rem]">
                 Run every task like a
                 <br />
                 <span className="bg-[linear-gradient(90deg,_#0f6c57,_#158f78,_#b77728)] bg-clip-text text-transparent">
@@ -334,9 +334,9 @@ const HomePage = () => {
                 ))}
               </div>
 
-              <div className="mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-[28px] border border-white/80 bg-white/80 shadow-[0_16px_40px_rgba(15,23,42,0.07)] backdrop-blur">
+              <div className="mt-8 grid max-w-xl grid-cols-1 overflow-hidden rounded-[28px] border border-white/80 bg-white/80 shadow-[0_16px_40px_rgba(15,23,42,0.07)] backdrop-blur sm:grid-cols-3">
                 {heroStats.map((stat) => (
-                  <div key={stat.label} className="border-r border-slate-200/80 px-4 py-5 last:border-r-0">
+                  <div key={stat.label} className="border-b border-slate-200/80 px-4 py-4 last:border-b-0 sm:border-b-0 sm:border-r sm:py-5 sm:last:border-r-0">
                     <p className="font-display text-2xl font-black text-slate-950 sm:text-3xl">{stat.value}</p>
                     <p className="mt-1 text-xs font-bold uppercase text-slate-500">{stat.label}</p>
                   </div>
@@ -643,7 +643,7 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55 }}
-            className="mt-20 rounded-[34px] border border-white/80 bg-white p-8 shadow-[0_18px_45px_rgba(15,23,42,0.08)]"
+            className="mt-20 rounded-[34px] border border-white/80 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.08)] sm:p-8"
           >
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
               <div className="max-w-3xl">
@@ -693,7 +693,7 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55 }}
-            className="mt-20 overflow-hidden rounded-[34px] border border-white/80 bg-white px-8 py-10 text-slate-900 shadow-[0_24px_60px_rgba(15,23,42,0.09)]"
+            className="mt-20 overflow-hidden rounded-[34px] border border-white/80 bg-white px-5 py-7 text-slate-900 shadow-[0_24px_60px_rgba(15,23,42,0.09)] sm:px-8 sm:py-10"
           >
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
               <div>

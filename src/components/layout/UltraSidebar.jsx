@@ -77,7 +77,7 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
       initial={false}
       animate={{ width: collapsed ? 88 : 288 }}
       transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-      className="fixed left-0 top-0 z-50 flex h-screen flex-col border-r border-[#ead8cb] bg-[#fff8f3] shadow-[0_20px_60px_rgba(90,55,20,0.10)]"
+      className="fixed left-0 top-0 z-50 hidden h-screen flex-col border-r border-[#ead8cb] bg-[#fff8f3] shadow-[0_20px_60px_rgba(90,55,20,0.10)] lg:flex"
     >
       <div className="pointer-events-none absolute left-[-3rem] top-[-3rem] h-40 w-40 rounded-full bg-[#efbf91]/20 blur-3xl" />
       <div className="pointer-events-none absolute bottom-[-2rem] right-[-2rem] h-32 w-32 rounded-full bg-[#13856f]/10 blur-3xl" />

@@ -2,8 +2,8 @@ import { cn } from '@utils/cn';
 
 const Table = ({ children, className }) => {
   return (
-    <div className="w-full overflow-x-auto rounded-2xl border border-[#ead8cb] bg-white/80 backdrop-blur-sm shadow-soft">
-      <table className={cn('w-full border-collapse text-left text-sm', className)}>
+    <div className="w-full max-w-full overflow-x-auto rounded-2xl border border-[#ead8cb] bg-white/80 backdrop-blur-sm shadow-soft custom-scrollbar">
+      <table className={cn('w-full min-w-max border-collapse text-left text-sm', className)}>
         {children}
       </table>
     </div>
@@ -44,7 +44,7 @@ const TableHead = ({ children, className }) => {
   return (
     <th
       className={cn(
-        'px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400 font-display',
+        'whitespace-nowrap px-3 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400 font-display sm:px-4 lg:px-6 lg:py-4 lg:tracking-[0.16em]',
         className
       )}
     >
@@ -55,7 +55,7 @@ const TableHead = ({ children, className }) => {
 
 const TableCell = ({ children, className }) => {
   return (
-    <td className={cn('px-6 py-4 text-slate-700 font-medium', className)}>
+    <td className={cn('px-3 py-3 text-slate-700 font-medium sm:px-4 lg:px-6 lg:py-4', className)}>
       {children}
     </td>
   );
