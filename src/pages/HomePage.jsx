@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   AlarmClock,
   ArrowRight,
@@ -176,6 +176,7 @@ const HomePage = () => {
   const [isRunningDemo, setIsRunningDemo] = useState(false);
   const [isDeploying, setIsDeploying] = useState(false);
   const [nodeLibraryExpanded, setNodeLibraryExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState('builder');
   const dashboardPath = user?.role === 'admin' ? '/admin' : '/dashboard';
   const currentYear = new Date().getFullYear();
 
@@ -232,49 +233,57 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-clip bg-[#f5f7f2] text-slate-900">
+    <div className="min-h-screen lg:h-screen lg:overflow-hidden w-full overflow-x-clip bg-[#f5f7f2] text-slate-900 flex flex-col justify-between">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(135deg,_rgba(15,108,87,0.12)_0%,_rgba(255,255,255,0)_36%,_rgba(236,185,111,0.18)_100%)]" />
         <div className="absolute inset-x-0 top-0 h-[760px] bg-[linear-gradient(180deg,_#ffffff_0%,_rgba(255,255,255,0.62)_54%,_rgba(255,255,255,0)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.045)_1px,_transparent_1px),linear-gradient(90deg,_rgba(15,23,42,0.045)_1px,_transparent_1px)] bg-[size:72px_72px] opacity-50" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1320px] flex-col px-4 pb-12 pt-4 sm:px-6 lg:px-8">
-        <div className="sticky top-3 z-40 mb-6 flex justify-center sm:top-4 lg:mb-8">
+      <div className="relative z-10 mx-auto flex flex-1 w-full max-w-[1320px] flex-col px-4 pb-3 pt-3 sm:px-6 lg:px-8 lg:overflow-hidden">
+        <div className="sticky top-3 z-40 mb-3 flex justify-center sm:top-4">
           <motion.header
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="w-full rounded-[22px] border border-white/80 bg-white/92 px-3 py-3 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:rounded-[28px] sm:px-5 sm:py-4"
+            className="w-full rounded-[22px] border border-white/80 bg-white/92 px-3 py-2.5 shadow-[0_12px_36px_rgba(15,23,42,0.06)] backdrop-blur-xl sm:rounded-[28px] sm:px-5 sm:py-3"
           >
             <div className="flex flex-wrap items-center justify-between gap-4 lg:flex-nowrap">
               <Link to="/" className="flex min-w-0 items-center">
                 <BrandLogo size="sm" />
               </Link>
 
-              <nav className="hidden items-center gap-8 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-5 py-2.5 lg:flex">
-                {navItems.map((item, index) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="flex items-center gap-1 text-sm font-bold text-slate-600 transition hover:text-[#0f6c57]"
-                  >
-                    {item.label}
-                    {index === 0 && <ChevronDown className="h-4 w-4" />}
-                  </a>
-                ))}
+              <nav className="hidden items-center gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-4 py-2 lg:flex">
+                {navItems.map((item) => {
+                  const tabId = item.label.toLowerCase();
+                  const isActive = activeTab === tabId;
+                  return (
+                    <button
+                      key={item.label}
+                      onClick={() => setActiveTab(isActive ? 'builder' : tabId)}
+                      className={cn(
+                        "flex items-center gap-1 text-xs font-bold transition px-3.5 py-1.5 rounded-xl",
+                        isActive 
+                          ? "bg-[#0f6c57] text-white" 
+                          : "text-slate-600 hover:text-[#0f6c57]"
+                      )}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                })}
               </nav>
 
               <div className="flex w-full items-center justify-end gap-2 sm:gap-3 lg:w-auto">
                 <Link
                   to={isAuthenticated ? dashboardPath : '/login'}
-                  className="hidden rounded-2xl px-4 py-2.5 text-base font-semibold text-slate-700 transition hover:bg-[#f6efe8] sm:inline-flex"
+                  className="hidden rounded-2xl px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-[#f6efe8] sm:inline-flex"
                 >
                   {isAuthenticated ? 'Dashboard' : 'Sign In'}
                 </Link>
                 <Link
                   to={isAuthenticated ? dashboardPath : '/signup'}
-                  className="inline-flex items-center justify-center rounded-2xl bg-[#0f6c57] px-3 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(15,108,87,0.24)] transition hover:bg-[#0c5d4b] sm:px-5 sm:py-3 sm:text-base"
+                  className="inline-flex items-center justify-center rounded-2xl bg-[#0f6c57] px-3 py-2 text-xs font-semibold text-white shadow-[0_8px_20px_rgba(15,108,87,0.2)] transition hover:bg-[#0c5d4b] sm:px-5 sm:py-2.5 sm:text-sm"
                 >
                   {isAuthenticated ? 'Open Workspace' : 'Start Free'}
                 </Link>
@@ -283,20 +292,20 @@ const HomePage = () => {
           </motion.header>
         </div>
 
-        <main className="flex-1 overflow-x-clip px-2 pb-10 pt-2">
-          <section className="grid gap-6 xl:min-h-[calc(100vh-9rem)] xl:grid-cols-[minmax(0,0.92fr)_minmax(500px,1.08fr)] xl:items-center">
+        <main className="flex-1 flex flex-col justify-center overflow-y-auto lg:overflow-hidden px-2 py-1">
+          <section className="grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(500px,1.08fr)] items-center">
             <motion.section
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
-              className="flex min-w-0 max-w-2xl flex-col justify-center"
+              className="flex min-w-0 max-w-2xl flex-col justify-center lg:py-2"
             >
-              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#b7d8ce] bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.22em] text-[#0f6c57] shadow-[0_10px_30px_rgba(15,108,87,0.10)]">
-                <Sparkles className="h-4 w-4" />
+              <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#b7d8ce] bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#0f6c57] shadow-[0_8px_20px_rgba(15,108,87,0.06)]">
+                <Sparkles className="h-3.5 w-3.5" />
                 Automation Engine
               </div>
 
-              <h1 className="mt-5 font-display text-[2.35rem] font-black leading-[0.98] text-[#07111f] sm:text-[3.8rem] sm:leading-[0.95] xl:text-[4.55rem]">
+              <h1 className="mt-3 font-display text-[1.85rem] font-black leading-[1.05] text-[#07111f] sm:text-[2.8rem] sm:leading-[1.02] xl:text-[3.55rem]">
                 Run every task like a
                 <br />
                 <span className="bg-[linear-gradient(90deg,_#0f6c57,_#158f78,_#b77728)] bg-clip-text text-transparent">
@@ -304,41 +313,41 @@ const HomePage = () => {
                 </span>
               </h1>
 
-              <p className="mt-5 max-w-xl text-base leading-8 text-slate-600 sm:text-[1.15rem] sm:leading-[1.6] xl:text-[1.28rem]">
+              <p className="mt-3 max-w-lg text-xs leading-relaxed text-slate-600 sm:text-sm lg:text-base lg:leading-normal">
                 Tasky Studio brings task assignment, approvals, AI summaries, deadline protection, and team routing into one sharp operating system for work.
               </p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-4 flex flex-col gap-2.5 sm:flex-row">
                 <Link
                   to={isAuthenticated ? dashboardPath : '/signup'}
-                  className="inline-flex items-center justify-center gap-3 rounded-[24px] bg-[#0f6c57] px-7 py-4 text-base font-semibold text-white shadow-[0_16px_34px_rgba(15,108,87,0.24)] transition hover:bg-[#0c5d4b] sm:px-8 sm:py-5 sm:text-lg"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#0f6c57] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(15,108,87,0.18)] transition hover:bg-[#0c5d4b] sm:px-6 sm:py-3.5 sm:text-base"
                 >
                   {isAuthenticated ? 'Open Workspace' : 'Explore Workflows'}
-                  <ArrowRight className="h-5 w-5" />
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   to={isAuthenticated ? dashboardPath : '/login'}
-                  className="inline-flex items-center justify-center gap-3 rounded-[24px] border border-[#d9e8e1] bg-white/85 px-7 py-4 text-base font-semibold text-slate-700 transition hover:border-[#0f6c57]/30 hover:text-[#0f6c57] sm:px-8 sm:py-5 sm:text-lg"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#d9e8e1] bg-white/85 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#0f6c57]/30 hover:text-[#0f6c57] sm:px-6 sm:py-3.5 sm:text-base"
                 >
-                  <Play className="h-5 w-5" />
+                  <Play className="h-4 w-4" />
                   {isAuthenticated ? 'Dashboard' : 'Sign In'}
                 </Link>
               </div>
 
-              <div className="mt-7 flex flex-wrap gap-x-8 gap-y-3">
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                 {featurePills.map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-base font-medium text-slate-600">
-                    <Check className="h-4 w-4 text-[#0f6c57]" />
+                  <div key={item} className="flex items-center gap-1.5 text-xs font-medium text-slate-600 sm:text-sm">
+                    <Check className="h-3.5 w-3.5 text-[#0f6c57]" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-7 grid max-w-xl grid-cols-1 overflow-hidden rounded-[28px] border border-white/80 bg-white/80 shadow-[0_16px_40px_rgba(15,23,42,0.07)] backdrop-blur sm:grid-cols-3">
+              <div className="mt-4 grid max-w-lg grid-cols-3 overflow-hidden rounded-[20px] border border-white/80 bg-white/80 shadow-[0_12px_30px_rgba(15,23,42,0.05)] backdrop-blur">
                 {heroStats.map((stat) => (
-                  <div key={stat.label} className="border-b border-slate-200/80 px-4 py-4 last:border-b-0 sm:border-b-0 sm:border-r sm:py-5 sm:last:border-r-0">
-                    <p className="font-display text-2xl font-black text-slate-950 sm:text-3xl">{stat.value}</p>
-                    <p className="mt-1 text-xs font-bold uppercase text-slate-500">{stat.label}</p>
+                  <div key={stat.label} className="border-r border-slate-200/80 px-3 py-2.5 last:border-r-0 sm:py-3 text-center sm:text-left">
+                    <p className="font-display text-lg font-black text-slate-950 sm:text-2xl">{stat.value}</p>
+                    <p className="mt-0.5 text-[10px] font-bold uppercase text-slate-500 tracking-wider leading-none">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -348,459 +357,435 @@ const HomePage = () => {
               initial={{ opacity: 0, y: 22, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="relative flex min-w-0 items-center"
+              className="relative flex min-w-0 items-center justify-center lg:py-2"
             >
-              <div className="relative w-full min-w-0 overflow-hidden rounded-[34px] border border-white/90 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.14)]">
-                <div className="flex flex-col gap-4 border-b border-slate-200 px-6 py-5 lg:flex-row lg:items-center lg:justify-between">
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 text-lg font-bold text-slate-900">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#0f6c57] text-white">
-                        <Workflow className="h-5 w-5" />
-                      </span>
-                      Workflow Builder
-                      <span className="text-slate-400">/</span>
-                      <span className="truncate font-medium text-slate-500">Task Approval Pipeline</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-[#e8f6f2] px-3 py-1.5 text-sm font-semibold text-[#0f6c57]">
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#22b573]" />
-                      Saved
-                    </span>
-                    <button
-                      onClick={handleTestRun}
-                      className="rounded-2xl border border-[#e6ddd3] bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-[#0f6c57]/30 hover:text-[#0f6c57]"
+              <div className="relative w-full min-w-0 overflow-hidden rounded-[24px] border border-white/90 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.1)] h-[460px] lg:h-[490px] flex flex-col justify-between">
+                <AnimatePresence mode="wait">
+                  {activeTab === 'builder' && (
+                    <motion.div
+                      key="builder"
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col h-full"
                     >
-                      {isRunningDemo ? 'Running...' : 'Test Run'}
-                    </button>
-                    <button
-                      onClick={handleDeploy}
-                      className="rounded-2xl bg-[#0f6c57] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0c5d4b]"
-                    >
-                      {isDeploying ? 'Deploying...' : 'Deploy'}
-                    </button>
-                  </div>
-                </div>
-
-                <div className="grid gap-3 border-b border-slate-200 bg-[#f8fbf8] px-6 py-4 md:grid-cols-3">
-                  {proofPoints.map((point) => {
-                    const Icon = point.icon;
-                    return (
-                      <div key={point.label} className="flex items-center gap-3 rounded-2xl border border-white bg-white px-4 py-3 shadow-sm">
-                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#edf5f1] text-[#0f6c57]">
-                          <Icon className="h-4 w-4" />
-                        </span>
-                        <span className="text-sm font-bold text-slate-700">{point.label}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="grid min-h-[420px] md:grid-cols-[180px_minmax(0,1fr)] xl:min-h-[470px]">
-                  <aside className="border-r border-slate-200 bg-[#fbf8f2] p-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                      Node Library
-                    </p>
-                    <div className="mt-5 space-y-3">
-                      {workflowGroups.map((group, index) => (
-                        <div
-                          key={group.name}
-                          className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-3 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0f6c57]/30"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className={cn('flex h-10 w-10 items-center justify-center rounded-2xl', group.tone)}>
-                              {index === 0 && <Play className="h-4 w-4" />}
-                              {index === 1 && <Workflow className="h-4 w-4" />}
-                              {index === 2 && <Layers3 className="h-4 w-4" />}
-                              {index === 3 && <CheckCircle2 className="h-4 w-4" />}
-                              {index === 4 && <Bot className="h-4 w-4" />}
-                            </div>
-                            <div>
-                              <p className="text-sm font-semibold text-slate-800">{group.name}</p>
-                              <p className="text-xs text-slate-400">{group.count}</p>
-                            </div>
+                      {/* Header */}
+                      <div className="flex items-center justify-between border-b border-slate-200 px-5 py-3.5 bg-white">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5 text-base font-bold text-slate-900">
+                            <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-[#0f6c57] text-white">
+                              <Workflow className="h-4 w-4" />
+                            </span>
+                            <span className="truncate">Workflow Builder</span>
+                            <span className="text-slate-300 font-normal">/</span>
+                            <span className="truncate font-medium text-slate-500 text-xs sm:text-sm">Task Approval Pipeline</span>
                           </div>
                         </div>
-                      ))}
-                    </div>
-
-                    <button
-                      onClick={handleNodeToggle}
-                      className="mt-5 w-full rounded-2xl bg-[#eef4ef] px-4 py-3 text-sm font-semibold text-[#0f6c57] transition hover:bg-[#e2f1eb]"
-                    >
-                      {nodeLibraryExpanded ? 'Reset preview' : '+ Add node'}
-                    </button>
-                  </aside>
-
-                  <div className="relative overflow-hidden bg-[linear-gradient(180deg,_#ffffff_0%,_#f7fbf9_100%)] p-5">
-                    <div className="absolute right-10 top-10 z-10 rounded-2xl border border-[#d9ebe4] bg-white/95 px-4 py-3 shadow-[0_14px_30px_rgba(15,23,42,0.08)]">
-                      <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                        <Clock3 className="h-4 w-4 text-[#0f6c57]" />
-                        Approval SLA
-                      </div>
-                      <p className="mt-1 text-2xl font-bold text-slate-900">4h 12m</p>
-                    </div>
-
-                    <div className="absolute bottom-8 left-8 z-10 rounded-2xl border border-[#f0d8ba] bg-[#fff7ec] px-4 py-3 shadow-sm">
-                      <div className="flex items-center gap-2 text-sm font-bold text-[#9a5b12]">
-                        <Zap className="h-4 w-4" />
-                        7 automations active
-                      </div>
-                    </div>
-
-                    {visibleConnectionLines.map((line) => (
-                      <div key={line} className={cn('absolute rounded-full bg-[#dbe7f7]', line)} />
-                    ))}
-
-                    {visibleWorkflowNodes.map((node) => (
-                      <div
-                        key={node.title}
-                        className={cn(
-                          'absolute w-[118px] rounded-[22px] border px-3 py-4 shadow-[0_8px_20px_rgba(90,55,20,0.08)]',
-                          node.className
-                        )}
-                      >
-                        <div className={cn('mb-3 flex h-9 w-9 items-center justify-center rounded-2xl text-white', node.iconWrap)}>
-                          {node.subtitle === 'Trigger' && <Play className="h-4 w-4" />}
-                          {node.subtitle === 'Logic' && <Workflow className="h-4 w-4" />}
-                          {node.subtitle === 'Approval' && <CheckCircle2 className="h-4 w-4" />}
-                          {node.subtitle === 'Action' && <Layers3 className="h-4 w-4" />}
+                        <div className="flex items-center gap-2">
+                          <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#e8f6f2] px-2 py-1 text-xs font-semibold text-[#0f6c57]">
+                            <span className="h-2 w-2 rounded-full bg-[#22b573]" />
+                            Saved
+                          </span>
+                          <button
+                            onClick={handleTestRun}
+                            className="rounded-xl border border-[#e6ddd3] bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-[#0f6c57]/30 hover:text-[#0f6c57]"
+                          >
+                            {isRunningDemo ? 'Running...' : 'Test Run'}
+                          </button>
+                          <button
+                            onClick={handleDeploy}
+                            className="rounded-xl bg-[#0f6c57] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#0c5d4b]"
+                          >
+                            {isDeploying ? 'Deploying...' : 'Deploy'}
+                          </button>
                         </div>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
-                          {node.subtitle}
-                        </p>
-                        <p className="mt-1 text-sm font-semibold leading-4 text-slate-800">
-                          {node.title}
-                        </p>
                       </div>
-                    ))}
 
-                    <div className="absolute left-[50%] top-[42%] flex -translate-x-1/2 items-center justify-center rounded-full border border-[#dbe7f7] bg-white px-2 py-1 text-[10px] font-bold text-slate-500 shadow-sm">
-                      {'>'} 10L
-                    </div>
-                    <div className="absolute left-[50%] top-[64%] flex -translate-x-1/2 items-center justify-center rounded-full border border-[#dbe7f7] bg-white px-2 py-1 text-[10px] font-bold text-slate-500 shadow-sm">
-                      {'<'}= 10L
-                    </div>
-                  </div>
-                </div>
+                      {/* Proof points */}
+                      <div className="grid gap-2 border-b border-slate-200 bg-[#f8fbf8] px-5 py-2.5 grid-cols-3">
+                        {proofPoints.map((point) => {
+                          const Icon = point.icon;
+                          return (
+                            <div key={point.label} className="flex items-center gap-2 rounded-xl border border-white bg-white px-2.5 py-1.5 shadow-sm">
+                              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#edf5f1] text-[#0f6c57]">
+                                <Icon className="h-3.5 w-3.5" />
+                              </span>
+                              <span className="text-[10px] font-bold text-slate-700 truncate">{point.label}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Canvas and Sidebar */}
+                      <div className="flex-1 grid grid-cols-[140px_minmax(0,1fr)] overflow-hidden">
+                        {/* Sidebar */}
+                        <aside className="border-r border-slate-200 bg-[#fbf8f2] p-3 flex flex-col justify-between overflow-y-auto">
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 mb-3">
+                              Node Library
+                            </p>
+                            <div className="space-y-2">
+                              {workflowGroups.map((group, index) => (
+                                <div
+                                  key={group.name}
+                                  className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-2 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0f6c57]/30"
+                                >
+                                  <div className={cn('flex h-8 w-8 shrink-0 items-center justify-center rounded-xl', group.tone)}>
+                                    {index === 0 && <Play className="h-3.5 w-3.5" />}
+                                    {index === 1 && <Workflow className="h-3.5 w-3.5" />}
+                                    {index === 2 && <Layers3 className="h-3.5 w-3.5" />}
+                                    {index === 3 && <CheckCircle2 className="h-3.5 w-3.5" />}
+                                    {index === 4 && <Bot className="h-3.5 w-3.5" />}
+                                  </div>
+                                  <div className="min-w-0">
+                                    <p className="text-xs font-semibold text-slate-800 truncate leading-none">{group.name}</p>
+                                    <p className="text-[9px] text-slate-400 mt-0.5 leading-none">{group.count}</p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={handleNodeToggle}
+                            className="mt-3 w-full rounded-xl bg-[#eef4ef] py-2 text-xs font-semibold text-[#0f6c57] transition hover:bg-[#e2f1eb]"
+                          >
+                            {nodeLibraryExpanded ? 'Reset Canvas' : '+ Add Node'}
+                          </button>
+                        </aside>
+
+                        {/* Canvas */}
+                        <div className="relative overflow-hidden bg-[linear-gradient(180deg,_#ffffff_0%,_#f7fbf9_100%)] p-4">
+                          {/* SLA Box */}
+                          <div className="absolute right-3 top-3 z-10 rounded-xl border border-[#d9ebe4] bg-white/95 px-3 py-1.5 shadow-sm">
+                            <div className="flex items-center gap-1 text-[10px] font-semibold text-slate-700">
+                              <Clock3 className="h-3 w-3 text-[#0f6c57]" />
+                              SLA
+                            </div>
+                            <p className="text-sm font-bold text-slate-900 leading-none mt-0.5">4h 12m</p>
+                          </div>
+
+                          {/* Active automations */}
+                          <div className="absolute bottom-3 left-3 z-10 rounded-xl border border-[#f0d8ba] bg-[#fff7ec] px-3 py-1.5 shadow-sm">
+                            <div className="flex items-center gap-1 text-[10px] font-bold text-[#9a5b12] leading-none">
+                              <Zap className="h-3 w-3 shrink-0" />
+                              7 active
+                            </div>
+                          </div>
+
+                          {/* Connection Lines */}
+                          {visibleConnectionLines.map((line) => (
+                            <div key={line} className={cn('absolute rounded-full bg-[#dbe7f7]', line)} />
+                          ))}
+
+                          {/* Nodes */}
+                          {visibleWorkflowNodes.map((node) => (
+                            <div
+                              key={node.title}
+                              className={cn(
+                                'absolute w-[94px] rounded-xl border px-2 py-2.5 shadow-sm transition hover:shadow-md bg-white',
+                                node.className
+                              )}
+                            >
+                              <div className={cn('mb-1.5 flex h-7 w-7 items-center justify-center rounded-lg text-white', node.iconWrap)}>
+                                {node.subtitle === 'Trigger' && <Play className="h-3.5 w-3.5" />}
+                                {node.subtitle === 'Logic' && <Workflow className="h-3.5 w-3.5" />}
+                                {node.subtitle === 'Approval' && <CheckCircle2 className="h-3.5 w-3.5" />}
+                                {node.subtitle === 'Action' && <Layers3 className="h-3.5 w-3.5" />}
+                              </div>
+                              <p className="text-[8px] font-bold uppercase tracking-wider text-slate-400 leading-none">
+                                {node.subtitle}
+                              </p>
+                              <p className="mt-0.5 text-xs font-semibold leading-tight text-slate-800 truncate">
+                                {node.title}
+                              </p>
+                            </div>
+                          ))}
+
+                          <div className="absolute left-[50%] top-[42%] flex -translate-x-1/2 items-center justify-center rounded-full border border-[#dbe7f7] bg-white px-1.5 py-0.5 text-[8px] font-bold text-slate-500 shadow-sm leading-none">
+                            {'>'} 10L
+                          </div>
+                          <div className="absolute left-[50%] top-[64%] flex -translate-x-1/2 items-center justify-center rounded-full border border-[#dbe7f7] bg-white px-1.5 py-0.5 text-[8px] font-bold text-slate-500 shadow-sm leading-none">
+                            {'<'}= 10L
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {activeTab === 'platform' && (
+                    <motion.div
+                      key="platform"
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col h-full bg-[#fbfdfb] p-5"
+                    >
+                      <div className="flex items-center justify-between mb-3 border-b border-slate-100 pb-3">
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0f6c57] leading-none">
+                            Built For Task Management
+                          </p>
+                          <h3 className="text-lg font-extrabold text-slate-900 mt-1">Platform Capabilities</h3>
+                        </div>
+                        <button
+                          onClick={() => setActiveTab('builder')}
+                          className="text-xs font-semibold text-slate-500 hover:text-[#0f6c57] flex items-center gap-1 transition"
+                        >
+                          ← Back to Canvas
+                        </button>
+                      </div>
+
+                      <div className="flex-1 grid grid-cols-2 gap-3 overflow-y-auto pr-1">
+                        {platformFeatures.map((feature) => {
+                          const Icon = feature.icon;
+                          return (
+                            <div
+                              key={feature.title}
+                              className="flex flex-col rounded-2xl border border-slate-200 bg-white p-3 shadow-sm hover:border-[#0f6c57]/30 transition"
+                            >
+                              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0f6c57] text-white shrink-0">
+                                <Icon className="h-4 w-4" />
+                              </div>
+                              <h4 className="mt-2 text-sm font-bold text-slate-900 leading-tight">{feature.title}</h4>
+                              <p className="mt-1 text-[11px] leading-relaxed text-slate-500 flex-1">{feature.description}</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#0f6c57] bg-[#edf5f1] px-2 py-0.5 rounded-full">
+                          Live workflow capability
+                        </span>
+                        <Link
+                          to="/signup"
+                          className="inline-flex items-center gap-1 text-xs font-bold text-[#0f6c57] hover:underline"
+                        >
+                          Sign Up to Try <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {activeTab === 'templates' && (
+                    <motion.div
+                      key="templates"
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col h-full bg-[#fbfdfb] p-5"
+                    >
+                      <div className="flex items-center justify-between mb-3 border-b border-slate-100 pb-3">
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0f6c57] leading-none">
+                            Ready-to-launch templates
+                          </p>
+                          <h3 className="text-lg font-extrabold text-slate-900 mt-1">SaaS Workflow Layouts</h3>
+                        </div>
+                        <button
+                          onClick={() => setActiveTab('builder')}
+                          className="text-xs font-semibold text-slate-500 hover:text-[#0f6c57] flex items-center gap-1 transition"
+                        >
+                          ← Back to Canvas
+                        </button>
+                      </div>
+
+                      <div className="flex-1 space-y-2.5 overflow-y-auto pr-1">
+                        {workflowTemplates.map((template) => {
+                          const Icon = template.icon;
+                          return (
+                            <div
+                              key={template.title}
+                              className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm hover:border-[#0f6c57]/30 transition animate-fade-in"
+                            >
+                              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#e8f6f2] text-[#0f6c57]">
+                                <Icon className="h-5 w-5" />
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center justify-between gap-2">
+                                  <h4 className="text-sm font-bold text-slate-900 truncate leading-tight">{template.title}</h4>
+                                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#0f6c57] bg-[#edf5f1] px-1.5 py-0.5 rounded">
+                                    {template.tag}
+                                  </span>
+                                </div>
+                                <p className="mt-1 text-[11px] leading-relaxed text-slate-500 truncate sm:whitespace-normal sm:line-clamp-2">
+                                  {template.description}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <div className="text-[11px] text-slate-500">
+                          Launch speed: <strong className="text-slate-900">5 min</strong> average setup.
+                        </div>
+                        <Link
+                          to="/signup"
+                          className="inline-flex items-center gap-1 rounded-xl bg-[#0f6c57] px-3.5 py-1.5 font-bold text-white shadow-sm hover:bg-[#0c5d4b] transition"
+                        >
+                          Use Template <ArrowUpRight className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {activeTab === 'pricing' && (
+                    <motion.div
+                      key="pricing"
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col h-full bg-[#fbfdfb] p-5"
+                    >
+                      <div className="flex items-center justify-between mb-3 border-b border-slate-100 pb-3">
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0f6c57] leading-none">
+                            Flexible Tiering
+                          </p>
+                          <h3 className="text-lg font-extrabold text-slate-900 mt-1">Simple Pricing Options</h3>
+                        </div>
+                        <button
+                          onClick={() => setActiveTab('builder')}
+                          className="text-xs font-semibold text-slate-500 hover:text-[#0f6c57] flex items-center gap-1 transition"
+                        >
+                          ← Back to Canvas
+                        </button>
+                      </div>
+
+                      <div className="flex-1 grid grid-cols-3 gap-2.5 items-stretch overflow-y-auto pr-1">
+                        {pricingTiers.map((tier) => (
+                          <div
+                            key={tier.name}
+                            className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-[#fffaf6] p-3 shadow-sm hover:border-[#0f6c57]/30 transition"
+                          >
+                            <div>
+                              <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400">{tier.name}</p>
+                              <p className="mt-1 text-xl font-extrabold text-slate-950 leading-none">{tier.price}</p>
+                              <p className="mt-2 text-[10px] leading-relaxed text-slate-500 leading-normal">{tier.detail}</p>
+                            </div>
+                            <Link
+                              to="/signup"
+                              className="mt-3 w-full text-center rounded-xl bg-[#0f6c57] py-1.5 text-[10px] font-bold text-white hover:bg-[#0c5d4b] transition block"
+                            >
+                              Select
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <span className="text-[10px] font-semibold text-[#0f6c57]">No credit card required to start</span>
+                        <Link
+                          to="/signup"
+                          className="inline-flex items-center gap-1 text-xs font-bold text-[#0f6c57] hover:underline"
+                        >
+                          Create Workspace <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {activeTab === 'about' && (
+                    <motion.div
+                      key="about"
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col h-full bg-[#fbfdfb] p-5"
+                    >
+                      <div className="flex items-center justify-between mb-3 border-b border-slate-100 pb-3">
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0f6c57] leading-none">
+                            About Tasky Studio
+                          </p>
+                          <h3 className="text-lg font-extrabold text-slate-900 mt-1">Our Core Value</h3>
+                        </div>
+                        <button
+                          onClick={() => setActiveTab('builder')}
+                          className="text-xs font-semibold text-slate-500 hover:text-[#0f6c57] flex items-center gap-1 transition"
+                        >
+                          ← Back to Canvas
+                        </button>
+                      </div>
+
+                      <div className="flex-1 flex flex-col justify-between gap-3 overflow-y-auto pr-1">
+                        <div className="rounded-xl border border-[#e7ddd2] bg-[#fffaf6] p-3 text-xs leading-relaxed text-slate-700">
+                          <p className="font-semibold text-slate-900 mb-1">A cleaner way to run work across teams</p>
+                          We combine task tracking, approvals, automation, and AI assistance so your team can move faster with fewer manual follow-ups.
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="rounded-xl border border-[#eadfd4] bg-white p-2.5 shadow-sm text-center">
+                            <p className="text-lg font-black text-[#0f6c57] leading-none">30+</p>
+                            <p className="mt-1 text-[9px] uppercase tracking-wider text-slate-400 font-bold leading-none">Workflow nodes</p>
+                          </div>
+                          <div className="rounded-xl border border-[#eadfd4] bg-white p-2.5 shadow-sm text-center">
+                            <p className="text-lg font-black text-[#0f6c57] leading-none">4</p>
+                            <p className="mt-1 text-[9px] uppercase tracking-wider text-slate-400 font-bold leading-none">Execution layers</p>
+                          </div>
+                          <div className="rounded-xl border border-[#eadfd4] bg-white p-2.5 shadow-sm text-center">
+                            <p className="text-lg font-black text-[#0f6c57] leading-none">AI</p>
+                            <p className="mt-1 text-[9px] uppercase tracking-wider text-slate-400 font-bold leading-none">Assistance</p>
+                          </div>
+                          <div className="rounded-xl border border-[#eadfd4] bg-white p-2.5 shadow-sm text-center">
+                            <p className="text-lg font-black text-[#0f6c57] leading-none">24/7</p>
+                            <p className="mt-1 text-[9px] uppercase tracking-wider text-slate-400 font-bold leading-none">Coverage</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <span className="text-[10px] text-slate-500 font-medium">Empowering operations and managers</span>
+                        <Link
+                          to="/signup"
+                          className="inline-flex items-center gap-1 font-bold text-[#0f6c57] hover:underline"
+                        >
+                          Learn More <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </motion.section>
           </section>
-
-          <motion.section
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.5 }}
-            className="mt-10 rounded-[30px] border border-white/80 bg-white/82 px-6 py-5 shadow-[0_18px_46px_rgba(15,23,42,0.07)] backdrop-blur"
-          >
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-              <p className="text-sm font-bold uppercase tracking-[0.22em] text-slate-500">
-                Trusted by teams that move fast
-              </p>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {trustedTeams.map((team) => (
-                  <div
-                    key={team}
-                    className="flex min-h-14 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm font-black text-slate-700"
-                  >
-                    {team}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.section>
-
-          <motion.section
-            id="platform"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
-            className="mt-16 rounded-[36px] border border-white/80 bg-white px-6 py-10 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:px-8 lg:px-12 lg:py-14"
-          >
-            <div className="mx-auto max-w-3xl text-center">
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#0f6c57]">
-                Built For Task Management
-              </p>
-              <h2 className="mt-5 font-display text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
-                Assign, automate, approve, and follow through.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-slate-600 sm:text-xl">
-                Everything in Tasky Studio is designed around real team execution, from intake to approval to delivery.
-              </p>
-            </div>
-
-            <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {platformFeatures.map((feature) => {
-                const Icon = feature.icon;
-                return (
-                  <div
-                    key={feature.title}
-                    className="flex min-h-[280px] flex-col rounded-[28px] border border-slate-200 bg-[#fbfdfb] p-6 shadow-[0_12px_30px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:border-[#0f6c57]/35 hover:shadow-[0_20px_44px_rgba(15,108,87,0.12)]"
-                  >
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0f6c57] text-white">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="mt-6 text-2xl font-bold text-slate-900">{feature.title}</h3>
-                    <p className="mt-4 text-base leading-8 text-slate-600">{feature.description}</p>
-                    <div className="mt-auto pt-6">
-                      <span className="inline-flex rounded-full bg-[#edf5f1] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#0f6c57]">
-                        Live workflow capability
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </motion.section>
-
-          <motion.section
-            id="templates"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
-            className="mt-20 rounded-[34px] border border-white/80 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.08)] sm:p-8 lg:grid lg:grid-cols-[minmax(340px,0.88fr)_minmax(0,1.12fr)] lg:gap-10"
-          >
-            <div className="flex h-full flex-col rounded-[30px] border border-[#deece5] bg-[linear-gradient(180deg,_#f7fbf9_0%,_#eef7f3_100%)] p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]">
-              <div className="inline-flex w-fit items-center gap-2 rounded-full bg-[#edf5f1] px-4 py-2 text-sm font-semibold text-[#0f6c57]">
-                <LayoutDashboard className="h-4 w-4" />
-                Ready-to-launch templates
-              </div>
-              <h2 className="mt-8 max-w-md font-display text-[3.15rem] font-bold leading-[1.02] tracking-[-0.03em] text-slate-900">
-                Start from flows your team will actually use.
-              </h2>
-              <p className="mt-6 max-w-lg text-[1.15rem] leading-9 text-slate-600">
-                Instead of generic automation blocks, Tasky Studio helps teams launch workflows for assignments, escalations, status changes, and reporting.
-              </p>
-              <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
-                <div className="rounded-[24px] border border-[#dcebe4] bg-white p-5 shadow-[0_10px_24px_rgba(15,108,87,0.04)]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0f6c57]">Template speed</p>
-                  <p className="mt-3 text-[2.2rem] font-bold leading-none text-slate-900">5 min</p>
-                  <p className="mt-3 text-sm leading-7 text-slate-500">Average time to launch a workflow from a starter layout.</p>
-                </div>
-                <div className="rounded-[24px] border border-[#ece1d7] bg-white p-5 shadow-[0_10px_24px_rgba(90,55,20,0.04)]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Best for</p>
-                  <p className="mt-3 text-xl font-bold leading-8 text-slate-900">Ops, managers, and fast-moving teams</p>
-                </div>
-              </div>
-              <Link
-                to="/signup"
-                className="mt-10 inline-flex w-fit items-center gap-2 rounded-[20px] bg-[#0f6c57] px-7 py-4 text-base font-semibold text-white shadow-[0_14px_30px_rgba(15,108,87,0.18)] transition hover:bg-[#0c5d4b]"
-              >
-                Start with a template
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="mt-8 grid gap-5 lg:mt-0">
-              {workflowTemplates.map((template) => {
-                const Icon = template.icon;
-                return (
-                  <div
-                    key={template.title}
-                    className="group grid min-w-0 gap-5 rounded-[28px] border border-slate-200 bg-[linear-gradient(180deg,_#ffffff_0%,_#fff8ef_100%)] p-6 shadow-[0_14px_32px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:border-[#0f6c57]/30 hover:shadow-[0_20px_44px_rgba(15,23,42,0.10)] md:grid-cols-[88px_minmax(0,1fr)_auto] md:items-start"
-                  >
-                    <div className="flex items-start justify-between gap-4 md:block">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-[20px] bg-[#e8f6f2] text-[#0f6c57] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span className="rounded-full border border-[#d8e9e2] bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#0f6c57] md:hidden">
-                          Live
-                        </span>
-                        <span className="rounded-full bg-[#edf5f1] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#0f6c57] md:hidden">
-                          {template.tag}
-                        </span>
-                      </div>
-                      <h3 className="mt-3 text-[1.8rem] font-bold leading-[1.1] tracking-[-0.02em] text-slate-900 md:mt-1">
-                        {template.title}
-                      </h3>
-                      <p className="mt-4 max-w-2xl text-[1.02rem] leading-8 text-slate-500">
-                        {template.description}
-                      </p>
-                    </div>
-                    <div className="hidden items-start justify-end gap-3 md:flex">
-                      <span className="rounded-full border border-[#d8e9e2] bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#0f6c57]">
-                        Live
-                      </span>
-                      <span className="inline-flex rounded-full bg-[#edf5f1] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#0f6c57]">
-                        {template.tag}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </motion.section>
-
-          <motion.section
-            id="pricing"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
-            className="mt-20 rounded-[34px] border border-white/80 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.08)] sm:p-8"
-          >
-            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
-              <div className="max-w-3xl">
-                <p className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.22em] text-[#0f6c57]">
-                  <BarChart3 className="h-4 w-4" />
-                  Pricing Direction
-                </p>
-                <h2 className="mt-4 font-display text-4xl font-bold text-slate-900">
-                  Flexible for teams growing from simple tasks to automated operations.
-                </h2>
-                <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-500">
-                  Clear tiers, no visual clutter, and enough flexibility to support teams from first launch to scaled delivery.
-                </p>
-              </div>
-              <div className="rounded-[28px] border border-[#dcebe4] bg-[#f3faf7] p-6">
-                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#0f6c57]">Get started</p>
-                <p className="mt-3 text-lg font-semibold leading-8 text-slate-800">
-                  Launch your workspace and shape the plan around your team size.
-                </p>
-                <Link
-                  to="/signup"
-                  className="mt-6 inline-flex items-center gap-2 rounded-[18px] bg-[#0f6c57] px-5 py-3 text-base font-semibold text-white transition hover:bg-[#0c5d4b]"
-                >
-                  Create your workspace
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="mt-10 grid gap-6 lg:grid-cols-3">
-              {pricingTiers.map((tier) => (
-                <div
-                  key={tier.name}
-                  className="flex min-h-[220px] flex-col rounded-[26px] border border-slate-200 bg-[#fffaf6] p-7 transition hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(15,23,42,0.08)]"
-                >
-                  <p className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400">{tier.name}</p>
-                  <p className="mt-4 font-display text-4xl font-bold text-slate-900">{tier.price}</p>
-                  <p className="mt-4 text-base leading-8 text-slate-500">{tier.detail}</p>
-                </div>
-              ))}
-            </div>
-          </motion.section>
-
-          <motion.section
-            id="about"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
-            className="mt-20 overflow-hidden rounded-[34px] border border-white/80 bg-white px-5 py-7 text-slate-900 shadow-[0_24px_60px_rgba(15,23,42,0.09)] sm:px-8 sm:py-10"
-          >
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#0f6c57]">
-                  About Tasky Studio
-                </p>
-                <h2 className="mt-4 font-display text-4xl font-bold leading-tight text-slate-900">
-                  A cleaner way to run work across teams, not just track tasks.
-                </h2>
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-                  We combine task tracking, approvals, automation, and AI assistance so your team can move faster with fewer manual follow-ups.
-                </p>
-                <div className="mt-8 rounded-[24px] border border-[#e7ddd2] bg-[#fffaf6] p-5 shadow-sm">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Why teams choose it</p>
-                  <p className="mt-3 text-xl font-semibold leading-9 text-slate-800">
-                    One place to plan work, move approvals, automate follow-ups, and keep everyone aligned.
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div className="rounded-[24px] border border-[#eadfd4] bg-[#fffaf6] p-6 shadow-sm">
-                  <p className="text-4xl font-bold text-slate-900">30+</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.16em] text-slate-500">Workflow nodes</p>
-                </div>
-                <div className="rounded-[24px] border border-[#eadfd4] bg-[#fffaf6] p-6 shadow-sm">
-                  <p className="text-4xl font-bold text-slate-900">4</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.16em] text-slate-500">Core execution layers</p>
-                </div>
-                <div className="rounded-[24px] border border-[#eadfd4] bg-[#fffaf6] p-6 shadow-sm">
-                  <p className="text-4xl font-bold text-slate-900">AI</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.16em] text-slate-500">Built into workflows</p>
-                </div>
-                <div className="rounded-[24px] border border-[#eadfd4] bg-[#fffaf6] p-6 shadow-sm">
-                  <p className="text-4xl font-bold text-slate-900">24/7</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.16em] text-slate-500">Automation coverage</p>
-                </div>
-              </div>
-            </div>
-          </motion.section>
-          <motion.section
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.55 }}
-            className="my-10 overflow-hidden rounded-[34px] bg-[#071f1a] px-7 py-8 text-white shadow-[0_28px_70px_rgba(7,31,26,0.26)] sm:px-10 lg:px-12"
-          >
-            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-[#bce9dc]">
-                  <Rocket className="h-4 w-4" />
-                  Ready when your team is
-                </div>
-                <h2 className="mt-5 max-w-3xl font-display text-3xl font-black leading-tight sm:text-5xl">
-                  Launch a cleaner task workflow before the next status meeting.
-                </h2>
-                <p className="mt-4 max-w-2xl text-lg leading-8 text-white/70">
-                  Start with templates, invite your team, and automate the recurring handoffs that slow everyone down.
-                </p>
-              </div>
-              <Link
-                to={isAuthenticated ? dashboardPath : '/signup'}
-                className="inline-flex items-center justify-center gap-3 rounded-[22px] bg-white px-7 py-4 text-base font-black text-[#071f1a] shadow-[0_18px_36px_rgba(0,0,0,0.18)] transition hover:bg-[#e8f6f2]"
-              >
-                {isAuthenticated ? 'Open Workspace' : 'Start Free'}
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
-          </motion.section>
         </main>
 
-        <footer className="px-2 py-8">
-          <div className="flex flex-col gap-6 rounded-[28px] border border-slate-200 bg-white px-6 py-6 shadow-[0_14px_34px_rgba(15,23,42,0.06)] md:flex-row md:items-center md:justify-between">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="grid h-10 w-10 grid-cols-2 gap-1 rounded-2xl bg-[#0f6c57] p-2 text-white shadow-[0_8px_18px_rgba(15,108,87,0.22)]">
-                <span className="rounded-[5px] bg-white/95" />
-                <span className="rounded-[5px] bg-white/75" />
-                <span className="rounded-[5px] bg-white/75" />
-                <span className="rounded-[5px] bg-white/95" />
-              </div>
-              <div>
-                <p className="font-display text-xl font-bold tracking-tight text-slate-950">
-                  Tasky Studio
-                </p>
-                <p className="text-sm text-slate-500">
-                  Automate the work behind the work.
-                </p>
-              </div>
-            </Link>
-
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-              <nav className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-slate-600">
-                {navItems.map((item) => (
-                  <a key={item.label} href={item.href} className="transition hover:text-[#0f6c57]">
-                    {item.label}
-                  </a>
-                ))}
-                {footerLinks.map((item) => (
-                  <a key={item.label} href={item.href} className="transition hover:text-[#0f6c57]">
-                    {item.label}
-                  </a>
-                ))}
-              </nav>
-              <p className="text-sm font-medium text-slate-500">
-                (c) {currentYear} Tasky Studio. All rights reserved.
-              </p>
+        <footer className="mt-auto py-3.5 border-t border-slate-200/60 w-full shrink-0">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 px-2">
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-[#0f6c57]">Tasky Studio</span>
+              <span>© {currentYear}</span>
+              <span className="text-slate-300">|</span>
+              <span className="text-slate-400">Automate the work behind the work.</span>
             </div>
+            <nav className="flex gap-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => setActiveTab(item.label.toLowerCase())}
+                  className={cn(
+                    "transition hover:text-[#0f6c57] font-semibold",
+                    activeTab === item.label.toLowerCase() ? "text-[#0f6c57]" : ""
+                  )}
+                >
+                  {item.label}
+                </button>
+              ))}
+              {footerLinks.map((item) => (
+                <a key={item.label} href={item.href} className="transition hover:text-[#0f6c57] font-semibold">
+                  {item.label}
+                </a>
+              ))}
+            </nav>
           </div>
         </footer>
       </div>
