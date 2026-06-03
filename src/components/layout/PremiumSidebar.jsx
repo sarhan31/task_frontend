@@ -5,7 +5,7 @@ import {
   CheckSquare,
   BarChart3,
   FileText,
-  MessageSquare,
+  CalendarDays,
   Settings,
   LogOut,
   PanelLeftClose,
@@ -24,11 +24,7 @@ const PremiumSidebar = ({ collapsed, setCollapsed }) => {
       path: "/premium-dashboard/analytics",
     },
     { icon: FileText, label: "Reports", path: "/premium-dashboard/reports" },
-    {
-      icon: MessageSquare,
-      label: "Messages",
-      path: "/premium-dashboard/messages",
-    },
+    { icon: CalendarDays, label: "Calendar", path: "/dashboard/calendar" },
     { icon: Settings, label: "Settings", path: "/premium-dashboard/settings" },
   ];
 

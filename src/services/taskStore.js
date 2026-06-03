@@ -3,7 +3,6 @@ import { taskService } from './taskService';
 import { demoTaskStore } from './demoTaskStore';
 
 const TASKS_STORAGE_KEY = 'task_suite_tasks';
-const NOTIFS_STORAGE_KEY = 'task_suite_notifications';
 const ACTIVITIES_STORAGE_KEY = 'task_suite_activities';
 
 const isDemoToken = () => {
@@ -12,10 +11,6 @@ const isDemoToken = () => {
 };
 
 const initialMockTasks = [];
-
-const initialNotifications = [
-  { id: 1, text: 'Welcome to Tasky Work Suite commanding center!', time: 'Just now', read: false, type: 'event' }
-];
 
 const initialActivities = [
   { id: 1, text: 'Workspace session initialized successfully', time: 'Just now', color: '#13856f' }
@@ -55,7 +50,6 @@ export const useTaskStore = create((set, get) => ({
   tasks: [],
   taskUpdates: {},
   searchQuery: '',
-  notifications: loadFromStorage(NOTIFS_STORAGE_KEY, initialNotifications),
   activities: loadFromStorage(ACTIVITIES_STORAGE_KEY, initialActivities),
   loading: false,
   error: null,
@@ -108,10 +102,7 @@ export const useTaskStore = create((set, get) => ({
       const logActivity = { id: Date.now() + 1, text: `New task "${newTask.title}" created`, time: 'Just now', color: '#13856f' };
       const updatedActivities = [logActivity, ...get().activities];
       saveToStorage(ACTIVITIES_STORAGE_KEY, updatedActivities);
-      const newNotif = { id: Date.now() + 2, text: `Task "${newTask.title}" was created`, time: 'Just now', read: false, type: 'task' };
-      const updatedNotifs = [newNotif, ...get().notifications];
-      saveToStorage(NOTIFS_STORAGE_KEY, updatedNotifs);
-      set({ tasks: updatedTasks, activities: updatedActivities, notifications: updatedNotifs, loading: false, error: null });
+      set({ tasks: updatedTasks, activities: updatedActivities, loading: false, error: null });
     } catch (e) {
       // demo fallback
       const currentUser = (() => {
@@ -297,20 +288,6 @@ export const useTaskStore = create((set, get) => ({
       console.error('Failed to delete attachment:', e);
       set({ error: e.message || 'Failed to delete attachment', loading: false });
     }
-  },
-
-  // Mark all notifications as read
-  markAllNotificationsRead: () => {
-    const updated = get().notifications.map(n => ({ ...n, read: true }));
-    saveToStorage(NOTIFS_STORAGE_KEY, updated);
-    set({ notifications: updated });
-  },
-
-  // Clear single notification
-  clearNotification: (id) => {
-    const updated = get().notifications.filter(n => n.id !== id);
-    saveToStorage(NOTIFS_STORAGE_KEY, updated);
-    set({ notifications: updated });
   },
 
   // Start Task

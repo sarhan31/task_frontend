@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Save, Settings, Shield, Globe, Bell, Clock, Lock, Users,
+  Save, Settings, Shield, Globe, Clock, Lock, Users,
   ToggleLeft, ToggleRight, CheckCircle2, AlertTriangle, RefreshCcw,
   Palette, Server, Mail, ChevronRight
 } from 'lucide-react';
@@ -66,12 +66,6 @@ const SystemSettings = () => {
   const [enforceStrongPassword, setEnforceStrongPassword] = useState(true);
   const [allowRegistration, setAllowRegistration] = useState(true);
 
-  // Notifications
-  const [emailNotifs, setEmailNotifs] = useState(true);
-  const [taskAssignNotifs, setTaskAssignNotifs] = useState(true);
-  const [deadlineReminders, setDeadlineReminders] = useState(true);
-  const [weeklyDigest, setWeeklyDigest] = useState(false);
-
   const handleSave = async () => {
     setSaving(true);
     await new Promise(r => setTimeout(r, 1000));
@@ -102,7 +96,6 @@ const SystemSettings = () => {
   const tabs = [
     { id: 'general', label: 'General', icon: Settings },
     { id: 'security', label: 'Security', icon: Shield },
-    { id: 'notifications', label: 'Notifications', icon: Bell },
   ];
 
   return (
@@ -296,48 +289,6 @@ const SystemSettings = () => {
               </p>
             </div>
           </div>
-        </motion.div>
-      )}
-
-      {/* Notifications Tab */}
-      {activeTab === 'notifications' && (
-        <motion.div
-          key="notifications"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25 }}
-          className="space-y-5"
-        >
-          <SettingsSection
-            icon={Bell}
-            title="Email Notifications"
-            description="Configure which events trigger system email alerts"
-          >
-            <ToggleRow
-              label="Email Notifications"
-              description="Master toggle for all email notification delivery"
-              checked={emailNotifs}
-              onChange={setEmailNotifs}
-            />
-            <ToggleRow
-              label="Task Assignment Alerts"
-              description="Notify users when they are assigned to a new task"
-              checked={taskAssignNotifs}
-              onChange={setTaskAssignNotifs}
-            />
-            <ToggleRow
-              label="Deadline Reminders"
-              description="Send reminders 24 hours before task due dates"
-              checked={deadlineReminders}
-              onChange={setDeadlineReminders}
-            />
-            <ToggleRow
-              label="Weekly Activity Digest"
-              description="Send a weekly summary of team activity every Monday"
-              checked={weeklyDigest}
-              onChange={setWeeklyDigest}
-            />
-          </SettingsSection>
         </motion.div>
       )}
     </motion.div>

@@ -5,7 +5,7 @@ import {
   LayoutDashboard,
   Clock,
   FolderKanban,
-  History,
+  CalendarDays,
   Settings,
   Plus,
   User,
@@ -17,7 +17,7 @@ import { cn } from "@utils/cn";
 import { useAuth } from "@hooks/useAuth";
 import { taskService } from "@services/taskService";
 import { demoTaskStore } from "@services/demoTaskStore";
-import NotificationBadge from "@components/ui/NotificationBadge";
+
 import BrandLogo from "@components/ui/BrandLogo";
 
 const isDemoToken = () => {
@@ -60,7 +60,7 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
       label: "Task Board",
       path: "/dashboard/board",
     },
-    { icon: History, label: "Notifications", path: "/dashboard/notifications" },
+    { icon: CalendarDays, label: "Calendar", path: "/dashboard/calendar" },
   ];
 
   const adminTools = [

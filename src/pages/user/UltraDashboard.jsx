@@ -5,13 +5,13 @@ import {
   Calendar,
   CheckCircle2,
   BarChart3,
-  MessageSquare,
   User,
   ArrowRight,
   Sparkles,
   FolderKanban,
   Clock,
   Activity,
+  TrendingUp,
 } from "lucide-react";
 import UltraSidebar from "@components/layout/UltraSidebar";
 import TaskChart from "@components/charts/TaskChart";
@@ -70,27 +70,24 @@ const UltraDashboard = () => {
     { name: "Core", subtitle: "UX Research", progress: 100, active: true },
   ];
 
-  const messages = [
+  const teamUpdates = [
     {
       name: "Charles Brown",
-      message: "Hey! Can you share your document...",
+      action: "Completed the Dashboard Design task",
       time: "5:43 PM",
       avatar: "CB",
-      online: true,
     },
     {
       name: "Darrin Sturt",
-      message: "When will you start the next review?",
+      action: "Submitted progress update on App UI/UX",
       time: "4:30 PM",
       avatar: "DS",
-      online: false,
     },
     {
       name: "Milton Lam",
-      message: "Please check the new task update.",
+      action: "Requested review for User Flow Mapping",
       time: "3:00 PM",
       avatar: "ML",
-      online: false,
     },
   ];
 
@@ -360,40 +357,35 @@ const UltraDashboard = () => {
                 <div className="mb-5 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                      Messages
+                      Team
                     </p>
                     <h3 className="mt-0.5 font-display text-lg font-bold text-slate-900">
-                      Recent Conversations
+                      Recent Activity
                     </h3>
                   </div>
-                  <MessageSquare className="h-5 w-5 text-[#13856f]" />
+                  <TrendingUp className="h-5 w-5 text-[#13856f]" />
                 </div>
 
                 <div className="space-y-4">
-                  {messages.map((msg) => (
+                  {teamUpdates.map((item) => (
                     <div
-                      key={msg.name}
+                      key={item.name}
                       className="flex items-start gap-3 rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-3 transition hover:bg-white"
                     >
-                      <div className="relative">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#8d514f] text-sm font-semibold text-white">
-                          {msg.avatar}
-                        </div>
-                        {msg.online && (
-                          <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-[#13856f]" />
-                        )}
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#8d514f] text-sm font-semibold text-white">
+                        {item.avatar}
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center justify-between gap-2">
                           <p className="truncate text-sm font-semibold text-slate-800">
-                            {msg.name}
+                            {item.name}
                           </p>
                           <span className="text-[11px] text-slate-400">
-                            {msg.time}
+                            {item.time}
                           </span>
                         </div>
                         <p className="mt-1 truncate text-xs text-slate-500">
-                          {msg.message}
+                          {item.action}
                         </p>
                       </div>
                     </div>

@@ -25,7 +25,9 @@ import UserDashboard from '@pages/user/Dashboard';
 import MyTasks from '@pages/user/MyTasks';
 import TaskBoard from '@pages/user/TaskBoard';
 import Profile from '@pages/user/Profile';
-import Notifications from '@pages/user/Notifications';
+import CalendarView from '@pages/user/CalendarView';
+import AuditTrail from '@pages/admin/AuditTrail';
+import TaskTemplates from '@pages/admin/TaskTemplates';
 
 // Shared Pages
 import HomePage from '@pages/HomePage';
@@ -150,6 +152,9 @@ const AppRoutes = () => {
         <Route path="settings" element={<SystemSettings />} />
         <Route path="reports" element={<Reports />} />
         <Route path="pending-approvals" element={<PendingApprovals />} />
+        <Route path="calendar" element={<CalendarView />} />
+        <Route path="audit" element={<AuditTrail />} />
+        <Route path="templates" element={<TaskTemplates />} />
       </Route>
 
       {/* ── User Routes ── */}
@@ -164,8 +169,8 @@ const AppRoutes = () => {
         <Route index element={<UserDashboard />} />
         <Route path="tasks" element={<MyTasks />} />
         <Route path="board" element={<TaskBoard />} />
+        <Route path="calendar" element={<CalendarView />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="notifications" element={<Notifications />} />
       </Route>
 
       {/* ── Default Routes ── */}

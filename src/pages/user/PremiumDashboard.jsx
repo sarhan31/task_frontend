@@ -11,7 +11,6 @@ import {
   ArrowRight,
   Sparkles,
   ClipboardCheck,
-  MessageSquare,
   BarChart3,
   ShieldCheck,
 } from "lucide-react";
@@ -112,9 +111,9 @@ const PremiumDashboard = () => {
     },
     {
       id: 2,
-      text: "New client message received",
+      text: "Project milestone reached",
       time: "32 min ago",
-      icon: MessageSquare,
+      icon: TrendingUp,
       tone: "bg-[#fff4ef] text-[#c26a44]",
     },
     {
@@ -236,7 +235,7 @@ const PremiumDashboard = () => {
                   {[
                     "18 active projects",
                     "6 pending approvals",
-                    "3 new messages",
+                    "3 items in review",
                   ].map((item, index) => (
                     <span
                       key={item}

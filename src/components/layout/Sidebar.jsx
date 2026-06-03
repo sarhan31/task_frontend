@@ -8,6 +8,9 @@ import {
   Settings,
   BarChart3,
   Trello,
+  CalendarDays,
+  ClipboardList,
+  History,
   LogOut,
   Home,
   PanelLeftClose,
@@ -23,8 +26,11 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
     { to: "/", icon: Home, label: "Home" },
     { to: "/admin", icon: LayoutDashboard, label: "Dashboard" },
     { to: "/admin/tasks", icon: CheckSquare, label: "Tasks" },
+    { to: "/admin/calendar", icon: CalendarDays, label: "Calendar" },
+    { to: "/admin/templates", icon: ClipboardList, label: "Templates" },
     { to: "/admin/users", icon: Users, label: "Users" },
     { to: "/admin/reports", icon: BarChart3, label: "Reports" },
+    { to: "/admin/audit", icon: History, label: "Audit Trail" },
     { to: "/admin/settings", icon: Settings, label: "Settings" },
   ];
 
@@ -33,6 +39,7 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
     { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { to: "/dashboard/tasks", icon: CheckSquare, label: "My Tasks" },
     { to: "/dashboard/board", icon: Trello, label: "Task Board" },
+    { to: "/dashboard/calendar", icon: CalendarDays, label: "Calendar" },
     { to: "/dashboard/profile", icon: Settings, label: "Profile" },
   ];
 
