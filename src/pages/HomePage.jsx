@@ -240,14 +240,14 @@ const HomePage = () => {
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1320px] flex-col px-4 pb-12 pt-4 sm:px-6 lg:px-8">
-        <div className="fixed inset-x-0 top-4 z-40 flex justify-center px-4 sm:px-6 lg:px-8">
+        <div className="sticky top-3 z-40 mb-6 flex justify-center sm:top-4 lg:mb-8">
           <motion.header
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="w-full max-w-[1320px] rounded-[22px] border border-white/80 bg-white/90 px-3 py-3 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:rounded-[28px] sm:px-5 sm:py-4"
+            className="w-full rounded-[22px] border border-white/80 bg-white/92 px-3 py-3 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:rounded-[28px] sm:px-5 sm:py-4"
           >
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center justify-between gap-4 lg:flex-nowrap">
               <Link to="/" className="flex min-w-0 items-center">
                 <BrandLogo size="sm" />
               </Link>
@@ -265,7 +265,7 @@ const HomePage = () => {
                 ))}
               </nav>
 
-              <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
+              <div className="flex w-full items-center justify-end gap-2 sm:gap-3 lg:w-auto">
                 <Link
                   to={isAuthenticated ? dashboardPath : '/login'}
                   className="hidden rounded-2xl px-4 py-2.5 text-base font-semibold text-slate-700 transition hover:bg-[#f6efe8] sm:inline-flex"
@@ -283,8 +283,8 @@ const HomePage = () => {
           </motion.header>
         </div>
 
-        <main className="flex-1 overflow-x-clip px-2 pb-10 pt-28 lg:pt-32">
-          <section className="grid min-h-[calc(100vh-8rem)] gap-8 xl:grid-cols-[minmax(0,0.95fr)_minmax(540px,1.05fr)] xl:items-center">
+        <main className="flex-1 overflow-x-clip px-2 pb-10 pt-2">
+          <section className="grid gap-6 xl:min-h-[calc(100vh-9rem)] xl:grid-cols-[minmax(0,0.92fr)_minmax(500px,1.08fr)] xl:items-center">
             <motion.section
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -296,7 +296,7 @@ const HomePage = () => {
                 Automation Engine
               </div>
 
-              <h1 className="mt-6 font-display text-[2.45rem] font-black leading-[0.98] text-[#07111f] sm:text-[4.35rem] sm:leading-[0.94] xl:text-[5.1rem]">
+              <h1 className="mt-5 font-display text-[2.35rem] font-black leading-[0.98] text-[#07111f] sm:text-[3.8rem] sm:leading-[0.95] xl:text-[4.55rem]">
                 Run every task like a
                 <br />
                 <span className="bg-[linear-gradient(90deg,_#0f6c57,_#158f78,_#b77728)] bg-clip-text text-transparent">
@@ -304,21 +304,21 @@ const HomePage = () => {
                 </span>
               </h1>
 
-              <p className="mt-6 max-w-xl text-lg leading-9 text-slate-600 sm:text-[1.35rem] sm:leading-[1.55] xl:text-[1.48rem]">
+              <p className="mt-5 max-w-xl text-base leading-8 text-slate-600 sm:text-[1.15rem] sm:leading-[1.6] xl:text-[1.28rem]">
                 Tasky Studio brings task assignment, approvals, AI summaries, deadline protection, and team routing into one sharp operating system for work.
               </p>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link
                   to={isAuthenticated ? dashboardPath : '/signup'}
-                  className="inline-flex items-center justify-center gap-3 rounded-[24px] bg-[#0f6c57] px-8 py-5 text-lg font-semibold text-white shadow-[0_16px_34px_rgba(15,108,87,0.24)] transition hover:bg-[#0c5d4b]"
+                  className="inline-flex items-center justify-center gap-3 rounded-[24px] bg-[#0f6c57] px-7 py-4 text-base font-semibold text-white shadow-[0_16px_34px_rgba(15,108,87,0.24)] transition hover:bg-[#0c5d4b] sm:px-8 sm:py-5 sm:text-lg"
                 >
                   {isAuthenticated ? 'Open Workspace' : 'Explore Workflows'}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <Link
                   to={isAuthenticated ? dashboardPath : '/login'}
-                  className="inline-flex items-center justify-center gap-3 rounded-[24px] border border-[#d9e8e1] bg-white/85 px-8 py-5 text-lg font-semibold text-slate-700 transition hover:border-[#0f6c57]/30 hover:text-[#0f6c57]"
+                  className="inline-flex items-center justify-center gap-3 rounded-[24px] border border-[#d9e8e1] bg-white/85 px-7 py-4 text-base font-semibold text-slate-700 transition hover:border-[#0f6c57]/30 hover:text-[#0f6c57] sm:px-8 sm:py-5 sm:text-lg"
                 >
                   <Play className="h-5 w-5" />
                   {isAuthenticated ? 'Dashboard' : 'Sign In'}
@@ -334,7 +334,7 @@ const HomePage = () => {
                 ))}
               </div>
 
-              <div className="mt-8 grid max-w-xl grid-cols-1 overflow-hidden rounded-[28px] border border-white/80 bg-white/80 shadow-[0_16px_40px_rgba(15,23,42,0.07)] backdrop-blur sm:grid-cols-3">
+              <div className="mt-7 grid max-w-xl grid-cols-1 overflow-hidden rounded-[28px] border border-white/80 bg-white/80 shadow-[0_16px_40px_rgba(15,23,42,0.07)] backdrop-blur sm:grid-cols-3">
                 {heroStats.map((stat) => (
                   <div key={stat.label} className="border-b border-slate-200/80 px-4 py-4 last:border-b-0 sm:border-b-0 sm:border-r sm:py-5 sm:last:border-r-0">
                     <p className="font-display text-2xl font-black text-slate-950 sm:text-3xl">{stat.value}</p>
@@ -396,7 +396,7 @@ const HomePage = () => {
                   })}
                 </div>
 
-                <div className="grid min-h-[520px] md:grid-cols-[180px_minmax(0,1fr)] xl:min-h-[560px]">
+                <div className="grid min-h-[420px] md:grid-cols-[180px_minmax(0,1fr)] xl:min-h-[470px]">
                   <aside className="border-r border-slate-200 bg-[#fbf8f2] p-4">
                     <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
                       Node Library
