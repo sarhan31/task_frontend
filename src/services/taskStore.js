@@ -142,8 +142,11 @@ export const useTaskStore = create((set, get) => ({
 
       // Prep update payload
       const payload = { ...updatedFields };
-      if (updatedFields.assigneeEmail) {
+      if (updatedFields.assigneeEmail !== undefined) {
         payload.assignedToEmail = updatedFields.assigneeEmail;
+      }
+      if (updatedFields.assignToAll !== undefined) {
+        payload.assignToAll = updatedFields.assignToAll;
       }
 
       // If comments were modified locally, preserve them

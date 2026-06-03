@@ -36,18 +36,16 @@ const BrandLogo = ({
 
   return (
     <div className={cn("flex min-w-0 items-center", config.wrap, className)}>
-      <div
+      <img
+        src="/logotask_manager.png"
+        alt="Brand Logo"
         className={cn(
-          "grid flex-shrink-0 grid-cols-2 gap-1 bg-[#0f6c57] text-white shadow-[0_8px_20px_rgba(15,108,87,0.28)]",
+          "flex-shrink-0 object-contain",
           config.mark,
-          markClassName,
+          "!p-0 rounded-none bg-transparent shadow-none",
+          markClassName
         )}
-      >
-        <span className="rounded-[6px] bg-white/95" />
-        <span className="rounded-[6px] bg-white/75" />
-        <span className="rounded-[6px] bg-white/75" />
-        <span className="rounded-[6px] bg-white/95" />
-      </div>
+      />
 
       <div className={cn("min-w-0", brandClassName)}>
         <p
