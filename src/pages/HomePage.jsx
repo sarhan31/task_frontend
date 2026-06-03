@@ -296,7 +296,7 @@ const HomePage = () => {
               </div>
 
               <h1 className="mt-3 font-display text-[1.85rem] font-black leading-[1.05] text-[#07111f] sm:text-[2.8rem] sm:leading-[1.02] xl:text-[3.55rem]">
-                Run every task like a
+                Run every project with a
                 <br />
                 <span className="bg-[linear-gradient(90deg,_#0f6c57,_#158f78,_#b77728)] bg-clip-text text-transparent">
                   world-class workflow.
