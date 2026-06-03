@@ -36,7 +36,13 @@ Create `vercel.json` in root:
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
 ```
 

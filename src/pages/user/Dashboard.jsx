@@ -283,7 +283,7 @@ const UserDashboard = () => {
         </motion.div>
       )}
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
-        <div className="space-y-6">
+        <div className="min-w-0 space-y-6">
           <motion.div
             {...fadeUp(0)}
             className="relative overflow-hidden rounded-[28px] border border-white/65 bg-white/88 p-7 shadow-[0_8px_40px_rgba(90,55,20,0.12)] backdrop-blur-sm"
@@ -293,7 +293,7 @@ const UserDashboard = () => {
             <div className="absolute right-32 bottom-2 h-20 w-20 rounded-full bg-[#13856f]/10 blur-2xl pointer-events-none" />
 
             <div className="flex flex-wrap items-center justify-between gap-4 pl-6">
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#13856f]">
                   {greeting()},
                 </p>
@@ -436,7 +436,7 @@ const UserDashboard = () => {
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)]">
             <motion.div
               {...fadeUp(0.18)}
-              className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
+              className="min-w-0 overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
             >
               <div className="mb-5 flex items-center justify-between">
                 <div>
@@ -456,7 +456,7 @@ const UserDashboard = () => {
 
             <motion.div
               {...fadeUp(0.24)}
-              className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
+              className="min-w-0 overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
             >
               <div className="mb-5 flex items-center justify-between">
                 <div>
@@ -525,7 +525,7 @@ const UserDashboard = () => {
 
           <motion.div
             {...fadeUp(0.3)}
-            className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
+            className="min-w-0 overflow-hidden rounded-[24px] border border-white/65 bg-white/88 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
           >
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f4ddd0] px-6 py-4">
               <div>
@@ -617,7 +617,7 @@ const UserDashboard = () => {
           </motion.div>
         </div>
 
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <motion.div
             {...fadeUp(0.14)}
             className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"

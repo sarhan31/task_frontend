@@ -350,7 +350,7 @@ const HomePage = () => {
               transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
               className="relative flex min-w-0 items-center"
             >
-              <div className="relative w-full overflow-hidden rounded-[34px] border border-white/90 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.14)]">
+              <div className="relative w-full min-w-0 overflow-hidden rounded-[34px] border border-white/90 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.14)]">
                 <div className="flex flex-col gap-4 border-b border-slate-200 px-6 py-5 lg:flex-row lg:items-center lg:justify-between">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2 text-lg font-bold text-slate-900">

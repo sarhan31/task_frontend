@@ -191,7 +191,7 @@ const AdminDashboard = () => {
   return (
     <div className="space-y-6 pb-6">
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
-        <div className="space-y-6">
+        <div className="min-w-0 space-y-6">
           <motion.div
             {...fadeUp(0)}
             className="relative overflow-hidden rounded-[28px] border border-white/65 bg-white/88 p-7 shadow-[0_8px_40px_rgba(90,55,20,0.12)] backdrop-blur-sm"
@@ -214,8 +214,8 @@ const AdminDashboard = () => {
                 </p>
               </div>
 
-              <div className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto">
-                <div className="flex min-w-[220px] items-center gap-3 rounded-2xl border border-[#ead8cb] bg-white/90 px-4 py-3 shadow-sm">
+              <div className="flex w-full min-w-0 flex-col gap-3 sm:flex-row lg:w-auto">
+                <div className="flex w-full min-w-0 items-center gap-3 rounded-2xl border border-[#ead8cb] bg-white/90 px-4 py-3 shadow-sm sm:min-w-[220px]">
                   <Search className="h-4 w-4 text-[#13856f]" />
                   <input
                     type="text"
@@ -298,7 +298,7 @@ const AdminDashboard = () => {
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)]">
             <motion.div
               {...fadeUp(0.18)}
-              className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
+              className="min-w-0 overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
             >
               <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
                 <div>
@@ -318,7 +318,7 @@ const AdminDashboard = () => {
 
             <motion.div
               {...fadeUp(0.24)}
-              className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
+              className="min-w-0 overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
             >
               <div className="mb-5 flex items-center justify-between">
                 <div>
@@ -385,7 +385,7 @@ const AdminDashboard = () => {
 
           <motion.div
             {...fadeUp(0.3)}
-            className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
+            className="min-w-0 overflow-hidden rounded-[24px] border border-white/65 bg-white/88 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
           >
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f4ddd0] px-6 py-4">
               <div>
@@ -469,7 +469,7 @@ const AdminDashboard = () => {
           </motion.div>
         </div>
 
-        <motion.aside {...fadeUp(0.14)} className="space-y-4">
+        <motion.aside {...fadeUp(0.14)} className="min-w-0 space-y-4">
           <div className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 p-6 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm">
             <div className="mb-5 flex items-center justify-between">
               <div>

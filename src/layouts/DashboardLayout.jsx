@@ -33,7 +33,7 @@ const DashboardLayout = () => {
   }, []);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f7e3cf]">
+    <div className="flex h-screen overflow-x-clip overflow-y-hidden bg-[#f7e3cf]">
       {/* Ambient background blobs */}
       <div className="pointer-events-none fixed left-[-6rem] top-[-5rem] h-72 w-72 rounded-full bg-[#efbf91]/30 blur-3xl z-0" />
       <div className="pointer-events-none fixed bottom-[-6rem] right-[-4rem] h-80 w-80 rounded-full bg-white/40 blur-3xl z-0" />
@@ -51,11 +51,11 @@ const DashboardLayout = () => {
       )}
 
       <div
-        className="relative z-10 flex flex-1 flex-col overflow-hidden transition-[padding-left] duration-300"
+        className="relative z-10 flex min-w-0 flex-1 flex-col overflow-x-clip overflow-y-hidden transition-[padding-left] duration-300"
         style={{ paddingLeft: isMobile ? 0 : (sidebarOpen ? 256 : 80) }}
       >
         <Navbar onToggleSidebar={() => setSidebarOpen((prev) => !prev)} />
-        <main className="flex-1 overflow-y-auto px-3 py-4 custom-scrollbar sm:px-4 sm:py-5 lg:px-6 lg:py-6">
+        <main className="flex-1 overflow-x-clip overflow-y-auto px-3 py-4 custom-scrollbar sm:px-4 sm:py-5 lg:px-6 lg:py-6">
           <Outlet />
         </main>
       </div>

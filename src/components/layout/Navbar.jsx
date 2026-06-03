@@ -39,7 +39,7 @@ const Navbar = ({ onToggleSidebar }) => {
   }, [searchQuery]);
 
   return (
-    <header className="relative z-30 flex h-16 items-center justify-between gap-4 border-b border-[#ead8cb] bg-[#fff8f3]/90 px-4 backdrop-blur-sm">
+    <header className="relative z-30 flex h-16 min-w-0 items-center justify-between gap-4 border-b border-[#ead8cb] bg-[#fff8f3]/90 px-4 backdrop-blur-sm">
       <div className="flex min-w-0 flex-shrink-0 items-center gap-3">
         <button
           onClick={onToggleSidebar}
@@ -107,7 +107,7 @@ const Navbar = ({ onToggleSidebar }) => {
         </AnimatePresence>
       </div>
 
-      <div className="flex flex-shrink-0 items-center gap-2">
+      <div className="flex min-w-0 flex-shrink-0 items-center gap-2">
         <div className="relative">
           <button
             onClick={() => {
