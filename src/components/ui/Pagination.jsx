@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@utils/cn';
+import Button from "@components/ui/Button";
 
 const Pagination = ({
   currentPage,
@@ -14,20 +15,20 @@ const Pagination = ({
   return (
     <div className={cn('flex items-center justify-between px-4 py-3 border-t border-[#ead8cb]', className)}>
       <div className="flex flex-1 justify-between sm:hidden">
-        <button
+        <Button variant="custom" size="none"
           onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
           disabled={currentPage === 1}
           className="relative inline-flex items-center rounded-xl border border-[#e6d6ca] bg-white px-4 py-2 text-sm font-medium text-slate-500 hover:bg-[#fffaf6] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Previous
-        </button>
-        <button
+        </Button>
+        <Button variant="custom" size="none"
           onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
           disabled={currentPage === totalPages}
           className="relative ml-3 inline-flex items-center rounded-xl border border-[#e6d6ca] bg-white px-4 py-2 text-sm font-medium text-slate-500 hover:bg-[#fffaf6] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Next
-        </button>
+        </Button>
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
@@ -38,17 +39,17 @@ const Pagination = ({
         </div>
         <div>
           <nav className="isolate inline-flex -space-x-px rounded-2xl shadow-sm gap-1" aria-label="Pagination">
-            <button
+            <Button variant="custom" size="none"
               onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
               disabled={currentPage === 1}
               className="relative inline-flex items-center rounded-xl border border-[#e6d6ca] bg-white p-2 text-slate-400 hover:bg-[#e8f6f2] hover:text-[#13856f] disabled:opacity-50 disabled:cursor-not-allowed transition"
             >
               <span className="sr-only">Previous</span>
               <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-            </button>
+            </Button>
             
             {pages.map((p) => (
-              <button
+              <Button variant="custom" size="none"
                 key={p}
                 onClick={() => onPageChange(p)}
                 aria-current={currentPage === p ? 'page' : undefined}
@@ -60,17 +61,17 @@ const Pagination = ({
                 )}
               >
                 {p}
-              </button>
+              </Button>
             ))}
 
-            <button
+            <Button variant="custom" size="none"
               onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
               disabled={currentPage === totalPages}
               className="relative inline-flex items-center rounded-xl border border-[#e6d6ca] bg-white p-2 text-slate-400 hover:bg-[#e8f6f2] hover:text-[#13856f] disabled:opacity-50 disabled:cursor-not-allowed transition"
             >
               <span className="sr-only">Next</span>
               <ChevronRight className="h-4 w-4" aria-hidden="true" />
-            </button>
+            </Button>
           </nav>
         </div>
       </div>

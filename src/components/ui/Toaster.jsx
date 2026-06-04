@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Button from "@components/ui/Button";
 
 let toastId = 0;
 const toastListeners = new Set();
@@ -66,12 +67,12 @@ export const Toaster = () => {
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
               <p className="flex-1 text-sm font-medium">{toast.message}</p>
-              <button
+              <Button variant="custom" size="none"
                 onClick={() => removeToast(toast.id)}
                 className="flex-shrink-0 hover:opacity-70 transition-opacity"
               >
                 <X className="h-4 w-4" />
-              </button>
+              </Button>
             </motion.div>
           );
         })}

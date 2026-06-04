@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@utils/cn';
+import Button from "@components/ui/Button";
 
 const Modal = ({ isOpen, onClose, title, children, size = 'md', hideHeader = false, noPadding = false, className = '' }) => {
   useEffect(() => {
@@ -48,12 +49,12 @@ const Modal = ({ isOpen, onClose, title, children, size = 'md', hideHeader = fal
                 {!hideHeader && (
                   <div className="flex items-center justify-between gap-3 border-b border-gray-100 p-4 sm:p-6">
                     <h3 className="min-w-0 truncate text-lg font-bold text-gray-900 sm:text-xl">{title}</h3>
-                    <button
+                    <Button variant="custom" size="none"
                       onClick={onClose}
                       className="text-gray-400 hover:text-gray-600 transition-colors bg-gray-50 hover:bg-gray-100 rounded-full p-2"
                     >
                       <X className="h-5 w-5" />
-                    </button>
+                    </Button>
                   </div>
                 )}
                 <div className={cn(!noPadding && "p-4 sm:p-6")}>{children}</div>

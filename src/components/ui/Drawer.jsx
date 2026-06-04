@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { cn } from '@utils/cn';
+import Button from "@components/ui/Button";
 
 const Drawer = ({
   isOpen,
@@ -48,12 +49,12 @@ const Drawer = ({
               <h2 className="min-w-0 truncate text-base font-bold text-slate-800 font-display sm:text-lg">
                 {title || 'Details'}
               </h2>
-              <button
+              <Button variant="custom" size="none"
                 onClick={onClose}
                 className="flex h-8 w-8 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm transition hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
               >
                 <X className="h-4 w-4" />
-              </button>
+              </Button>
             </div>
 
             {/* Scrollable Content */}

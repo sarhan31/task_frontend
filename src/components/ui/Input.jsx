@@ -1,6 +1,7 @@
 import { cn } from '@utils/cn';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import Button from "@components/ui/Button";
 
 const Input = ({ 
   label, 
@@ -42,14 +43,14 @@ const Input = ({
           {...props}
         />
         {showPasswordToggle && isPasswordField && (
-          <button
+          <Button variant="custom" size="none"
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
             className="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 transition hover:text-gray-600"
             aria-label={showPassword ? 'Hide password' : 'Show password'}
           >
             {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-          </button>
+          </Button>
         )}
       </div>
       {error && (

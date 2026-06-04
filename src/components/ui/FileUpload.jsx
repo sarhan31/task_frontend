@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { UploadCloud, FileText, ImageIcon, Download, Trash2, AlertCircle } from 'lucide-react';
 import { cn } from '@utils/cn';
 import { useTaskStore } from '@services/taskStore';
+import Button from "@components/ui/Button";
 
 const FileUpload = ({ taskId, currentAttachments = [], onAdd, onDelete }) => {
   const [dragActive, setDragActive] = useState(false);
@@ -138,22 +139,22 @@ const FileUpload = ({ taskId, currentAttachments = [], onAdd, onDelete }) => {
                   </div>
                 </div>
                 <div className="flex items-center gap-1 flex-shrink-0">
-                  <button
+                  <Button variant="custom" size="none"
                     type="button"
                     title="Download mockup file"
                     className="p-1.5 text-slate-400 hover:text-[#13856f] rounded-lg hover:bg-slate-50 transition"
                   >
                     <Download className="h-4 w-4" />
-                  </button>
+                  </Button>
                   {onDelete && (
-                    <button
+                    <Button variant="custom" size="none"
                       type="button"
                       onClick={() => onDelete(att.id)}
                       title="Remove attachment"
                       className="p-1.5 text-slate-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition"
                     >
                       <Trash2 className="h-4 w-4" />
-                    </button>
+                    </Button>
                   )}
                 </div>
               </div>

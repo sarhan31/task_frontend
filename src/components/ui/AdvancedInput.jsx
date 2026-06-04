@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Eye, EyeOff, Check, X } from 'lucide-react';
 import { cn } from '@utils/cn';
+import Button from "@components/ui/Button";
 
 const AdvancedInput = ({
   label,
@@ -79,13 +80,13 @@ const AdvancedInput = ({
         )}
 
         {showPasswordToggle && type === 'password' && !multiline && (
-          <button
+          <Button variant="custom" size="none"
             type="button"
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
           >
             {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-          </button>
+          </Button>
         )}
 
         {validation && value && !showPasswordToggle && !multiline && (

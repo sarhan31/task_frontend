@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@utils/cn';
+import Button from "@components/ui/Button";
 
 const Dropdown = ({ trigger, children, align = 'left' }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,13 +39,13 @@ const Dropdown = ({ trigger, children, align = 'left' }) => {
 
 const DropdownItem = ({ children, onClick, icon: Icon }) => {
   return (
-    <button
+    <Button variant="custom" size="none"
       onClick={onClick}
       className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
     >
       {Icon && <Icon className="mr-3 h-4 w-4" />}
       {children}
-    </button>
+    </Button>
   );
 };
 
