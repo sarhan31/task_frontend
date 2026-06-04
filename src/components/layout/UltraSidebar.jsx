@@ -101,13 +101,13 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
           variant="ghost"
           size="sm"
           onClick={() => setCollapsed(!collapsed)}
-          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
           title={collapsed ? "Show sidebar" : "Hide sidebar"}
         >
           {collapsed ? (
-            <PanelLeftOpen className="h-3.5 w-3.5" />
+            <PanelLeftOpen className="h-5 w-5" />
           ) : (
-            <PanelLeftClose className="h-3.5 w-3.5" />
+            <PanelLeftClose className="h-5 w-5" />
           )}
         </Button>
       </div>
