@@ -35,7 +35,29 @@ const TeamSelector = ({ value, onChange, error }) => {
       assignedType: type,
       assignedTo: "",
       assignedToTeam: "",
-      responsibleUser: ""
+      assignedToTeamName: "",
+      responsibleUser: "",
+      responsibleUserName: ""
+    });
+  };
+
+  const handleTeamChange = (teamId) => {
+    const team = teams.find(t => t._id === teamId);
+    onChange({
+      ...value,
+      assignedToTeam: teamId,
+      assignedToTeamName: team?.teamName || "",
+      responsibleUser: "",
+      responsibleUserName: ""
+    });
+  };
+
+  const handleResponsibleUserChange = (userId) => {
+    const selectedUser = users.find(u => u._id === userId);
+    onChange({
+      ...value,
+      responsibleUser: userId,
+      responsibleUserName: selectedUser?.name || ""
     });
   };
 
@@ -100,7 +122,7 @@ const TeamSelector = ({ value, onChange, error }) => {
           </label>
           <select
             value={value.assignedToTeam || ""}
-            onChange={(e) => onChange({ ...value, assignedToTeam: e.target.value, responsibleUser: "" })}
+            onChange={(e) => handleTeamChange(e.target.value)}
             className={cn(
               "w-full rounded-xl border bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none transition-all focus:border-[#13856f] focus:ring-4 focus:ring-[#13856f]/10",
               error && !value.assignedToTeam ? "border-red-300" : "border-slate-200"
@@ -121,7 +143,7 @@ const TeamSelector = ({ value, onChange, error }) => {
           </label>
           <select
             value={value.responsibleUser || ""}
-            onChange={(e) => onChange({ ...value, responsibleUser: e.target.value })}
+            onChange={(e) => handleResponsibleUserChange(e.target.value)}
             className={cn(
               "w-full rounded-xl border bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none transition-all focus:border-[#13856f] focus:ring-4 focus:ring-[#13856f]/10",
               error && !value.responsibleUser ? "border-red-300" : "border-slate-200"

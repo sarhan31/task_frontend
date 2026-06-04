@@ -23,6 +23,7 @@ import { useTaskStore } from "@services/taskStore";
 import { analyticsService } from "@services/analyticsService";
 import { useAuth } from "@hooks/useAuth";
 import { formatDate, isTaskOverdue } from "@utils/formatters";
+import { getTaskAssigneeLabel } from "@utils/taskAssignment";
 
 const statusClasses = {
   Assigned: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
@@ -71,7 +72,7 @@ const sortContributors = (items = []) =>
   });
 const normalizeTask = (task) => {
   const title = task?.title || task?.task || "Untitled task";
-  const assignee = task?.assignee || task?.assignedToName || task?.assignedTo?.name || "Unassigned";
+  const assignee = getTaskAssigneeLabel(task);
   const progressRaw = task?.progressPercentage ?? task?.progress;
   const status = task?.status || "Assigned";
 

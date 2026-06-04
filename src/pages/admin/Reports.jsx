@@ -7,6 +7,7 @@ import Select from '@components/ui/Select';
 import { toast } from '@components/ui/Toaster';
 import { useTaskStore } from '@services/taskStore';
 import { analyticsService } from '@services/analyticsService';
+import { getTaskAssigneeLabel } from '@utils/taskAssignment';
 
 const COMPLETED_STATUSES = ['Completed', 'completed', 'Approved'];
 const IN_PROGRESS_STATUSES = ['In Progress', 'Started', 'in_progress', 'Under Review', 'in_review', 'Rejected'];
@@ -28,7 +29,7 @@ const compileLocalReport = (tasks, period) => {
     efficiency: filteredTasks.length > 0 ? Math.round((completed / filteredTasks.length) * 100) : 0,
     rows: filteredTasks.map((task) => ({
       title: task.title,
-      assignee: task.assignee || task.assignedToName || (task.assignedToAll ? 'All Members' : 'Unassigned'),
+      assignee: getTaskAssigneeLabel(task),
       status: task.status,
       priority: task.priority,
       progress: task.progressPercentage ?? task.progress ?? 0,

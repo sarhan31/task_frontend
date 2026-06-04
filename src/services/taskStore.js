@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { taskService } from './taskService';
 import { demoTaskStore } from './demoTaskStore';
+import { getTaskAssigneeLabel } from '@utils/taskAssignment';
 
 const TASKS_STORAGE_KEY = 'task_suite_tasks';
 const ACTIVITIES_STORAGE_KEY = 'task_suite_activities';
@@ -36,24 +37,11 @@ const saveToStorage = (key, data) => {
 
 const mapApiTaskToStoreTask = (apiTask) => {
   if (!apiTask) return null;
-  
-  let assigneeName = 'Unassigned';
-  if (apiTask.assignedTo) {
-    assigneeName = apiTask.assignedTo.name;
-  } else if (apiTask.assignedToTeam) {
-    if (apiTask.assignedType === 'team_member' && apiTask.responsibleUser) {
-      assigneeName = `${apiTask.responsibleUser.name} (${apiTask.assignedToTeam.teamName})`;
-    } else {
-      assigneeName = apiTask.assignedToTeam.teamName;
-    }
-  } else if (apiTask.assignedToAll) {
-    assigneeName = 'Everyone';
-  }
 
   return {
     ...apiTask,
     id: apiTask._id,
-    assignee: assigneeName,
+    assignee: getTaskAssigneeLabel(apiTask),
     assigneeEmail: apiTask.assignedTo?.email || '',
     creatorName: apiTask.creator?.name || 'System',
     dueDate: apiTask.dueDate || new Date().toISOString().split('T')[0]
@@ -90,7 +78,7 @@ export const useTaskStore = create((set, get) => ({
         } catch { return null; }
       })();
       const demoTasks = demoTaskStore.getTasks(currentUser);
-      const mapped = demoTasks.map(t => ({ ...t, id: t._id, assignee: t.assignedToName || 'Unassigned' }));
+      const mapped = demoTasks.map(mapApiTaskToStoreTask).filter(Boolean);
       set({ tasks: mapped, loading: false, error: null });
     }
   },
@@ -141,7 +129,7 @@ export const useTaskStore = create((set, get) => ({
         assignedToEmail: taskData.assigneeEmail,
         assignToAll: taskData.assignToAll,
       }, currentUser);
-      const mapped = { ...newTask, id: newTask._id, assignee: newTask.assignedToName || 'Unassigned' };
+      const mapped = mapApiTaskToStoreTask(newTask);
       const updatedTasks = [mapped, ...get().tasks];
       const logActivity = { id: Date.now(), text: `Task "${newTask.title}" created (demo)`, time: 'Just now', color: '#13856f' };
       const updatedActivities = [logActivity, ...get().activities];

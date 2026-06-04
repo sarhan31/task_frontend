@@ -209,13 +209,34 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
   };
 
   const isAdmin = user?.role === 'admin';
-  // Match by email (most reliable) or by _id fallback — never compare raw display name strings
+  const userId = user?._id || user?.id;
+
+  // Match by email (most reliable) or by _id fallback — for individually assigned tasks
   const isAssignedToCurrentUser = !isAdmin && (
     (task.assigneeEmail && user?.email && task.assigneeEmail.toLowerCase() === user.email.toLowerCase()) ||
-    (task.assignedTo && (user?._id || user?.id) &&
-      (task.assignedTo === (user._id || user.id) || task.assignedTo?._id === (user._id || user.id))
+    (task.assignedTo && userId &&
+      (task.assignedTo === userId || task.assignedTo?._id === userId)
     )
   );
+
+  // Team task detection
+  const isTeamTask = task.assignedType === 'team' || task.assignedType === 'team_member';
+
+  // Responsible user for team_member tasks — they get the accept/deny flow
+  const isResponsibleUser = !isAdmin && task.assignedType === 'team_member' && task.responsibleUser && (
+    typeof task.responsibleUser === 'string'
+      ? task.responsibleUser === userId
+      : task.responsibleUser?._id === userId
+  );
+
+  // All members of a 'team' task can take workflow actions (start, progress, review)
+  const isTeamMember = !isAdmin && task.assignedType === 'team';
+
+  // Can take any workflow action (start, progress, review)
+  const canActOnTask = isAssignedToCurrentUser || isTeamMember || isResponsibleUser;
+
+  // Accept/Deny flow only applies to individual tasks or the responsible user of team_member tasks
+  const showAssignmentFlow = (isAssignedToCurrentUser && !isTeamTask) || isResponsibleUser;
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title={task.title} size="lg">
@@ -232,7 +253,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
 
           <div className="flex flex-wrap items-center gap-3">
             {/* User Accept/Deny flow */}
-            {isAssignedToCurrentUser && task.assignmentStatus === 'pending' && (
+            {showAssignmentFlow && task.assignmentStatus === 'pending' && (
               <div className="flex flex-col gap-3 w-full">
                 <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-3 text-xs text-yellow-800 font-medium">
                   This task has been assigned to you. Please accept or deny this assignment.
@@ -266,14 +287,14 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
             )}
 
             {/* User Start Task (only if accepted) */}
-            {isAssignedToCurrentUser && task.assignmentStatus === 'accepted' && (task.status === 'Assigned' || task.status === 'Accepted' || task.status === 'todo') && (
+            {canActOnTask && (task.assignmentStatus === 'accepted' || isTeamMember) && (task.status === 'Assigned' || task.status === 'Accepted' || task.status === 'todo') && (
               <Button onClick={handleStartTask} className="bg-[#13856f] text-white hover:bg-[#0f7260] rounded-xl font-semibold shadow-md">
                 <Play className="mr-1.5 h-4 w-4" /> Start Task
               </Button>
             )}
 
             {/* User Progress Updates and Review Request */}
-            {isAssignedToCurrentUser && task.assignmentStatus === 'accepted' && ['Started', 'In Progress', 'Rejected', 'in_progress'].includes(task.status) && (
+            {canActOnTask && (task.assignmentStatus === 'accepted' || isTeamMember) && ['Started', 'In Progress', 'Rejected', 'in_progress'].includes(task.status) && (
               <>
                 <Button 
                   onClick={() => setShowProgressForm(!showProgressForm)} 

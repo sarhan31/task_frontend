@@ -26,6 +26,7 @@ import { demoTaskStore } from '@services/demoTaskStore';
 import { taskService } from '@services/taskService';
 import { useTaskStore } from '@services/taskStore';
 import { cn } from '@utils/cn';
+import { getTaskAssigneeLabel } from '@utils/taskAssignment';
 import toast from '@utils/toast';
 import Button from "@components/ui/Button";
 
@@ -238,11 +239,12 @@ const MyTasks = () => {
 
   const filtered = tasks.filter((t) => {
     const query = searchQuery.trim().toLowerCase();
+    const assigneeLabel = getTaskAssigneeLabel(t).toLowerCase();
     const matchesSearch =
       !query ||
       t.title?.toLowerCase().includes(query) ||
       t.description?.toLowerCase().includes(query) ||
-      t.assignee?.toLowerCase().includes(query);
+      assigneeLabel.includes(query);
 
     if (!matchesSearch) return false;
     if (filter === 'pending') return t.assignmentStatus === 'pending';
@@ -419,7 +421,13 @@ const MyTasks = () => {
                         {task.assignedToAll && (
                           <span className="inline-flex items-center gap-1 rounded-full border border-teal-200 bg-teal-50 px-2.5 py-1 text-[11px] font-bold text-teal-700">
                             <Users className="h-3 w-3" />
-                            Team task
+                            Everyone
+                          </span>
+                        )}
+                        {(task.assignedType === 'team' || task.assignedType === 'team_member') && !task.assignedToAll && (
+                          <span className="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-[11px] font-bold text-blue-700">
+                            <Users className="h-3 w-3" />
+                            {task.assignedType === 'team_member' ? 'Team + Owner' : 'Team Task'}
                           </span>
                         )}
                       </div>
@@ -477,7 +485,8 @@ const MyTasks = () => {
                   )}
 
                   <div className="mt-auto">
-                    {task.assignmentStatus === 'pending' && (
+                    {/* Individual/team_member pending: show Review Assignment */}
+                    {task.assignmentStatus === 'pending' && task.assignedType !== 'team' && (
                       <Button variant="custom" size="none"
                         onClick={() => {
                           setAcceptTask(task);
@@ -491,7 +500,19 @@ const MyTasks = () => {
                       </Button>
                     )}
 
-                    {task.assignmentStatus === 'accepted' && !hasPendingStatusChange && !isCompleted && (
+                    {/* Team tasks: show Update Status immediately (no accept/deny needed) */}
+                    {task.assignedType === 'team' && !hasPendingStatusChange && !isCompleted && (
+                      <Button variant="custom" size="none"
+                        onClick={() => setStatusTask(task)}
+                        className="flex w-full items-center gap-2 rounded-2xl border border-blue-300 bg-blue-50/60 px-4 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 active:scale-[0.98]"
+                      >
+                        <Users className="h-4 w-4" />
+                        Update Team Status
+                        <ChevronRight className="ml-auto h-4 w-4" />
+                      </Button>
+                    )}
+
+                    {task.assignmentStatus === 'accepted' && task.assignedType !== 'team' && !hasPendingStatusChange && !isCompleted && (
                       <Button variant="custom" size="none"
                         onClick={() => setStatusTask(task)}
                         className="flex w-full items-center gap-2 rounded-2xl border border-[#13856f]/70 bg-[#e8f6f2]/55 px-4 py-3 text-sm font-semibold text-[#13856f] transition hover:bg-[#e8f6f2] active:scale-[0.98]"
@@ -502,7 +523,7 @@ const MyTasks = () => {
                       </Button>
                     )}
 
-                    {task.assignmentStatus === 'accepted' && hasPendingStatusChange && (
+                    {(task.assignmentStatus === 'accepted' || task.assignedType === 'team') && hasPendingStatusChange && (
                       <div className="flex items-center justify-center gap-2 rounded-2xl border border-orange-200/80 bg-orange-50/80 px-4 py-3 text-xs font-bold text-orange-700">
                         <Loader2 className="h-4 w-4 animate-spin text-orange-600" />
                         Waiting for admin approval

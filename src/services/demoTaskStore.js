@@ -28,6 +28,34 @@ const resolveUser = (idOrEmail) => {
   return users.find(u => (u.id === idOrEmail || u.email === idOrEmail) && u.status !== 'fired') || null;
 };
 
+const resolveTeam = (teamId) => {
+  if (!teamId) return null;
+  try {
+    const teams = JSON.parse(localStorage.getItem('demo_teams') || localStorage.getItem('teams') || '[]');
+    return teams.find(t => t._id === teamId || t.id === teamId) || null;
+  } catch {
+    return null;
+  }
+};
+
+const getUserTeamIds = (userId) => {
+  if (!userId) return [];
+  try {
+    const teams = JSON.parse(localStorage.getItem('demo_teams') || localStorage.getItem('teams') || '[]');
+    return teams
+      .filter((team) =>
+        (team.members || []).some((member) => {
+          const memberId = typeof member === 'object' ? (member._id || member.id) : member;
+          return memberId === userId;
+        })
+      )
+      .map((team) => team._id || team.id)
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+};
+
 // ─── public API ─────────────────────────────────────────────────────────────
 
 export const demoTaskStore = {
@@ -37,10 +65,13 @@ export const demoTaskStore = {
     const tasks = readTasks();
     if (!currentUser) return [];
     if (currentUser.role === 'admin') return tasks;
+    const userId = currentUser._id || currentUser.id;
+    const teamIds = getUserTeamIds(userId);
     return tasks.filter(t =>
       t.assignedToAll ||
-      t.assignedTo === currentUser.id ||
-      t.creator === currentUser.id
+      t.assignedTo === userId ||
+      t.creator === userId ||
+      (t.assignedToTeam && teamIds.includes(t.assignedToTeam))
     );
   },
 
@@ -52,15 +83,35 @@ export const demoTaskStore = {
     let assignedUser = null;
     if (!isAll && data.assignedToEmail) {
       assignedUser = resolveUser(data.assignedToEmail);
+    } else if (!isAll && data.assignedTo) {
+      assignedUser = resolveUser(data.assignedTo);
     }
+
+    const assignedTeam = !isAll ? resolveTeam(data.assignedToTeam) : null;
+    const responsibleUser = !isAll ? resolveUser(data.responsibleUser) : null;
+    const assignedToName = (() => {
+      if (isAll) return 'All Members';
+      if (data.assignedType === 'team_member' && data.assignedToTeam) {
+        return `${responsibleUser?.name || data.responsibleUserName || 'Team Member'} (${assignedTeam?.teamName || data.assignedToTeamName || 'Team'})`;
+      }
+      if (data.assignedType === 'team' && data.assignedToTeam) {
+        return assignedTeam?.teamName || data.assignedToTeamName || 'Team';
+      }
+      return assignedUser ? assignedUser.name : 'Unassigned';
+    })();
 
     const task = {
       _id: makeId(),
       title: data.title,
       description: data.description || '',
-      assignedTo: isAll ? null : (assignedUser ? assignedUser.id : null),
+      assignedTo: isAll ? null : (assignedUser ? (assignedUser._id || assignedUser.id) : null),
+      assignedType: data.assignedType || 'individual',
+      assignedToTeam: data.assignedToTeam || null,
+      assignedToTeamName: assignedTeam?.teamName || data.assignedToTeamName || '',
+      responsibleUser: data.responsibleUser || null,
+      responsibleUserName: responsibleUser?.name || data.responsibleUserName || '',
       assignedToAll: isAll,
-      assignedToName: isAll ? 'All Members' : (assignedUser ? assignedUser.name : 'Unassigned'),
+      assignedToName,
       priority: data.priority || 'medium',
       status: 'Assigned',
       assignmentStatus: 'pending',
@@ -72,7 +123,7 @@ export const demoTaskStore = {
       pendingStatusChange: null,
       activityTimeline: [
         { action: 'Task Created', details: `Created by ${currentUser.name}`, user: currentUser.name, date: new Date().toISOString() },
-        { action: 'Task Assigned', details: isAll ? 'Assigned to all active members' : (assignedUser ? `Assigned to ${assignedUser.name}` : 'Created without an assignee'), user: currentUser.name, date: new Date().toISOString() },
+        { action: 'Task Assigned', details: assignedToName === 'Unassigned' ? 'Created without an assignee' : `Assigned to ${assignedToName}`, user: currentUser.name, date: new Date().toISOString() },
       ],
       createdAt: new Date().toISOString(),
     };
