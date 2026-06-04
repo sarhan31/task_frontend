@@ -40,6 +40,8 @@ const TaskBoard = () => {
 
       // Standard users only see their own tasks
       const isAssigned = isAdmin || (
+        task.assignedToAll ||
+        task.assignedToTeam ||
         (task.assigneeEmail && user?.email && task.assigneeEmail.toLowerCase() === user.email.toLowerCase()) ||
         (task.assignedTo && (user?._id || user?.id) &&
           (task.assignedTo === (user._id || user.id) || task.assignedTo?._id === (user._id || user.id))
