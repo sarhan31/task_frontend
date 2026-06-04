@@ -172,6 +172,24 @@ const connectionLines = [
   'left-[62%] top-[52%] h-[2px] w-[14%]',
 ];
 
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
+  }
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+};
+
+const scaleUp = {
+  hidden: { opacity: 0, scale: 0.95, y: 15 },
+  show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] } }
+};
+
 const HomePage = () => {
   const { isAuthenticated, user } = useAuth();
   const [isRunningDemo, setIsRunningDemo] = useState(false);
@@ -286,29 +304,29 @@ const HomePage = () => {
         <main className="flex-1 px-2 py-1">
           <section className="grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(500px,1.08fr)] items-center">
             <motion.section
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
+              variants={staggerContainer}
+              initial="hidden"
+              animate="show"
               className="flex min-w-0 max-w-2xl flex-col justify-center lg:py-2"
             >
-              <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#b7d8ce] bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#0f6c57] shadow-[0_8px_20px_rgba(15,108,87,0.06)]">
+              <motion.div variants={fadeUp} className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#b7d8ce] bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#0f6c57] shadow-[0_8px_20px_rgba(15,108,87,0.06)]">
                 <Sparkles className="h-3.5 w-3.5" />
                 Automation Engine
-              </div>
+              </motion.div>
 
-              <h1 className="mt-3 font-display text-[1.85rem] font-black leading-[1.05] text-[#07111f] sm:text-[2.8rem] sm:leading-[1.02] xl:text-[3.55rem]">
+              <motion.h1 variants={fadeUp} className="mt-3 font-display text-[1.85rem] font-black leading-[1.05] text-[#07111f] sm:text-[2.8rem] sm:leading-[1.02] xl:text-[3.55rem]">
                 Run every project with a
                 <br />
                 <span className="bg-[linear-gradient(90deg,_#0f6c57,_#158f78,_#b77728)] bg-clip-text text-transparent">
                   world-class workflow.
                 </span>
-              </h1>
+              </motion.h1>
 
-              <p className="mt-3 max-w-lg text-xs leading-relaxed text-slate-600 sm:text-sm lg:text-base lg:leading-normal">
+              <motion.p variants={fadeUp} className="mt-3 max-w-lg text-xs leading-relaxed text-slate-600 sm:text-sm lg:text-base lg:leading-normal">
                 DoNow brings task assignment, approvals, AI summaries, deadline protection, and team routing into one sharp operating system for work.
-              </p>
+              </motion.p>
 
-              <div className="mt-4 flex flex-col gap-2.5 sm:flex-row">
+              <motion.div variants={fadeUp} className="mt-4 flex flex-col gap-2.5 sm:flex-row">
                 <Link
                   to={isAuthenticated ? dashboardPath : '/signup'}
                   className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#0f6c57] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(15,108,87,0.18)] transition hover:bg-[#0c5d4b] sm:px-6 sm:py-3.5 sm:text-base"
@@ -323,31 +341,31 @@ const HomePage = () => {
                   <Play className="h-4 w-4" />
                   {isAuthenticated ? 'Dashboard' : 'Sign In'}
                 </Link>
-              </div>
+              </motion.div>
 
-              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+              <motion.div variants={fadeUp} className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                 {featurePills.map((item) => (
                   <div key={item} className="flex items-center gap-1.5 text-xs font-medium text-slate-600 sm:text-sm">
                     <Check className="h-3.5 w-3.5 text-[#0f6c57]" />
                     <span>{item}</span>
                   </div>
                 ))}
-              </div>
+              </motion.div>
 
-              <div className="mt-4 grid max-w-lg grid-cols-3 overflow-hidden rounded-[20px] border border-white/80 bg-white/80 shadow-[0_12px_30px_rgba(15,23,42,0.05)] backdrop-blur">
+              <motion.div variants={fadeUp} className="mt-4 grid max-w-lg grid-cols-3 overflow-hidden rounded-[20px] border border-white/80 bg-white/80 shadow-[0_12px_30px_rgba(15,23,42,0.05)] backdrop-blur">
                 {heroStats.map((stat) => (
                   <div key={stat.label} className="border-r border-slate-200/80 px-3 py-2.5 last:border-r-0 sm:py-3 text-center sm:text-left">
                     <p className="font-display text-lg font-black text-slate-950 sm:text-2xl">{stat.value}</p>
                     <p className="mt-0.5 text-[10px] font-bold uppercase text-slate-500 tracking-wider leading-none">{stat.label}</p>
                   </div>
                 ))}
-              </div>
+              </motion.div>
             </motion.section>
 
             <motion.section
-              initial={{ opacity: 0, y: 22, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              variants={scaleUp}
+              initial="hidden"
+              animate="show"
               className="relative flex min-w-0 items-center justify-center lg:py-2"
             >
               <div className="relative w-full min-w-0 overflow-hidden rounded-[24px] border border-white/90 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.1)] h-[460px] lg:h-[490px] flex flex-col justify-between">
@@ -505,10 +523,10 @@ const HomePage = () => {
 
           {/* Trusted Teams Section */}
           <motion.section
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="mt-10 rounded-[30px] border border-white/80 bg-white/82 px-6 py-5 shadow-[0_18px_46px_rgba(15,23,42,0.07)] backdrop-blur"
           >
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
