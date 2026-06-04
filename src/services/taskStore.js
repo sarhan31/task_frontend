@@ -36,10 +36,24 @@ const saveToStorage = (key, data) => {
 
 const mapApiTaskToStoreTask = (apiTask) => {
   if (!apiTask) return null;
+  
+  let assigneeName = 'Unassigned';
+  if (apiTask.assignedTo) {
+    assigneeName = apiTask.assignedTo.name;
+  } else if (apiTask.assignedToTeam) {
+    if (apiTask.assignedType === 'team_member' && apiTask.responsibleUser) {
+      assigneeName = `${apiTask.responsibleUser.name} (${apiTask.assignedToTeam.teamName})`;
+    } else {
+      assigneeName = apiTask.assignedToTeam.teamName;
+    }
+  } else if (apiTask.assignedToAll) {
+    assigneeName = 'Everyone';
+  }
+
   return {
     ...apiTask,
     id: apiTask._id,
-    assignee: apiTask.assignedTo?.name || 'Unassigned',
+    assignee: assigneeName,
     assigneeEmail: apiTask.assignedTo?.email || '',
     creatorName: apiTask.creator?.name || 'System',
     dueDate: apiTask.dueDate || new Date().toISOString().split('T')[0]
@@ -94,6 +108,10 @@ export const useTaskStore = create((set, get) => ({
         dueDate: taskData.dueDate || new Date().toISOString().split('T')[0],
         progress: taskData.status === 'completed' ? 100 : (taskData.progress || 0),
         tags: taskData.tags || [],
+        assignedType: taskData.assignedType,
+        assignedTo: taskData.assignedTo,
+        assignedToTeam: taskData.assignedToTeam,
+        responsibleUser: taskData.responsibleUser,
         assignedToEmail: taskData.assigneeEmail,
         assignToAll: taskData.assignToAll
       });
@@ -148,6 +166,10 @@ export const useTaskStore = create((set, get) => ({
       if (updatedFields.assignToAll !== undefined) {
         payload.assignToAll = updatedFields.assignToAll;
       }
+      if (updatedFields.assignedType !== undefined) payload.assignedType = updatedFields.assignedType;
+      if (updatedFields.assignedTo !== undefined) payload.assignedTo = updatedFields.assignedTo;
+      if (updatedFields.assignedToTeam !== undefined) payload.assignedToTeam = updatedFields.assignedToTeam;
+      if (updatedFields.responsibleUser !== undefined) payload.responsibleUser = updatedFields.responsibleUser;
 
       // If comments were modified locally, preserve them
       if (updatedFields.comments) {
