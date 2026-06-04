@@ -266,9 +266,9 @@ const HomePage = () => {
             transition={{ duration: 0.45 }}
             className="w-full rounded-[22px] border border-white/80 bg-white/92 px-3 py-2.5 shadow-[0_12px_36px_rgba(15,23,42,0.06)] backdrop-blur-xl sm:rounded-[28px] sm:px-5 sm:py-3"
           >
-            <div className="flex flex-wrap items-center justify-between gap-4 lg:flex-nowrap">
+            <div className="flex items-center justify-between gap-2 lg:gap-4 lg:flex-nowrap">
               <Link to="/" className="flex min-w-0 items-center">
-                <BrandLogo size="sm" />
+                <BrandLogo size="md" />
               </Link>
 
               <nav className="hidden items-center gap-2 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-4 py-2 lg:flex">
@@ -283,7 +283,7 @@ const HomePage = () => {
                 ))}
               </nav>
 
-              <div className="flex w-full items-center justify-end gap-2 sm:gap-3 lg:w-auto">
+              <div className="flex items-center justify-end gap-2 sm:gap-3">
                 <Link
                   to={isAuthenticated ? dashboardPath : '/login'}
                   className="hidden rounded-2xl px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-[#f6efe8] sm:inline-flex"
