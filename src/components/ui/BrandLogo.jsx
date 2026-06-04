@@ -38,7 +38,7 @@ const BrandLogo = ({
     <div className={cn("flex min-w-0 items-center", config.wrap, className)}>
       <div
         className={cn(
-          "flex-shrink-0 overflow-hidden rounded-xl border border-[#e6d6ca] bg-white shadow-sm",
+          "flex-shrink-0 overflow-hidden bg-transparent mix-blend-multiply",
           markClassName
         )}
         style={{ width: config.imgSize, height: config.imgSize }}
