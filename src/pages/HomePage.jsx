@@ -305,7 +305,7 @@ const HomePage = () => {
               </h1>
 
               <p className="mt-3 max-w-lg text-xs leading-relaxed text-slate-600 sm:text-sm lg:text-base lg:leading-normal">
-                Tasky Studio brings task assignment, approvals, AI summaries, deadline protection, and team routing into one sharp operating system for work.
+                DoNow brings task assignment, approvals, AI summaries, deadline protection, and team routing into one sharp operating system for work.
               </p>
 
               <div className="mt-4 flex flex-col gap-2.5 sm:flex-row">
@@ -545,7 +545,7 @@ const HomePage = () => {
                 Assign, automate, approve, and follow through.
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-600 sm:text-xl">
-                Everything in Tasky Studio is designed around real team execution, from intake to approval to delivery.
+                Everything in DoNow is designed around real team execution, from intake to approval to delivery.
               </p>
             </div>
 
@@ -591,7 +591,7 @@ const HomePage = () => {
                 Start from flows your team will actually use.
               </h2>
               <p className="mt-6 max-w-lg text-[1.15rem] leading-9 text-slate-600">
-                Instead of generic automation blocks, Tasky Studio helps teams launch workflows for assignments, escalations, status changes, and reporting.
+                Instead of generic automation blocks, DoNow helps teams launch workflows for assignments, escalations, status changes, and reporting.
               </p>
               <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
                 <div className="rounded-[24px] border border-[#dcebe4] bg-white p-5 shadow-[0_10px_24px_rgba(15,108,87,0.04)]">
@@ -740,7 +740,7 @@ const HomePage = () => {
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#0f6c57]">
-                  About Tasky Studio
+                  About DoNow
                 </p>
                 <h2 className="mt-4 font-display text-4xl font-bold leading-tight text-slate-900">
                   A cleaner way to run work across teams, not just track tasks.
@@ -821,7 +821,7 @@ const HomePage = () => {
               </div>
               <div>
                 <p className="font-display text-xl font-bold tracking-tight text-slate-950">
-                  Tasky Studio
+                  DoNow
                 </p>
                 <p className="text-sm text-slate-500">
                   Automate the work behind the work.
@@ -843,7 +843,7 @@ const HomePage = () => {
                 ))}
               </nav>
               <p className="text-sm font-medium text-slate-500">
-                © {currentYear} Tasky Studio. All rights reserved.
+                © {currentYear} DoNow. All rights reserved.
               </p>
             </div>
           </div>

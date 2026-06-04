@@ -25,7 +25,7 @@ const BrandLogo = ({
   className = "",
   size = "md",
   showSubtitle = true,
-  brandName = "Tasky Studio",
+  brandName = "DoNow",
   subtitle = "Workflow automation for modern teams",
   brandClassName = "",
   titleClassName = "",
@@ -45,7 +45,7 @@ const BrandLogo = ({
       >
         <img
           src="/logotask_manager.png"
-          alt="Tasky Studio"
+          alt="DoNow"
           width={config.imgSize}
           height={config.imgSize}
           className="h-full w-full object-cover"
@@ -57,7 +57,7 @@ const BrandLogo = ({
       <div className={cn("min-w-0", brandClassName)}>
         <p
           className={cn(
-            "truncate font-display font-bold tracking-tight text-slate-950",
+            "truncate font-display font-extrabold tracking-tight bg-gradient-to-r from-[#0f6c57] via-[#13856f] to-[#1a937a] bg-clip-text text-transparent drop-shadow-sm",
             config.title,
             titleClassName,
           )}
