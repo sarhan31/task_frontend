@@ -6,6 +6,7 @@ import { demoTaskStore } from '@services/demoTaskStore';
 import { useAuth } from '@hooks/useAuth';
 import toast from '@utils/toast';
 import { cn } from '@utils/cn';
+import Button from "@components/ui/Button";
 
 const isDemoToken = () => {
   const t = localStorage.getItem('token');
@@ -165,41 +166,41 @@ const PendingApprovalsPanel = () => {
                   className="w-full resize-none rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#13856f] focus:bg-white focus:outline-none"
                 />
                 <div className="grid grid-cols-2 gap-3">
-                  <button
+                  <Button variant="custom" size="none"
                     onClick={() => { setShowRejectForm(null); setRejectFeedback(p => ({ ...p, [task._id]: '' })); }}
                     disabled={busy === task._id}
                     className="rounded-xl border-2 border-slate-200 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
                   >
                     Cancel
-                  </button>
-                  <button
+                  </Button>
+                  <Button variant="custom" size="none"
                     onClick={() => handleReject(task._id)}
                     disabled={busy === task._id}
                     className="flex items-center justify-center gap-2 rounded-xl bg-red-600 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 disabled:opacity-60"
                   >
                     {busy === task._id ? <Loader2 className="h-4 w-4 animate-spin" /> : <XCircle className="h-4 w-4" />}
                     Confirm Rejection
-                  </button>
+                  </Button>
                 </div>
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-3">
-                <button
+                <Button variant="custom" size="none"
                   onClick={() => handleApprove(task._id)}
                   disabled={busy === task._id}
                   className="flex items-center justify-center gap-2 rounded-xl bg-[#13856f] py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0f7260] disabled:opacity-60"
                 >
                   {busy === task._id ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle className="h-4 w-4" />}
                   Approve
-                </button>
-                <button
+                </Button>
+                <Button variant="custom" size="none"
                   onClick={() => setShowRejectForm(task._id)}
                   disabled={busy === task._id}
                   className="flex items-center justify-center gap-2 rounded-xl border-2 border-red-500 py-2.5 text-sm font-semibold text-red-600 transition hover:bg-red-50 disabled:opacity-60"
                 >
                   <XCircle className="h-4 w-4" />
                   Reject
-                </button>
+                </Button>
               </div>
             )}
           </div>

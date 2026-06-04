@@ -1,21 +1,21 @@
 import { cn } from "@utils/cn";
 
-const sizeClasses = {
+const sizeConfig = {
   sm: {
     wrap: "gap-2.5",
-    mark: "h-9 w-9 p-1.5 rounded-xl",
+    imgSize: 36,
     title: "text-lg",
     subtitle: "text-[10px]",
   },
   md: {
     wrap: "gap-3",
-    mark: "h-11 w-11 p-2 rounded-2xl",
+    imgSize: 44,
     title: "text-xl sm:text-2xl",
     subtitle: "text-xs",
   },
   lg: {
     wrap: "gap-3",
-    mark: "h-12 w-12 p-2.5 rounded-2xl",
+    imgSize: 48,
     title: "text-2xl",
     subtitle: "text-xs",
   },
@@ -32,20 +32,27 @@ const BrandLogo = ({
   subtitleClassName = "",
   markClassName = "",
 }) => {
-  const config = sizeClasses[size] || sizeClasses.md;
+  const config = sizeConfig[size] || sizeConfig.md;
 
   return (
     <div className={cn("flex min-w-0 items-center", config.wrap, className)}>
-      <img
-        src="/logotask_manager.png"
-        alt="Brand Logo"
+      <div
         className={cn(
-          "flex-shrink-0 object-contain",
-          config.mark,
-          "!p-0 rounded-none bg-transparent shadow-none",
+          "flex-shrink-0 overflow-hidden rounded-xl border border-[#e6d6ca] bg-white shadow-sm",
           markClassName
         )}
-      />
+        style={{ width: config.imgSize, height: config.imgSize }}
+      >
+        <img
+          src="/logotask_manager.png"
+          alt="Tasky Studio"
+          width={config.imgSize}
+          height={config.imgSize}
+          className="h-full w-full object-cover"
+          style={{ imageRendering: "auto" }}
+          draggable={false}
+        />
+      </div>
 
       <div className={cn("min-w-0", brandClassName)}>
         <p

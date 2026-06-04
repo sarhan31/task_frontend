@@ -156,9 +156,9 @@ const TaskTemplates = () => {
                     <p className="text-xs font-semibold capitalize text-slate-400">{template.priority} priority</p>
                   </div>
                 </div>
-                <button onClick={() => handleDelete(template.id)} className="rounded-xl p-2 text-slate-400 transition hover:bg-red-50 hover:text-red-500">
+                <Button variant="custom" size="none" onClick={() => handleDelete(template.id)} className="rounded-xl p-2 text-slate-400 transition hover:bg-red-50 hover:text-red-500">
                   <Trash2 className="h-4 w-4" />
-                </button>
+                </Button>
               </div>
 
               <h3 className="text-sm font-bold leading-5 text-slate-800">{template.title}</h3>

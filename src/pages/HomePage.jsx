@@ -30,6 +30,7 @@ import { cn } from '@utils/cn';
 import { toast } from '@components/ui/Toaster';
 import { useAuth } from '@hooks/useAuth';
 import BrandLogo from '@components/ui/BrandLogo';
+import Button from '@components/ui/Button';
 
 const navItems = [
   { label: 'Platform', href: '#platform' },
@@ -368,18 +369,21 @@ const HomePage = () => {
                         <span className="h-2 w-2 rounded-full bg-[#22b573]" />
                         Saved
                       </span>
-                      <button
+                      <Button
+                        variant="outline"
+                        size="sm"
                         onClick={handleTestRun}
-                        className="rounded-xl border border-[#e6ddd3] bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-[#0f6c57]/30 hover:text-[#0f6c57]"
+                        className="rounded-xl border-[#e6ddd3] text-xs text-slate-600 hover:border-[#0f6c57]/30 hover:text-[#0f6c57]"
                       >
                         {isRunningDemo ? 'Running...' : 'Test Run'}
-                      </button>
-                      <button
+                      </Button>
+                      <Button
+                        size="sm"
                         onClick={handleDeploy}
-                        className="rounded-xl bg-[#0f6c57] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#0c5d4b]"
+                        className="rounded-xl bg-[#0f6c57] text-xs text-white hover:bg-[#0c5d4b]"
                       >
                         {isDeploying ? 'Deploying...' : 'Deploy'}
-                      </button>
+                      </Button>
                     </div>
                   </div>
 
@@ -428,12 +432,14 @@ const HomePage = () => {
                         </div>
                       </div>
 
-                      <button
+                      <Button
+                        variant="ghost"
+                        size="sm"
                         onClick={handleNodeToggle}
-                        className="mt-3 w-full rounded-xl bg-[#eef4ef] py-2 text-xs font-semibold text-[#0f6c57] transition hover:bg-[#e2f1eb]"
+                        className="mt-3 w-full rounded-xl bg-[#eef4ef] text-xs text-[#0f6c57] hover:bg-[#e2f1eb]"
                       >
                         {nodeLibraryExpanded ? 'Reset Canvas' : '+ Add Node'}
-                      </button>
+                      </Button>
                     </aside>
 
                     {/* Canvas */}

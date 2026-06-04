@@ -29,6 +29,7 @@ import { analyticsService } from "@services/analyticsService";
 import Drawer from "@components/ui/Drawer";
 import TaskForm from "@components/forms/TaskForm";
 import { formatDate, isTaskOverdue } from "@utils/formatters";
+import Button from "@components/ui/Button";
 
 const priorities = {
   high: { label: "High", cls: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]" },
@@ -352,13 +353,13 @@ const UserDashboard = () => {
             </div>
 
             {user?.role === 'admin' && (
-  <button
+  <Button variant="custom" size="none"
     onClick={() => setCreateOpen(true)}
     className="inline-flex items-center gap-2 rounded-2xl bg-[#13856f] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-[#0f7260] hover:shadow-[0_12px_32px_rgba(19,133,111,0.36)]"
   >
     <Plus className="h-4 w-4" />
     New Task
-  </button>
+  </Button>
 )}
 <div className="mt-5 flex flex-wrap gap-2 pl-6">
               {[
@@ -544,7 +545,7 @@ const UserDashboard = () => {
                   { key: "todo", label: "To Do" },
                   { key: "completed", label: "Done" },
                 ].map((f) => (
-                  <button
+                  <Button variant="custom" size="none"
                     key={f.key}
                     onClick={() => setActiveFilter(f.key)}
                     className={`rounded-xl px-3 py-1.5 text-xs font-semibold transition-all ${
@@ -554,7 +555,7 @@ const UserDashboard = () => {
                     }`}
                   >
                     {f.label}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>

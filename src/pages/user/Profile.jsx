@@ -108,9 +108,9 @@ const Profile = () => {
             <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-[#8d514f] to-[#c26a44] flex items-center justify-center text-white text-2xl font-bold shadow-[0_8px_20px_rgba(141,81,79,0.35)]">
               {initials}
             </div>
-            <button className="absolute -bottom-1.5 -right-1.5 h-7 w-7 rounded-xl bg-[#13856f] text-white flex items-center justify-center shadow-[0_4px_10px_rgba(19,133,111,0.35)] hover:bg-[#0f7260] transition">
+            <Button variant="custom" size="none" className="absolute -bottom-1.5 -right-1.5 h-7 w-7 rounded-xl bg-[#13856f] text-white flex items-center justify-center shadow-[0_4px_10px_rgba(19,133,111,0.35)] hover:bg-[#0f7260] transition">
               <Camera className="h-3.5 w-3.5" />
-            </button>
+            </Button>
           </div>
 
           {/* Info */}
@@ -154,7 +154,7 @@ const Profile = () => {
       {/* Tabs */}
       <div className="flex gap-1 p-1 bg-white border border-[#ead8cb] rounded-2xl w-fit shadow-sm">
         {tabs.map(tab => (
-          <button
+          <Button variant="custom" size="none"
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
@@ -165,7 +165,7 @@ const Profile = () => {
           >
             <tab.icon className="h-4 w-4" />
             {tab.label}
-          </button>
+          </Button>
         ))}
       </div>
 

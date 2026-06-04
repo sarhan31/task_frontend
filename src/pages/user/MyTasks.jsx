@@ -27,6 +27,7 @@ import { taskService } from '@services/taskService';
 import { useTaskStore } from '@services/taskStore';
 import { cn } from '@utils/cn';
 import toast from '@utils/toast';
+import Button from "@components/ui/Button";
 
 const isDemoToken = () => {
   const t = localStorage.getItem('token');
@@ -308,14 +309,14 @@ const MyTasks = () => {
                 {counts['in-progress']} active in motion
               </p>
             </div>
-            <button
+            <Button variant="custom" size="none"
               onClick={fetchTasks}
               disabled={loading}
               className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#ead8cb] bg-white text-slate-600 shadow-sm transition hover:border-[#13856f]/30 hover:bg-[#e8f6f2] hover:text-[#13856f] active:scale-95 disabled:opacity-50"
               aria-label="Refresh tasks"
             >
               <RefreshCw className={cn('h-4.5 w-4.5', loading && 'animate-spin')} />
-            </button>
+            </Button>
           </div>
         </div>
       </motion.section>
@@ -339,7 +340,7 @@ const MyTasks = () => {
             const Icon = tab.icon;
             const isActive = filter === tab.value;
             return (
-              <button
+              <Button variant="custom" size="none"
                 key={tab.value}
                 onClick={() => setFilter(tab.value)}
                 className={cn(
@@ -359,7 +360,7 @@ const MyTasks = () => {
                 >
                   {counts[tab.value]}
                 </span>
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -477,7 +478,7 @@ const MyTasks = () => {
 
                   <div className="mt-auto">
                     {task.assignmentStatus === 'pending' && (
-                      <button
+                      <Button variant="custom" size="none"
                         onClick={() => {
                           setAcceptTask(task);
                           setShowDenyForm(false);
@@ -487,18 +488,18 @@ const MyTasks = () => {
                       >
                         <AlertCircle className="h-4 w-4" />
                         Review Assignment
-                      </button>
+                      </Button>
                     )}
 
                     {task.assignmentStatus === 'accepted' && !hasPendingStatusChange && !isCompleted && (
-                      <button
+                      <Button variant="custom" size="none"
                         onClick={() => setStatusTask(task)}
                         className="flex w-full items-center gap-2 rounded-2xl border border-[#13856f]/70 bg-[#e8f6f2]/55 px-4 py-3 text-sm font-semibold text-[#13856f] transition hover:bg-[#e8f6f2] active:scale-[0.98]"
                       >
                         <TrendingUp className="h-4 w-4" />
                         Update Status
                         <ChevronRight className="ml-auto h-4 w-4" />
-                      </button>
+                      </Button>
                     )}
 
                     {task.assignmentStatus === 'accepted' && hasPendingStatusChange && (
@@ -548,7 +549,7 @@ const MyTasks = () => {
                   Review Task Assignment
                 </h2>
               </div>
-              <button
+              <Button variant="custom" size="none"
                 onClick={() => {
                   setAcceptTask(null);
                   setShowDenyForm(false);
@@ -557,7 +558,7 @@ const MyTasks = () => {
                 className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white transition hover:bg-white/20"
               >
                 <X className="h-4 w-4" />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -591,22 +592,22 @@ const MyTasks = () => {
                   Accepting this task moves it into your active backlog so you can start sharing execution updates.
                 </p>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  <button
+                  <Button variant="custom" size="none"
                     onClick={handleAccept}
                     disabled={busy}
                     className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#13856f] to-[#1b9b82] py-3.5 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(19,133,111,0.25)] transition hover:from-[#0f7260] hover:to-[#17856f] hover:shadow-[0_6px_16px_rgba(19,133,111,0.3)] active:scale-[0.98] disabled:opacity-60"
                   >
                     {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle className="h-4 w-4" />}
                     Accept Task
-                  </button>
-                  <button
+                  </Button>
+                  <Button variant="custom" size="none"
                     onClick={() => setShowDenyForm(true)}
                     disabled={busy}
                     className="flex items-center justify-center gap-2 rounded-2xl border border-red-300 bg-red-50/40 py-3.5 text-sm font-semibold text-red-600 transition hover:bg-red-50 active:scale-[0.98] disabled:opacity-60"
                   >
                     <X className="h-4 w-4" />
                     Deny Assignment
-                  </button>
+                  </Button>
                 </div>
               </>
             ) : (
@@ -624,7 +625,7 @@ const MyTasks = () => {
                   />
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  <button
+                  <Button variant="custom" size="none"
                     onClick={() => {
                       setShowDenyForm(false);
                       setDenyReason('');
@@ -633,15 +634,15 @@ const MyTasks = () => {
                     className="rounded-2xl border border-slate-200 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 active:scale-[0.98]"
                   >
                     Back
-                  </button>
-                  <button
+                  </Button>
+                  <Button variant="custom" size="none"
                     onClick={handleDeny}
                     disabled={busy}
                     className="flex items-center justify-center gap-2 rounded-2xl bg-red-600 py-3 text-sm font-semibold text-white transition hover:bg-red-700 active:scale-[0.98] disabled:opacity-60"
                   >
                     {busy && <Loader2 className="h-4 w-4 animate-spin" />}
                     Confirm Rejection
-                  </button>
+                  </Button>
                 </div>
               </div>
             )}
@@ -655,12 +656,12 @@ const MyTasks = () => {
             <h2 className="text-xl font-bold tracking-wide text-white">
               Status Change Request
             </h2>
-            <button
+            <Button variant="custom" size="none"
               onClick={() => setStatusTask(null)}
               className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-white/70 transition-colors hover:bg-white/20 hover:text-white"
             >
               <X className="h-5 w-5" />
-            </button>
+            </Button>
           </div>
 
           <div className="space-y-6 p-6">
@@ -686,7 +687,7 @@ const MyTasks = () => {
                   const isCurrent = s.value === statusTask.status;
 
                   return (
-                    <button
+                    <Button variant="custom" size="none"
                       key={s.value}
                       onClick={() => handleStatusRequest(s.value)}
                       disabled={busy || isCurrent}
@@ -706,19 +707,19 @@ const MyTasks = () => {
                       <p className="mt-1.5 text-[11px] font-medium leading-relaxed text-slate-500">
                         {s.desc}
                       </p>
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
             </div>
 
-            <button
+            <Button variant="custom" size="none"
               onClick={() => setStatusTask(null)}
               disabled={busy}
               className="mt-2 w-full rounded-[20px] border border-gray-200 py-3.5 text-sm font-bold text-slate-600 transition-colors hover:bg-gray-50 focus:outline-none disabled:opacity-50"
             >
               Cancel Process
-            </button>
+            </Button>
           </div>
         </Overlay>
       )}

@@ -16,6 +16,7 @@ import {
 import UltraSidebar from "@components/layout/UltraSidebar";
 import TaskChart from "@components/charts/TaskChart";
 import { cn } from "@utils/cn";
+import Button from "@components/ui/Button";
 
 const UltraDashboard = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -171,10 +172,10 @@ const UltraDashboard = () => {
                       the app.
                     </p>
                   </div>
-                  <button className="inline-flex items-center gap-2 self-start rounded-2xl bg-[#13856f] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-[#0f7260] hover:shadow-[0_12px_32px_rgba(19,133,111,0.36)]">
+                  <Button variant="custom" size="none" className="inline-flex items-center gap-2 self-start rounded-2xl bg-[#13856f] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-[#0f7260] hover:shadow-[0_12px_32px_rgba(19,133,111,0.36)]">
                     <Sparkles className="h-4 w-4" />
                     Learn More
-                  </button>
+                  </Button>
                 </div>
               </motion.div>
 
@@ -391,9 +392,9 @@ const UltraDashboard = () => {
                     </div>
                   ))}
                 </div>
-                <button className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#13856f] transition-colors hover:text-[#0c6c59]">
+                <Button variant="custom" size="none" className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#13856f] transition-colors hover:text-[#0c6c59]">
                   View all <ArrowRight className="h-3.5 w-3.5" />
-                </button>
+                </Button>
               </motion.div>
 
               <motion.div

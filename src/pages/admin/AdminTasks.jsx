@@ -133,22 +133,22 @@ const AdminTasks = () => {
         </div>
 
         <div className="flex items-center gap-2 border-t border-[#f4ddd0] md:border-t-0 pt-3 md:pt-0 self-end md:self-auto">
-          <button
+          <Button variant="custom" size="none"
             onClick={() => setViewMode('list')}
             className={`p-2 rounded-xl transition ${
               viewMode === 'list' ? 'bg-[#e8f6f2] text-[#13856f]' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <List className="h-5 w-5" />
-          </button>
-          <button
+          </Button>
+          <Button variant="custom" size="none"
             onClick={() => setViewMode('grid')}
             className={`p-2 rounded-xl transition ${
               viewMode === 'grid' ? 'bg-[#e8f6f2] text-[#13856f]' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <LayoutGrid className="h-5 w-5" />
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -262,7 +262,7 @@ const AdminTasks = () => {
                       <Calendar className="h-3 w-3" />
                       {t.dueDate}
                     </span>
-                    <button
+                    <Button variant="custom" size="none"
                       onClick={() => {
                         setActiveTaskId(t.id);
                         setDetailsOpen(true);
@@ -270,14 +270,14 @@ const AdminTasks = () => {
                       className="p-1 hover:bg-slate-100 rounded-lg text-[#13856f]"
                     >
                       <ArrowUpRight className="h-4 w-4" />
-                    </button>
-                    <button
+                    </Button>
+                    <Button variant="custom" size="none"
                       onClick={() => handleDeleteTask(t)}
                       className="p-1 hover:bg-red-50 rounded-lg text-red-500"
                       title="Delete Task"
                     >
                       <Trash2 className="h-4 w-4" />
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -321,12 +321,12 @@ const AdminTasks = () => {
         {/* Dark Custom Header */}
         <div className="bg-[#141b2e] flex items-center justify-between px-6 py-5">
           <h2 className="text-xl font-bold text-white tracking-wide">Confirm Deletion</h2>
-          <button 
+          <Button variant="custom" size="none" 
             onClick={() => setTaskToDelete(null)}
             className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-white/70 transition-colors hover:bg-white/20 hover:text-white"
           >
             <X className="h-5 w-5" />
-          </button>
+          </Button>
         </div>
 
         <div className="p-6 space-y-6 bg-white">
@@ -338,18 +338,18 @@ const AdminTasks = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-2">
-            <button
+            <Button variant="custom" size="none"
               onClick={() => setTaskToDelete(null)}
               className="w-full rounded-[20px] border border-gray-200 py-3.5 text-sm font-bold text-slate-600 transition-colors hover:bg-gray-50 focus:outline-none"
             >
               Cancel Process
-            </button>
-            <button
+            </Button>
+            <Button variant="custom" size="none"
               onClick={confirmDeleteTask}
               className="w-full rounded-[20px] border border-transparent bg-red-500 py-3.5 text-sm font-bold text-white transition-colors hover:bg-red-600 focus:outline-none shadow-[0_4px_12px_rgba(239,68,68,0.2)]"
             >
               Delete Task
-            </button>
+            </Button>
           </div>
         </div>
       </Modal>

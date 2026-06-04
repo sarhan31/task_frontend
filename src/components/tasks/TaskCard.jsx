@@ -4,6 +4,7 @@ import Avatar from '@components/ui/Avatar';
 import Dropdown from '@components/ui/Dropdown';
 import { formatDate, isTaskOverdue } from '@utils/formatters';
 import { TASK_STATUS_COLORS, TASK_PRIORITY_COLORS } from '@utils/constants';
+import Button from "@components/ui/Button";
 
 const TaskCard = ({ task, onEdit, onDelete }) => {
   return (
@@ -12,9 +13,9 @@ const TaskCard = ({ task, onEdit, onDelete }) => {
         <h3 className="font-semibold text-gray-900 flex-1">{task.title}</h3>
         <Dropdown
           trigger={
-            <button className="p-1 hover:bg-gray-100 rounded">
+            <Button variant="custom" size="none" className="p-1 hover:bg-gray-100 rounded">
               <MoreVertical className="h-4 w-4 text-gray-500" />
-            </button>
+            </Button>
           }
         >
           <Dropdown.Item onClick={() => onEdit(task)}>Edit</Dropdown.Item>

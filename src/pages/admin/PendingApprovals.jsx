@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, CheckCircle2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PendingApprovalsPanel from '@components/admin/PendingApprovalsPanel';
+import Button from "@components/ui/Button";
 
 const PendingApprovals = () => {
   const navigate = useNavigate();
@@ -31,13 +32,13 @@ const PendingApprovals = () => {
             </p>
           </div>
 
-          <button
+          <Button variant="custom" size="none"
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 rounded-2xl border border-[#ead8cb] bg-white px-4 py-2.5 text-xs font-bold text-slate-600 shadow-sm transition hover:bg-[#e8f6f2] hover:text-[#13856f] hover:border-[#13856f]/30 active:scale-95"
           >
             <ArrowLeft className="h-4 w-4" />
             Back
-          </button>
+          </Button>
         </div>
       </motion.div>
 

@@ -18,6 +18,7 @@ import PremiumSidebar from "@components/layout/PremiumSidebar";
 import TaskChart from "@components/charts/TaskChart";
 import { cn } from "@utils/cn";
 import { useState } from "react";
+import Button from "@components/ui/Button";
 
 const PremiumDashboard = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -225,10 +226,10 @@ const PremiumDashboard = () => {
                       your team aligned without losing the current style.
                     </p>
                   </div>
-                  <button className="inline-flex items-center gap-2 self-start rounded-2xl bg-[#13856f] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-[#0f7260] hover:shadow-[0_12px_32px_rgba(19,133,111,0.36)]">
+                  <Button variant="custom" size="none" className="inline-flex items-center gap-2 self-start rounded-2xl bg-[#13856f] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-[#0f7260] hover:shadow-[0_12px_32px_rgba(19,133,111,0.36)]">
                     <Sparkles className="h-4 w-4" />
                     Assign Task
-                  </button>
+                  </Button>
                 </div>
 
                 <div className="mt-5 flex flex-wrap gap-2 pl-6">
@@ -308,7 +309,7 @@ const PremiumDashboard = () => {
                     </div>
                     <div className="flex gap-2">
                       {["7d", "30d", "90d"].map((range, index) => (
-                        <button
+                        <Button variant="custom" size="none"
                           key={range}
                           className={cn(
                             "rounded-xl px-3 py-1.5 text-xs font-semibold transition",
@@ -318,7 +319,7 @@ const PremiumDashboard = () => {
                           )}
                         >
                           {range}
-                        </button>
+                        </Button>
                       ))}
                     </div>
                   </div>
@@ -396,9 +397,9 @@ const PremiumDashboard = () => {
                       Recent Tasks
                     </h2>
                   </div>
-                  <button className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#13856f] transition-colors hover:text-[#0c6c59]">
+                  <Button variant="custom" size="none" className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#13856f] transition-colors hover:text-[#0c6c59]">
                     View all <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
+                  </Button>
                 </div>
                 <div className="space-y-0 divide-y divide-[#f4ddd0]">
                   {recentTasks.map((task) => (

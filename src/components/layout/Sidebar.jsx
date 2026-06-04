@@ -15,7 +15,9 @@ import {
   Home,
   PanelLeftClose,
   PanelLeftOpen,
+  Menu,
 } from "lucide-react";
+import Button from "@components/ui/Button";
 import { cn } from "@utils/cn";
 
 const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
@@ -80,9 +82,11 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
             </p>
           )}
         </div>
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={() => onToggle(!isOpen)}
-          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm transition hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
+          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
           title={isOpen ? "Hide sidebar" : "Show sidebar"}
           aria-label={isOpen ? "Hide sidebar" : "Show sidebar"}
         >
@@ -91,7 +95,7 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
           ) : (
             <PanelLeftOpen className="h-4 w-4" />
           )}
-        </button>
+        </Button>
       </div>
 
       <nav
@@ -153,13 +157,15 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
               </p>
             </div>
           )}
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={handleLogout}
-            className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl text-slate-400 transition-colors hover:bg-red-50 hover:text-red-500"
+            className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl text-slate-400 hover:bg-red-50 hover:text-red-500"
             title="Logout"
           >
             <LogOut className="h-4 w-4" />
-          </button>
+          </Button>
         </div>
       </div>
     </aside>

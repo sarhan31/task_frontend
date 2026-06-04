@@ -33,7 +33,7 @@ const ToggleRow = ({ label, description, checked, onChange }) => (
       <p className="text-sm font-semibold text-slate-700">{label}</p>
       {description && <p className="text-xs text-slate-400 mt-0.5">{description}</p>}
     </div>
-    <button
+    <Button variant="custom" size="none"
       onClick={() => onChange(!checked)}
       className={`relative h-6 w-11 rounded-full transition-colors duration-200 focus:outline-none flex-shrink-0 ${
         checked ? 'bg-[#13856f]' : 'bg-slate-200'
@@ -44,7 +44,7 @@ const ToggleRow = ({ label, description, checked, onChange }) => (
           checked ? 'translate-x-5' : 'translate-x-0'
         }`}
       />
-    </button>
+    </Button>
   </div>
 );
 
@@ -151,7 +151,7 @@ const SystemSettings = () => {
       {/* Tabs */}
       <div className="flex gap-1 p-1 bg-white border border-[#ead8cb] rounded-2xl w-fit shadow-sm">
         {tabs.map(tab => (
-          <button
+          <Button variant="custom" size="none"
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
@@ -162,7 +162,7 @@ const SystemSettings = () => {
           >
             <tab.icon className="h-4 w-4" />
             {tab.label}
-          </button>
+          </Button>
         ))}
       </div>
 

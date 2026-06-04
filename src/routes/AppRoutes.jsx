@@ -32,6 +32,7 @@ import TaskTemplates from '@pages/admin/TaskTemplates';
 // Shared Pages
 import HomePage from '@pages/HomePage';
 import NotFound from '@pages/NotFound';
+import Button from "@components/ui/Button";
 
 const FiredAccount = () => {
   const { user, logout } = useAuth();
@@ -75,13 +76,13 @@ const FiredAccount = () => {
             <p className="text-xs font-semibold leading-5 text-red-100">
               Use another account or wait until admin hires this account back.
             </p>
-            <button
+            <Button variant="custom" size="none"
               type="button"
               onClick={handleBackToHome}
               className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-red-900 transition hover:bg-red-50"
             >
               Back to Home
-            </button>
+            </Button>
           </div>
         </div>
       </div>

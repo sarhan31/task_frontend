@@ -19,6 +19,7 @@ import { taskService } from "@services/taskService";
 import { demoTaskStore } from "@services/demoTaskStore";
 
 import BrandLogo from "@components/ui/BrandLogo";
+import Button from "@components/ui/Button";
 
 const isDemoToken = () => {
   const t = localStorage.getItem('token');
@@ -96,9 +97,11 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
           <div />
         )}
 
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={() => setCollapsed(!collapsed)}
-          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm transition hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
+          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
           title={collapsed ? "Show sidebar" : "Hide sidebar"}
         >
           {collapsed ? (
@@ -106,7 +109,7 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
           ) : (
             <PanelLeftClose className="h-3.5 w-3.5" />
           )}
-        </button>
+        </Button>
       </div>
 
       {!collapsed && (
@@ -218,10 +221,10 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
 
       <div className="relative z-10 border-t border-[#ead8cb] p-3">
         {!collapsed && user?.role === 'admin' && (
-          <button className="mb-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#13856f] px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-[#0f7260]">
+          <Button className="mb-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#13856f] px-4 py-3 text-sm text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] hover:bg-[#0f7260]">
             <Plus className="h-4 w-4" />
             <span>Add New Task</span>
-          </button>
+          </Button>
         )}
 
         <div
