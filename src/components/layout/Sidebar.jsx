@@ -30,6 +30,7 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
     { to: "/admin/tasks", icon: CheckSquare, label: "Tasks" },
     { to: "/admin/calendar", icon: CalendarDays, label: "Calendar" },
     { to: "/admin/templates", icon: ClipboardList, label: "Templates" },
+    { to: "/admin/teams", icon: Users, label: "Teams" },
     { to: "/admin/users", icon: Users, label: "Users" },
     { to: "/admin/reports", icon: BarChart3, label: "Reports" },
     { to: "/admin/audit", icon: History, label: "Audit Trail" },

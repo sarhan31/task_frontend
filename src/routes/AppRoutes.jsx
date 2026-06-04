@@ -17,6 +17,8 @@ import UserManagement from '@pages/admin/UserManagement';
 import SystemSettings from '@pages/admin/SystemSettings';
 import Reports from '@pages/admin/Reports';
 import PendingApprovals from '@pages/admin/PendingApprovals';
+import TeamManagement from '@pages/admin/TeamManagement';
+import TeamDetails from '@pages/admin/TeamDetails';
 
 // User Pages
 import UltraDashboard from '@pages/user/UltraDashboard';
@@ -156,6 +158,8 @@ const AppRoutes = () => {
         <Route path="calendar" element={<CalendarView />} />
         <Route path="audit" element={<AuditTrail />} />
         <Route path="templates" element={<TaskTemplates />} />
+        <Route path="teams" element={<TeamManagement />} />
+        <Route path="teams/:id" element={<TeamDetails />} />
       </Route>
 
       {/* ── User Routes ── */}

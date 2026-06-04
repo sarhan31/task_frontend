@@ -5,7 +5,7 @@ import Input from '@components/ui/Input';
 import Textarea from '@components/ui/Textarea';
 import Select from '@components/ui/Select';
 import FileUpload from '@components/ui/FileUpload';
-import AssignTaskModal from '@components/tasks/AssignTaskModal';
+import TeamSelector from '@components/teams/TeamSelector';
 import { useAuth } from '@hooks/useAuth';
 
 
@@ -30,12 +30,16 @@ const TaskForm = ({ initialTask, onSave, onCancel }) => {
   const [status, setStatus] = useState(initialTask?.status || 'todo');
   const [progress, setProgress] = useState(initialTask?.progress || 0);
   const [tagsInput, setTagsInput] = useState(initialTask?.tags ? initialTask.tags.join(', ') : '');
-  const [assignee, setAssignee] = useState(initialTask?.assignee || 'Unassigned');
-  const [assigneeEmail, setAssigneeEmail] = useState(initialTask?.assigneeEmail || '');
-  const [assignToAll, setAssignToAll] = useState(initialTask?.assignedToAll || false);
   const [attachments, setAttachments] = useState(initialTask?.attachments || []);
   const [errors, setErrors] = useState({});
-  const [assignOpen, setAssignOpen] = useState(false);
+  
+  // Assignment State
+  const [assignment, setAssignment] = useState({
+    assignedType: initialTask?.assignedType || 'individual',
+    assignedTo: initialTask?.assignedTo?._id || initialTask?.assignedTo || '',
+    assignedToTeam: initialTask?.assignedToTeam?._id || initialTask?.assignedToTeam || '',
+    responsibleUser: initialTask?.responsibleUser?._id || initialTask?.responsibleUser || ''
+  });
 
   const isAssignedToParticularUser = !!(initialTask && initialTask.assignedTo && !initialTask.assignedToAll);
 
@@ -87,9 +91,7 @@ const TaskForm = ({ initialTask, onSave, onCancel }) => {
       status,
       progress: parseInt(progress, 10),
       tags,
-      assignee,
-      assigneeEmail,
-      assignToAll,
+      ...assignment,
       attachments
     };
 
@@ -147,27 +149,14 @@ const TaskForm = ({ initialTask, onSave, onCancel }) => {
             onChange={(e) => setStatus(e.target.value)}
           />
 
-          {/* Assignee select via Assign Modal */}
-          <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1.5 pl-0.5">
-              Assignee
-            </label>
-            <div className="relative">
-              <div
-                onClick={() => !isAssignedToParticularUser && setAssignOpen(true)}
-                className={`w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl bg-gray-50 hover:bg-white transition cursor-pointer text-slate-700 flex items-center justify-between ${
-                  isAssignedToParticularUser ? 'cursor-not-allowed opacity-75' : ''
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <User className="h-4 w-4 text-slate-400" />
-                  <span>{assignee}</span>
-                </div>
-                {!isAssignedToParticularUser && (
-                  <span className="text-xs font-semibold text-[#13856f] hover:underline">Change</span>
-                )}
-              </div>
-            </div>
+          {/* Assignee select via TeamSelector */}
+          <div className="col-span-1 md:col-span-2 mt-2 border-t border-slate-100 pt-4">
+            <h3 className="mb-4 text-sm font-bold text-slate-800">Assignment Details</h3>
+            <TeamSelector 
+              value={assignment} 
+              onChange={setAssignment} 
+              error={errors.assignment}
+            />
           </div>
         </div>
 
@@ -215,7 +204,6 @@ const TaskForm = ({ initialTask, onSave, onCancel }) => {
         </div>
       </div>
 
-      {/* Buttons */}
       <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#f4ddd0]">
         {onCancel && (
           <Button type="button" variant="ghost" onClick={onCancel}>
@@ -227,17 +215,6 @@ const TaskForm = ({ initialTask, onSave, onCancel }) => {
           {initialTask ? 'Save Changes' : 'Create Task'}
         </Button>
       </div>
-
-      <AssignTaskModal
-        isOpen={assignOpen}
-        onClose={() => setAssignOpen(false)}
-        selectedAssignee={assignee}
-        onAssign={(name, email, isAll) => {
-          setAssignee(name);
-          setAssigneeEmail(email || '');
-          setAssignToAll(isAll);
-        }}
-      />
     </form>
   );
 };
