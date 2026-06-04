@@ -1,5 +1,4 @@
 import { CheckCircle2, FileText, UserPlus, MessageSquare, AlertCircle } from "lucide-react";
-import { formatTimeAgo } from "@utils/formatters";
 
 const getActivityIcon = (text) => {
   const lower = text.toLowerCase();
