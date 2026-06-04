@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "@hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useTaskStore } from "@services/taskStore";
 import {
-  Search,
   LogOut,
   User,
-  X,
   Settings,
   Menu,
 } from "lucide-react";
@@ -16,28 +13,12 @@ import Button from "@components/ui/Button";
 
 const Navbar = ({ onToggleSidebar }) => {
   const { user, logout } = useAuth();
-  const { searchQuery, setSearchQuery } = useTaskStore();
   const navigate = useNavigate();
-  const [searchOpen, setSearchOpen] = useState(!!searchQuery);
-  const [searchVal, setSearchVal] = useState(searchQuery || "");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     logout(() => navigate("/", { replace: true }));
   };
-
-  const handleSearchSubmit = () => {
-    const value = searchVal.trim();
-    setSearchQuery(value);
-    if (value) {
-      navigate(user?.role === "admin" ? "/admin/tasks" : "/dashboard/tasks");
-    }
-  };
-
-  useEffect(() => {
-    setSearchVal(searchQuery || "");
-    setSearchOpen(Boolean(searchQuery));
-  }, [searchQuery]);
 
   return (
     <header className="relative z-30 flex h-[76px] min-w-0 items-center justify-between gap-4 border-b border-[#ead8cb] bg-[#fff8f3]/90 px-4 backdrop-blur-sm sm:px-5 lg:h-20 lg:px-6">
@@ -54,62 +35,6 @@ const Navbar = ({ onToggleSidebar }) => {
         </Button>
 
         <BrandLogo size="md" showSubtitle={false} className="flex-shrink-0" />
-      </div>
-
-      <div className="hidden flex-1 justify-center px-2 lg:flex">
-        <AnimatePresence mode="wait">
-          {searchOpen ? (
-            <motion.div
-              key="search-open"
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: 420, opacity: 1 }}
-              exit={{ width: 0, opacity: 0 }}
-              transition={{ duration: 0.22 }}
-              className="overflow-hidden"
-            >
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#13856f]" />
-                <input
-                  autoFocus
-                  type="text"
-                  value={searchVal}
-                  onChange={(e) => setSearchVal(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      handleSearchSubmit();
-                    }
-                  }}
-                  placeholder="Search tasks..."
-                  className="h-12 w-full rounded-2xl border border-[#e6d6ca] bg-white py-3 pl-12 pr-10 text-base text-slate-800 placeholder:text-slate-400 shadow-sm focus:border-[#13856f] focus:outline-none focus:ring-2 focus:ring-[#13856f]/20"
-                />
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    setSearchQuery("");
-                    setSearchOpen(false);
-                    setSearchVal("");
-                  }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 !p-0 text-slate-400 hover:text-slate-600"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.button
-              key="search-closed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSearchOpen(true)}
-              className="flex h-12 min-w-[420px] items-center gap-3 rounded-2xl border border-[#e6d6ca] bg-white px-5 text-base text-slate-400 shadow-sm transition hover:border-[#13856f]/40 hover:text-[#13856f]"
-            >
-              <Search className="h-5 w-5" />
-              <span>{searchQuery || "Search tasks..."}</span>
-            </motion.button>
-          )}
-        </AnimatePresence>
       </div>
 
       <div className="flex min-w-0 flex-shrink-0 items-center gap-3">
