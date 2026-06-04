@@ -258,48 +258,50 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.045)_1px,_transparent_1px),linear-gradient(90deg,_rgba(15,23,42,0.045)_1px,_transparent_1px)] bg-[size:72px_72px] opacity-50" />
       </div>
 
-      <div className="relative z-10 mx-auto flex flex-1 w-full max-w-[1320px] flex-col px-4 pb-8 pt-3 sm:px-6 lg:px-8">
-        <div className="sticky top-3 z-40 mb-3 flex justify-center sm:top-4">
-          <motion.header
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-            className="w-full rounded-[22px] border border-white/80 bg-white/92 px-3 py-2.5 shadow-[0_12px_36px_rgba(15,23,42,0.06)] backdrop-blur-xl sm:rounded-[28px] sm:px-5 sm:py-3"
-          >
-            <div className="flex items-center justify-between gap-2 lg:gap-4 lg:flex-nowrap">
-              <Link to="/" className="flex min-w-0 items-center">
-                <BrandLogo size="md" />
+      {/* Fixed Navbar */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-3 sm:px-6 sm:pt-4 lg:px-8">
+        <motion.header
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="w-full max-w-[1320px] rounded-[22px] border border-white/80 bg-white/92 px-3 py-2.5 shadow-[0_12px_36px_rgba(15,23,42,0.06)] backdrop-blur-xl sm:rounded-[28px] sm:px-5 sm:py-3"
+        >
+          <div className="flex items-center justify-between gap-2 lg:gap-4">
+            <Link to="/" className="flex min-w-0 items-center">
+              <BrandLogo size="md" />
+            </Link>
+
+            <nav className="hidden items-center gap-2 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-4 py-2 lg:flex">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-xs font-bold text-slate-600 hover:text-[#0f6c57] transition px-3.5 py-1.5 rounded-xl hover:bg-white/80"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center justify-end gap-2 sm:gap-3">
+              <Link
+                to={isAuthenticated ? dashboardPath : '/login'}
+                className="hidden rounded-2xl px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-[#f6efe8] sm:inline-flex"
+              >
+                {isAuthenticated ? 'Dashboard' : 'Sign In'}
               </Link>
-
-              <nav className="hidden items-center gap-2 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-4 py-2 lg:flex">
-                {navItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="text-xs font-bold text-slate-600 hover:text-[#0f6c57] transition px-3.5 py-1.5 rounded-xl hover:bg-white/80"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </nav>
-
-              <div className="flex items-center justify-end gap-2 sm:gap-3">
-                <Link
-                  to={isAuthenticated ? dashboardPath : '/login'}
-                  className="hidden rounded-2xl px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-[#f6efe8] sm:inline-flex"
-                >
-                  {isAuthenticated ? 'Dashboard' : 'Sign In'}
-                </Link>
-                <Link
-                  to={isAuthenticated ? dashboardPath : '/signup'}
-                  className="inline-flex items-center justify-center rounded-2xl bg-[#0f6c57] px-3 py-2 text-xs font-semibold text-white shadow-[0_8px_20px_rgba(15,108,87,0.2)] transition hover:bg-[#0c5d4b] sm:px-5 sm:py-2.5 sm:text-sm"
-                >
-                  {isAuthenticated ? 'Open Workspace' : 'Start Free'}
-                </Link>
-              </div>
+              <Link
+                to={isAuthenticated ? dashboardPath : '/signup'}
+                className="inline-flex items-center justify-center rounded-2xl bg-[#0f6c57] px-3 py-2 text-xs font-semibold text-white shadow-[0_8px_20px_rgba(15,108,87,0.2)] transition hover:bg-[#0c5d4b] sm:px-5 sm:py-2.5 sm:text-sm"
+              >
+                {isAuthenticated ? 'Open Workspace' : 'Start Free'}
+              </Link>
             </div>
-          </motion.header>
-        </div>
+          </div>
+        </motion.header>
+      </div>
+
+      <div className="relative z-10 mx-auto flex flex-1 w-full max-w-[1320px] flex-col px-4 pb-8 pt-24 sm:px-6 sm:pt-28 lg:px-8">
 
         <main className="flex-1 px-2 py-1">
           <section className="grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(500px,1.08fr)] items-center">
