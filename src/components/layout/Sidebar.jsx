@@ -42,6 +42,7 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
     { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { to: "/dashboard/tasks", icon: CheckSquare, label: "My Tasks" },
     { to: "/dashboard/board", icon: Trello, label: "Task Board" },
+    { to: "/dashboard/teams", icon: Users, label: "My Teams" },
     { to: "/dashboard/calendar", icon: CalendarDays, label: "Calendar" },
     { to: "/dashboard/profile", icon: Settings, label: "Profile" },
   ];

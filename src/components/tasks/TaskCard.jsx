@@ -5,10 +5,14 @@ import Dropdown from '@components/ui/Dropdown';
 import { formatDate, isTaskOverdue } from '@utils/formatters';
 import { TASK_STATUS_COLORS, TASK_PRIORITY_COLORS } from '@utils/constants';
 import Button from "@components/ui/Button";
+import { useAuth } from "@hooks/useAuth";
 
 const TaskCard = ({ task, onEdit, onDelete }) => {
+  const { user } = useAuth();
+  const isPrimaryOwner = task.assignedType === 'team_member' && task.responsibleUser && (task.responsibleUser._id === user?._id || task.responsibleUser === user?._id);
+
   return (
-    <div className="bg-white rounded-lg shadow-soft p-4 hover:shadow-lg transition-shadow">
+    <div className="bg-white rounded-lg shadow-soft p-4 hover:shadow-lg transition-shadow relative">
       <div className="flex items-start justify-between mb-3">
         <h3 className="font-semibold text-gray-900 flex-1">{task.title}</h3>
         <Dropdown
@@ -34,6 +38,11 @@ const TaskCard = ({ task, onEdit, onDelete }) => {
         <Badge className={TASK_PRIORITY_COLORS[task.priority]}>
           {task.priority}
         </Badge>
+        {isPrimaryOwner && (
+          <Badge className="bg-purple-100 text-purple-700 border-purple-200">
+            Primary Owner
+          </Badge>
+        )}
       </div>
 
       <div className="flex items-center justify-between text-sm text-gray-500">

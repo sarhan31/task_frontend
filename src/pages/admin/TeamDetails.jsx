@@ -74,11 +74,11 @@ const TeamDetails = () => {
   return (
     <div className="mx-auto max-w-7xl">
       <Link 
-        to={isAdmin ? "/admin/teams" : "/dashboard"} 
+        to={isAdmin ? "/admin/teams" : "/dashboard/teams"} 
         className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-[#13856f]"
       >
         <ArrowLeft className="h-4 w-4" />
-        Back to {isAdmin ? 'Teams' : 'Dashboard'}
+        Back to {isAdmin ? 'Teams' : 'My Teams'}
       </Link>
 
       {/* Header Card */}

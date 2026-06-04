@@ -26,6 +26,7 @@ import PremiumDashboard from '@pages/user/PremiumDashboard';
 import UserDashboard from '@pages/user/Dashboard';
 import MyTasks from '@pages/user/MyTasks';
 import TaskBoard from '@pages/user/TaskBoard';
+import MyTeams from '@pages/user/MyTeams';
 import Profile from '@pages/user/Profile';
 import CalendarView from '@pages/user/CalendarView';
 import AuditTrail from '@pages/admin/AuditTrail';
@@ -174,6 +175,8 @@ const AppRoutes = () => {
         <Route index element={<UserDashboard />} />
         <Route path="tasks" element={<MyTasks />} />
         <Route path="board" element={<TaskBoard />} />
+        <Route path="teams" element={<MyTeams />} />
+        <Route path="teams/:id" element={<TeamDetails />} />
         <Route path="calendar" element={<CalendarView />} />
         <Route path="profile" element={<Profile />} />
       </Route>

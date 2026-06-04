@@ -10,6 +10,7 @@ import {
   LogOut,
   PanelLeftClose,
   PanelLeftOpen,
+  Users,
 } from "lucide-react";
 import { cn } from "@utils/cn";
 import BrandLogo from "@components/ui/BrandLogo";
@@ -25,6 +26,7 @@ const PremiumSidebar = ({ collapsed, setCollapsed }) => {
       path: "/premium-dashboard/analytics",
     },
     { icon: FileText, label: "Reports", path: "/premium-dashboard/reports" },
+    { icon: Users, label: "My Teams", path: "/dashboard/teams" },
     { icon: CalendarDays, label: "Calendar", path: "/dashboard/calendar" },
     { icon: Settings, label: "Settings", path: "/premium-dashboard/settings" },
   ];
