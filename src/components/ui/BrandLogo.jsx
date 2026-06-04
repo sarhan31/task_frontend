@@ -3,19 +3,19 @@ import { cn } from "@utils/cn";
 const sizeConfig = {
   sm: {
     wrap: "gap-2.5",
-    imgSize: 36,
+    imgSize: 44,
     title: "text-lg",
     subtitle: "text-[10px]",
   },
   md: {
     wrap: "gap-3",
-    imgSize: 44,
+    imgSize: 52,
     title: "text-xl sm:text-2xl",
     subtitle: "text-xs",
   },
   lg: {
     wrap: "gap-3",
-    imgSize: 48,
+    imgSize: 60,
     title: "text-2xl",
     subtitle: "text-xs",
   },
