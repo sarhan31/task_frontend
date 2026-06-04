@@ -57,7 +57,7 @@ const BrandLogo = ({
       <div className={cn("min-w-0", brandClassName)}>
         <p
           className={cn(
-            "truncate font-display font-extrabold tracking-tight bg-gradient-to-r from-[#0f6c57] via-[#13856f] to-[#1a937a] bg-clip-text text-transparent drop-shadow-sm",
+            "truncate font-display font-extrabold tracking-tight bg-gradient-to-r from-[#0f6c57] via-[#23a589] to-[#0f6c57] bg-[length:200%_auto] bg-clip-text text-transparent drop-shadow-sm animate-gradient",
             config.title,
             titleClassName,
           )}
