@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -27,7 +27,7 @@ import { taskService } from '@services/taskService';
 import { useTaskStore } from '@services/taskStore';
 import { cn } from '@utils/cn';
 import { getTaskAssigneeLabel } from '@utils/taskAssignment';
-import toast from '@utils/toast';
+import { toast } from '@components/ui/Toaster';
 import Button from "@components/ui/Button";
 
 const isDemoToken = () => {
@@ -81,7 +81,7 @@ const STATS_META = [
     label: 'Total Tasks',
     note: 'Current workload',
     icon: ListTodo,
-    color: 'bg-gradient-to-br from-[#13856f] to-[#1b9b82]',
+    color: 'bg-gradient-to-br from-brand to-brand-alt',
   },
   {
     key: 'pending',
@@ -270,13 +270,13 @@ const MyTasks = () => {
         transition={{ duration: 0.4 }}
         className="relative overflow-hidden rounded-[30px] border border-white/65 bg-white/88 p-6 shadow-[0_8px_40px_rgba(90,55,20,0.12)] backdrop-blur-sm sm:p-7"
       >
-        <div className="absolute left-0 top-7 bottom-7 w-1.5 rounded-full bg-[#13856f]" />
-        <div className="pointer-events-none absolute right-8 top-4 h-32 w-32 rounded-full bg-[#efbf91]/25 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 right-28 h-24 w-24 rounded-full bg-[#13856f]/10 blur-3xl" />
+        <div className="absolute left-0 top-7 bottom-7 w-1.5 rounded-full bg-brand" />
+        <div className="pointer-events-none absolute right-8 top-4 h-32 w-32 rounded-full bg-warm-light/25 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 right-28 h-24 w-24 rounded-full bg-brand/10 blur-3xl" />
 
         <div className="relative z-10 flex flex-col gap-6 pl-5 sm:pl-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#13856f]">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand">
               Teammate Portal
             </p>
             <h1 className="mt-2 font-display text-3xl font-bold leading-tight text-slate-900 sm:text-[2rem]">
@@ -287,15 +287,15 @@ const MyTasks = () => {
             </p>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#e8f6f2] px-3 py-1.5 text-xs font-semibold text-[#13856f]">
+              <span className="inline-flex items-center gap-2 rounded-full bg-brand-light px-3 py-1.5 text-xs font-semibold text-brand">
                 <Sparkles className="h-3.5 w-3.5" />
                 Personal task center
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#fff8ef] px-3 py-1.5 text-xs font-semibold text-[#b5722a]">
+              <span className="inline-flex items-center gap-2 rounded-full bg-surface-hover px-3 py-1.5 text-xs font-semibold text-warm-accent">
                 <ListFilter className="h-3.5 w-3.5" />
                 {counts.pending} awaiting response
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#fdf0ef] px-3 py-1.5 text-xs font-semibold text-[#8d514f]">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#fdf0ef] px-3 py-1.5 text-xs font-semibold text-warm">
                 <CheckCircle2 className="h-3.5 w-3.5" />
                 {counts.completed} completed
               </span>
@@ -303,7 +303,7 @@ const MyTasks = () => {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="hidden rounded-[22px] border border-[#f4ddd0] bg-[#fffaf6] px-4 py-3 text-right shadow-sm md:block">
+            <div className="hidden rounded-[22px] border border-border-light bg-surface-card px-4 py-3 text-right shadow-sm md:block">
               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">
                 Workspace Pulse
               </p>
@@ -314,7 +314,7 @@ const MyTasks = () => {
             <Button variant="custom" size="none"
               onClick={fetchTasks}
               disabled={loading}
-              className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#ead8cb] bg-white text-slate-600 shadow-sm transition hover:border-[#13856f]/30 hover:bg-[#e8f6f2] hover:text-[#13856f] active:scale-95 disabled:opacity-50"
+              className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-white text-slate-600 shadow-sm transition hover:border-brand/30 hover:bg-brand-light hover:text-brand active:scale-95 disabled:opacity-50"
               aria-label="Refresh tasks"
             >
               <RefreshCw className={cn('h-4.5 w-4.5', loading && 'animate-spin')} />
@@ -348,8 +348,8 @@ const MyTasks = () => {
                 className={cn(
                   'flex items-center gap-2 whitespace-nowrap rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-200 active:scale-95',
                   isActive
-                    ? 'border border-[#13856f] bg-[#13856f] text-white shadow-[0_6px_18px_rgba(19,133,111,0.24)]'
-                    : 'border border-[#ead8cb] bg-white/95 text-slate-600 hover:border-[#13856f]/30 hover:bg-[#e8f6f2] hover:text-[#13856f]'
+                    ? 'border border-brand bg-brand text-white shadow-[0_6px_18px_rgba(19,133,111,0.24)]'
+                    : 'border border-border bg-white/95 text-slate-600 hover:border-brand/30 hover:bg-brand-light hover:text-brand'
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -370,16 +370,16 @@ const MyTasks = () => {
 
       {loading ? (
         <div className="flex h-64 items-center justify-center rounded-[28px] border border-white/60 bg-white/55 backdrop-blur-sm">
-          <div className="h-11 w-11 animate-spin rounded-full border-4 border-[#13856f] border-t-transparent" />
+          <div className="h-11 w-11 animate-spin rounded-full border-4 border-brand border-t-transparent" />
         </div>
       ) : filtered.length === 0 ? (
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center justify-center rounded-[28px] border border-dashed border-[#ead8cb] bg-white/50 px-6 py-20 text-center shadow-inner"
+          className="flex flex-col items-center justify-center rounded-[28px] border border-dashed border-border bg-white/50 px-6 py-20 text-center shadow-inner"
         >
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-[#ead8cb]/60 bg-white shadow-sm">
-            <CheckCircle className="h-8 w-8 text-[#13856f]" />
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-border/60 bg-white shadow-sm">
+            <CheckCircle className="h-8 w-8 text-brand" />
           </div>
           <h3 className="font-display text-lg font-bold text-slate-800">Clear Workspace</h3>
           <p className="mt-2 max-w-xs text-sm leading-6 text-slate-400">
@@ -409,7 +409,7 @@ const MyTasks = () => {
                   })}
                 />
 
-                <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-[#efbf91]/10 blur-3xl transition duration-300 group-hover:bg-[#efbf91]/20" />
+                <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-warm-light/10 blur-3xl transition duration-300 group-hover:bg-warm-light/20" />
 
                 <div className="flex flex-1 flex-col p-5">
                   <div className="mb-4 flex items-start justify-between gap-3">
@@ -432,7 +432,7 @@ const MyTasks = () => {
                         )}
                       </div>
 
-                      <h3 className="font-display text-lg font-bold leading-6 text-slate-900 transition-colors duration-200 group-hover:text-[#13856f]">
+                      <h3 className="font-display text-lg font-bold leading-6 text-slate-900 transition-colors duration-200 group-hover:text-brand">
                         {task.title}
                       </h3>
                     </div>
@@ -449,7 +449,7 @@ const MyTasks = () => {
                   </p>
 
                   <div className="mb-5 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] px-3.5 py-3">
+                    <div className="rounded-2xl border border-border-light bg-surface-card px-3.5 py-3">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
                         Priority
                       </p>
@@ -458,12 +458,12 @@ const MyTasks = () => {
                         {task.priority}
                       </div>
                     </div>
-                    <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] px-3.5 py-3">
+                    <div className="rounded-2xl border border-border-light bg-surface-card px-3.5 py-3">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
                         Due Date
                       </p>
                       <div className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-slate-700">
-                        <Calendar className="h-4 w-4 text-[#13856f]" />
+                        <Calendar className="h-4 w-4 text-brand" />
                         {task.dueDate}
                       </div>
                     </div>
@@ -493,7 +493,7 @@ const MyTasks = () => {
                           setShowDenyForm(false);
                           setDenyReason('');
                         }}
-                        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#13856f] to-[#1b9b82] px-4 py-3 text-sm font-semibold text-white shadow-[0_6px_18px_rgba(19,133,111,0.2)] transition hover:from-[#0f7260] hover:to-[#17856f] active:scale-[0.98]"
+                        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-alt px-4 py-3 text-sm font-semibold text-white shadow-[0_6px_18px_rgba(19,133,111,0.2)] transition hover:from-brand-dark hover:to-[#17856f] active:scale-[0.98]"
                       >
                         <AlertCircle className="h-4 w-4" />
                         Review Assignment
@@ -515,7 +515,7 @@ const MyTasks = () => {
                     {task.assignmentStatus === 'accepted' && task.assignedType !== 'team' && !hasPendingStatusChange && !isCompleted && (
                       <Button variant="custom" size="none"
                         onClick={() => setStatusTask(task)}
-                        className="flex w-full items-center gap-2 rounded-2xl border border-[#13856f]/70 bg-[#e8f6f2]/55 px-4 py-3 text-sm font-semibold text-[#13856f] transition hover:bg-[#e8f6f2] active:scale-[0.98]"
+                        className="flex w-full items-center gap-2 rounded-2xl border border-brand/70 bg-brand-light/55 px-4 py-3 text-sm font-semibold text-brand transition hover:bg-brand-light active:scale-[0.98]"
                       >
                         <TrendingUp className="h-4 w-4" />
                         Update Status
@@ -559,7 +559,7 @@ const MyTasks = () => {
             setDenyReason('');
           }}
         >
-          <div className="relative bg-gradient-to-br from-[#13856f] to-[#0f7260] px-6 py-5">
+          <div className="relative bg-gradient-to-br from-brand to-brand-dark px-6 py-5">
             <div className="absolute inset-0 bg-white/5 opacity-10" />
             <div className="relative z-10 flex items-start justify-between">
               <div>
@@ -584,14 +584,14 @@ const MyTasks = () => {
           </div>
 
           <div className="space-y-6 p-6">
-            <div className="space-y-3 rounded-[24px] border border-[#ead8cb] bg-[#fffaf6] p-5 shadow-sm">
+            <div className="space-y-3 rounded-[24px] border border-border bg-surface-card p-5 shadow-sm">
               <h3 className="font-display text-lg font-bold leading-snug text-slate-800">
                 {acceptTask.title}
               </h3>
               <p className="text-sm leading-6 text-slate-500">
                 {acceptTask.description || 'No description provided.'}
               </p>
-              <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-[#f4ddd0] pt-3 text-xs">
+              <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-border-light pt-3 text-xs">
                 <span className="flex items-center gap-1.5 font-medium text-slate-600">
                   <Flag className="h-3.5 w-3.5 text-orange-500" />
                   Priority:
@@ -600,7 +600,7 @@ const MyTasks = () => {
                   </strong>
                 </span>
                 <span className="flex items-center gap-1.5 font-medium text-slate-600">
-                  <Calendar className="h-3.5 w-3.5 text-[#13856f]" />
+                  <Calendar className="h-3.5 w-3.5 text-brand" />
                   Due Date:
                   <strong className="font-bold text-slate-700">{acceptTask.dueDate}</strong>
                 </span>
@@ -616,7 +616,7 @@ const MyTasks = () => {
                   <Button variant="custom" size="none"
                     onClick={handleAccept}
                     disabled={busy}
-                    className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#13856f] to-[#1b9b82] py-3.5 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(19,133,111,0.25)] transition hover:from-[#0f7260] hover:to-[#17856f] hover:shadow-[0_6px_16px_rgba(19,133,111,0.3)] active:scale-[0.98] disabled:opacity-60"
+                    className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-alt py-3.5 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(19,133,111,0.25)] transition hover:from-brand-dark hover:to-[#17856f] hover:shadow-[0_6px_16px_rgba(19,133,111,0.3)] active:scale-[0.98] disabled:opacity-60"
                   >
                     {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle className="h-4 w-4" />}
                     Accept Task
@@ -642,7 +642,7 @@ const MyTasks = () => {
                     onChange={(e) => setDenyReason(e.target.value)}
                     placeholder="Provide a clear reason for rejecting this assignment."
                     rows={4}
-                    className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 transition-all duration-200 placeholder:text-slate-400 focus:border-[#13856f] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#13856f]/30"
+                    className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 transition-all duration-200 placeholder:text-slate-400 focus:border-brand focus:bg-white focus:outline-none focus:ring-1 focus:ring-brand/30"
                   />
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -686,7 +686,7 @@ const MyTasks = () => {
           </div>
 
           <div className="space-y-6 p-6">
-            <div className="flex items-center justify-between rounded-[24px] border border-[#ead8cb] bg-[#fffaf6] px-5 py-4 shadow-sm">
+            <div className="flex items-center justify-between rounded-[24px] border border-border bg-surface-card px-5 py-4 shadow-sm">
               <span className="text-sm font-semibold text-slate-500">Current Status</span>
               <span className="rounded-xl bg-[#ccfbf1] px-3 py-1.5 text-xs font-bold text-[#115e59] border border-[#99f6e4]">
                 {statusTask.status.replace('_', ' ')}
@@ -715,11 +715,11 @@ const MyTasks = () => {
                       className={cn(
                         'flex flex-col items-start rounded-[24px] border p-5 text-left transition-all duration-200',
                         isCurrent
-                          ? 'border-[#ead8cb]/50 bg-slate-50 opacity-60 cursor-not-allowed'
-                          : 'border-[#ead8cb] bg-white shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] hover:border-[#13856f]/40 hover:bg-[#fffaf6] hover:shadow-md cursor-pointer'
+                          ? 'border-border/50 bg-slate-50 opacity-60 cursor-not-allowed'
+                          : 'border-border bg-white shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] hover:border-brand/40 hover:bg-surface-card hover:shadow-md cursor-pointer'
                       )}
                     >
-                      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[14px] bg-[#f8f9fa] text-[#13856f]">
+                      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[14px] bg-[#f8f9fa] text-brand">
                         <Icon className="h-5 w-5" />
                       </div>
                       <h4 className="text-sm font-bold text-slate-800">

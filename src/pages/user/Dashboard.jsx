@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+﻿import { useState, useEffect, useMemo } from "react";
 import {
   Clock,
   TrendingUp,
@@ -31,9 +31,9 @@ import ResponsibilityCard from "@components/ui/ResponsibilityCard";
 import ActivityTimeline from "@components/ui/ActivityTimeline";
 
 const priorities = {
-  high: { label: "High", cls: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]" },
-  medium: { label: "Medium", cls: "bg-[#fff8ef] text-[#b5722a] border-[#f0d9be]" },
-  low: { label: "Low", cls: "bg-[#e8f6f2] text-[#13856f] border-[#b8e0d8]" },
+  high: { label: "High", cls: "bg-[#fdf0ef] text-warm border-[#f4c5c1]" },
+  medium: { label: "Medium", cls: "bg-surface-hover text-warm-accent border-warm-pale" },
+  low: { label: "Low", cls: "bg-brand-light text-brand border-brand-muted" },
 };
 
 const statuses = {
@@ -144,7 +144,7 @@ const UserDashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: -18 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-[28px] border border-red-300 bg-gradient-to-br from-red-950 via-red-800 to-[#8d514f] p-6 text-white shadow-[0_18px_48px_rgba(127,29,29,0.35)]"
+          className="relative overflow-hidden rounded-[28px] border border-red-300 bg-gradient-to-br from-red-950 via-red-800 to-warm p-6 text-white shadow-[0_18px_48px_rgba(127,29,29,0.35)]"
         >
           {/* Fired logic ... (unchanged structure) */}
           <div className="absolute inset-x-0 top-0 h-1 bg-red-300" />
@@ -173,14 +173,14 @@ const UserDashboard = () => {
             {...fadeUp(0)}
             className="relative overflow-hidden rounded-[28px] border border-white/65 bg-white/88 p-7 shadow-[0_8px_40px_rgba(90,55,20,0.12)] backdrop-blur-sm"
           >
-            <div className="absolute left-0 top-8 bottom-8 w-1.5 rounded-full bg-[#13856f]" />
-            <div className="absolute right-8 top-4 h-32 w-32 rounded-full bg-[#efbf91]/20 blur-2xl pointer-events-none" />
+            <div className="absolute left-0 top-8 bottom-8 w-1.5 rounded-full bg-brand" />
+            <div className="absolute right-8 top-4 h-32 w-32 rounded-full bg-warm-light/20 blur-2xl pointer-events-none" />
             <div className="flex flex-wrap items-center justify-between gap-4 pl-6">
               <div className="min-w-0">
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#13856f]">{greeting()},</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-brand">{greeting()},</p>
                 <h1 className="font-display mt-1 text-3xl font-bold text-slate-900 leading-tight">{user?.name || "Welcome back"} 👋</h1>
                 <p className="mt-1.5 text-sm text-slate-500">
-                  You have <span className="font-semibold text-[#13856f]">{todoTasks} tasks</span> todo.
+                  You have <span className="font-semibold text-brand">{todoTasks} tasks</span> todo.
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -197,7 +197,7 @@ const UserDashboard = () => {
               </div>
             </div>
             {user?.role === 'admin' && (
-              <Button variant="custom" size="none" onClick={() => setCreateOpen(true)} className="inline-flex items-center gap-2 rounded-2xl bg-[#13856f] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-[#0f7260] mt-4 ml-6">
+              <Button variant="custom" size="none" onClick={() => setCreateOpen(true)} className="inline-flex items-center gap-2 rounded-2xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-brand-dark mt-4 ml-6">
                 <Plus className="h-4 w-4" /> New Task
               </Button>
             )}
@@ -220,13 +220,13 @@ const UserDashboard = () => {
               <ResponsibilityCard title="Due Soon" icon={AlertCircle} count={dueSoonTasks.length} tasks={dueSoonTasks} colorClass="text-amber-600" bgClass="bg-amber-100" linkTo="/dashboard/tasks" />
             </motion.div>
             <motion.div {...fadeUp(0.2)}>
-              <ResponsibilityCard title="Awaiting Review" icon={FileCheck} count={reviewTasks.length} tasks={reviewTasks} colorClass="text-[#13856f]" bgClass="bg-[#e8f6f2]" />
+              <ResponsibilityCard title="Awaiting Review" icon={FileCheck} count={reviewTasks.length} tasks={reviewTasks} colorClass="text-brand" bgClass="bg-brand-light" />
             </motion.div>
           </div>
 
           {/* Task Lists (My Tasks / Team Tasks) */}
           <motion.div {...fadeUp(0.25)} className="overflow-hidden rounded-[24px] border border-white/65 bg-white/88 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f4ddd0] px-6 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border-light px-6 py-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Classification</p>
                 <h2 className="font-display mt-0.5 text-lg font-bold text-slate-900">Task Board</h2>
@@ -240,10 +240,10 @@ const UserDashboard = () => {
                 </button>
               </div>
             </div>
-            <div className="divide-y divide-[#f4ddd0]">
+            <div className="divide-y divide-border-light">
               {displayedTasks.length > 0 ? (
                 displayedTasks.map((task) => (
-                  <div key={task.id} className="flex flex-col gap-4 px-6 py-4 transition-colors hover:bg-[#fffaf6] md:flex-row md:items-center md:justify-between">
+                  <div key={task.id} className="flex flex-col gap-4 px-6 py-4 transition-colors hover:bg-surface-card md:flex-row md:items-center md:justify-between">
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: (statuses[task.status] || statuses.todo).dot }} />
@@ -258,7 +258,7 @@ const UserDashboard = () => {
                         </span>
                       </div>
                     </div>
-                    <span className="rounded-full bg-[#fffaf6] px-3 py-1 text-xs font-semibold text-slate-600 border border-[#f4ddd0]">
+                    <span className="rounded-full bg-surface-card px-3 py-1 text-xs font-semibold text-slate-600 border border-border-light">
                       {(statuses[task.status] || statuses.todo).label}
                     </span>
                   </div>
@@ -279,10 +279,10 @@ const UserDashboard = () => {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Profile</p>
                 <h2 className="font-display mt-0.5 text-lg font-bold text-slate-900">Personal Panel</h2>
               </div>
-              <Bell className="h-4 w-4 text-[#13856f]" />
+              <Bell className="h-4 w-4 text-brand" />
             </div>
-            <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-4 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#8d514f] text-white text-lg font-bold">
+            <div className="rounded-2xl border border-border-light bg-surface-card p-4 flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-warm text-white text-lg font-bold">
                 {user?.name?.charAt(0)?.toUpperCase() || "U"}
               </div>
               <div>
@@ -299,7 +299,7 @@ const UserDashboard = () => {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Schedule</p>
                 <h2 className="font-display mt-0.5 text-lg font-bold text-slate-900">Upcoming Deadlines</h2>
               </div>
-              <Clock className="h-4 w-4 text-[#13856f]" />
+              <Clock className="h-4 w-4 text-brand" />
             </div>
             <div className="space-y-3">
               {upcomingDeadlines.length > 0 ? (
@@ -328,10 +328,10 @@ const UserDashboard = () => {
                     <div key={team._id} className="rounded-xl border border-slate-100 p-4">
                       <div className="mb-2 flex items-center justify-between">
                         <h4 className="text-sm font-bold text-slate-700">{team.teamName}</h4>
-                        <span className="text-xs font-bold text-[#13856f]">{teamPct}%</span>
+                        <span className="text-xs font-bold text-brand">{teamPct}%</span>
                       </div>
                       <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
-                        <div className="h-full bg-[#13856f] transition-all" style={{ width: `${teamPct}%` }} />
+                        <div className="h-full bg-brand transition-all" style={{ width: `${teamPct}%` }} />
                       </div>
                       <div className="mt-2 text-xs text-slate-400">
                         {teamComp} / {teamTotal} Tasks Completed

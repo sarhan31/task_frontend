@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+﻿import { NavLink } from "react-router-dom";
 import { useAuth } from "@hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import {
@@ -56,7 +56,7 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-30 flex h-screen flex-col overflow-hidden border-r border-[#ead8cb] bg-[#fff8f3] transition-transform duration-300 ease-out",
+        "fixed inset-y-0 left-0 z-30 flex h-screen flex-col overflow-hidden border-r border-border bg-surface-base transition-transform duration-300 ease-out",
         isMobile
           ? (isOpen ? "w-64 translate-x-0" : "w-64 -translate-x-full")
           : (isOpen ? "w-64 translate-x-0" : "w-20 translate-x-0"),
@@ -64,10 +64,10 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
       style={{ minWidth: isMobile ? 256 : (isOpen ? 256 : 80) }}
     >
       {/* Decorative blobs */}
-      <div className="pointer-events-none absolute left-[-3rem] top-[-3rem] h-40 w-40 rounded-full bg-[#efbf91]/20 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-2rem] right-[-2rem] h-32 w-32 rounded-full bg-[#13856f]/10 blur-3xl" />
+      <div className="pointer-events-none absolute left-[-3rem] top-[-3rem] h-40 w-40 rounded-full bg-warm-light/20 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-[-2rem] right-[-2rem] h-32 w-32 rounded-full bg-brand/10 blur-3xl" />
 
-      <div className="relative z-10 flex items-center justify-between gap-3 border-b border-[#ead8cb] px-3 py-4">
+      <div className="relative z-10 flex items-center justify-between gap-3 border-b border-border px-3 py-4">
         <div className="min-w-0">
           {isOpen ? (
             <>
@@ -88,7 +88,7 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
           variant="ghost"
           size="sm"
           onClick={() => onToggle(!isOpen)}
-          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-border-soft bg-white text-slate-500 shadow-sm hover:border-brand/40 hover:bg-brand-light hover:text-brand"
           title={isOpen ? "Hide sidebar" : "Show sidebar"}
           aria-label={isOpen ? "Hide sidebar" : "Show sidebar"}
         >
@@ -121,8 +121,8 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
                 "group flex items-center rounded-2xl text-sm font-medium transition-all duration-200",
                 isOpen ? "gap-3 px-3 py-2.5" : "justify-center px-2 py-3",
                 isActive
-                  ? "bg-[#13856f] text-white shadow-[0_4px_14px_rgba(19,133,111,0.28)]"
-                  : "text-slate-600 hover:bg-[#e8f6f2] hover:text-[#13856f]",
+                  ? "bg-brand text-white shadow-[0_4px_14px_rgba(19,133,111,0.28)]"
+                  : "text-slate-600 hover:bg-brand-light hover:text-brand",
               )
             }
           >
@@ -133,7 +133,7 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
                     "h-5 w-5 flex-shrink-0 transition-colors",
                     isActive
                       ? "text-white"
-                      : "text-slate-400 group-hover:text-[#13856f]",
+                      : "text-slate-400 group-hover:text-brand",
                   )}
                 />
                 {isOpen && <span>{link.label}</span>}
@@ -144,9 +144,9 @@ const Sidebar = ({ isOpen, onToggle, isMobile = false }) => {
       </nav>
 
       {/* Divider + user footer */}
-      <div className="relative z-10 border-t border-[#ead8cb] p-3">
+      <div className="relative z-10 border-t border-border p-3">
         <div className={cn("flex items-center rounded-2xl p-2", isOpen ? "gap-3" : "justify-center")}>
-          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#8d514f] text-white text-sm font-semibold">
+          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-warm text-white text-sm font-semibold">
             {user?.name?.charAt(0)?.toUpperCase() || "U"}
           </div>
           {isOpen && (

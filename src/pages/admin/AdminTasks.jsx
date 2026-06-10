@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, LayoutGrid, List, Eye, Calendar, ArrowUpRight, Trash2, AlertTriangle, X } from 'lucide-react';
 import { useTaskStore } from '@services/taskStore';
@@ -89,7 +89,7 @@ const AdminTasks = () => {
 
         <Button
           onClick={() => setCreateOpen(true)}
-          className="bg-[#13856f] text-white hover:bg-[#0f7260] shadow-[0_4px_12px_rgba(19,133,111,0.22)] rounded-xl"
+          className="bg-brand text-white hover:bg-brand-dark shadow-[0_4px_12px_rgba(19,133,111,0.22)] rounded-xl"
         >
           <Plus className="mr-2 h-4 w-4" />
           Create Task
@@ -97,7 +97,7 @@ const AdminTasks = () => {
       </div>
 
       {/* Filter and layout triggers */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white/70 border border-[#ead8cb] rounded-[24px] p-4 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white/70 border border-border rounded-[24px] p-4 shadow-sm">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 flex-1">
           <Input
             icon={Search}
@@ -132,11 +132,11 @@ const AdminTasks = () => {
           />
         </div>
 
-        <div className="flex items-center gap-2 border-t border-[#f4ddd0] md:border-t-0 pt-3 md:pt-0 self-end md:self-auto">
+        <div className="flex items-center gap-2 border-t border-border-light md:border-t-0 pt-3 md:pt-0 self-end md:self-auto">
           <Button variant="custom" size="none"
             onClick={() => setViewMode('list')}
             className={`p-2 rounded-xl transition ${
-              viewMode === 'list' ? 'bg-[#e8f6f2] text-[#13856f]' : 'text-slate-400 hover:text-slate-600'
+              viewMode === 'list' ? 'bg-brand-light text-brand' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <List className="h-5 w-5" />
@@ -144,7 +144,7 @@ const AdminTasks = () => {
           <Button variant="custom" size="none"
             onClick={() => setViewMode('grid')}
             className={`p-2 rounded-xl transition ${
-              viewMode === 'grid' ? 'bg-[#e8f6f2] text-[#13856f]' : 'text-slate-400 hover:text-slate-600'
+              viewMode === 'grid' ? 'bg-brand-light text-brand' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <LayoutGrid className="h-5 w-5" />
@@ -177,7 +177,7 @@ const AdminTasks = () => {
                   </Table.Cell>
                   <Table.Cell>
                     <div className="flex items-center gap-2">
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#8d514f] text-[10px] font-bold text-white">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-warm text-[10px] font-bold text-white">
                         {t.assignee.charAt(0)}
                       </div>
                       <span className="text-xs text-slate-700 font-bold">{t.assignee}</span>
@@ -210,7 +210,7 @@ const AdminTasks = () => {
                       </Button>
                       <Button
                         size="sm"
-                        className="bg-[#13856f] text-white hover:bg-[#0f7260]"
+                        className="bg-brand text-white hover:bg-brand-dark"
                         onClick={() => {
                           setActiveTaskId(t.id);
                           setEditOpen(true);
@@ -237,7 +237,7 @@ const AdminTasks = () => {
             {filteredTasks.map((t) => (
               <div
                 key={t.id}
-                className="bg-white border border-[#ead8cb] rounded-[24px] p-5 shadow-sm hover:shadow-md hover:border-[#13856f]/30 transition flex flex-col justify-between h-56"
+                className="bg-white border border-border rounded-[24px] p-5 shadow-sm hover:shadow-md hover:border-brand/30 transition flex flex-col justify-between h-56"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-2">
@@ -249,9 +249,9 @@ const AdminTasks = () => {
                   <p className="text-xs text-slate-500 leading- relaxed line-clamp-3 mb-4">{t.description}</p>
                 </div>
 
-                <div className="border-t border-[#f4ddd0] pt-3 flex items-center justify-between">
+                <div className="border-t border-border-light pt-3 flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#8d514f] text-[9px] font-bold text-white">
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-warm text-[9px] font-bold text-white">
                       {t.assignee.charAt(0)}
                     </div>
                     <span className="text-[11px] text-slate-600 font-bold truncate max-w-[80px]">{t.assignee}</span>
@@ -267,7 +267,7 @@ const AdminTasks = () => {
                         setActiveTaskId(t.id);
                         setDetailsOpen(true);
                       }}
-                      className="p-1 hover:bg-slate-100 rounded-lg text-[#13856f]"
+                      className="p-1 hover:bg-slate-100 rounded-lg text-brand"
                     >
                       <ArrowUpRight className="h-4 w-4" />
                     </Button>
@@ -285,7 +285,7 @@ const AdminTasks = () => {
           </div>
         )
       ) : (
-        <div className="mx-auto max-w-md space-y-3 rounded-[28px] border border-[#ead8cb] bg-white/80 p-6 text-center sm:p-12">
+        <div className="mx-auto max-w-md space-y-3 rounded-[28px] border border-border bg-white/80 p-6 text-center sm:p-12">
           <p className="text-slate-800 font-bold">No tasks found</p>
           <p className="text-xs text-slate-400">
             Create a task or modify search criteria filters above.

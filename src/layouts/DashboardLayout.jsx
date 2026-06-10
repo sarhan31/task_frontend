@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "@components/layout/Sidebar";
 import Navbar from "@components/layout/Navbar";
@@ -33,11 +33,11 @@ const DashboardLayout = () => {
   }, []);
 
   return (
-    <div className="flex h-screen overflow-x-clip overflow-y-hidden bg-[#f7e3cf]">
+    <div className="flex h-screen overflow-x-clip overflow-y-hidden bg-surface-page">
       {/* Ambient background blobs */}
-      <div className="pointer-events-none fixed left-[-6rem] top-[-5rem] h-72 w-72 rounded-full bg-[#efbf91]/30 blur-3xl z-0" />
+      <div className="pointer-events-none fixed left-[-6rem] top-[-5rem] h-72 w-72 rounded-full bg-warm-light/30 blur-3xl z-0" />
       <div className="pointer-events-none fixed bottom-[-6rem] right-[-4rem] h-80 w-80 rounded-full bg-white/40 blur-3xl z-0" />
-      <div className="pointer-events-none fixed left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#13856f]/5 blur-3xl z-0" />
+      <div className="pointer-events-none fixed left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/5 blur-3xl z-0" />
 
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onToggle={setSidebarOpen} isMobile={isMobile} />

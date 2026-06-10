@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@hooks/useAuth';
 
-// Layouts
+// Layout
 import DashboardLayout from '@layouts/DashboardLayout';
 
-// Auth Pages (Ultra Premium Only)
+// Auth Pages
 import UltraPremiumLogin from '@pages/auth/UltraPremiumLogin';
 import UltraPremiumSignup from '@pages/auth/UltraPremiumSignup';
 import ForgotPassword from '@pages/auth/ForgotPassword';
@@ -19,23 +19,22 @@ import Reports from '@pages/admin/Reports';
 import PendingApprovals from '@pages/admin/PendingApprovals';
 import TeamManagement from '@pages/admin/TeamManagement';
 import TeamDetails from '@pages/admin/TeamDetails';
+import AuditTrail from '@pages/admin/AuditTrail';
+import TaskTemplates from '@pages/admin/TaskTemplates';
 
 // User Pages
 import UltraDashboard from '@pages/user/UltraDashboard';
-import PremiumDashboard from '@pages/user/PremiumDashboard';
 import UserDashboard from '@pages/user/Dashboard';
 import MyTasks from '@pages/user/MyTasks';
 import TaskBoard from '@pages/user/TaskBoard';
 import MyTeams from '@pages/user/MyTeams';
 import Profile from '@pages/user/Profile';
 import CalendarView from '@pages/user/CalendarView';
-import AuditTrail from '@pages/admin/AuditTrail';
-import TaskTemplates from '@pages/admin/TaskTemplates';
 
 // Shared Pages
 import HomePage from '@pages/HomePage';
 import NotFound from '@pages/NotFound';
-import Button from "@components/ui/Button";
+import Button from '@components/ui/Button';
 
 const FiredAccount = () => {
   const { user, logout } = useAuth();
@@ -137,9 +136,8 @@ const AppRoutes = () => {
       <Route path="/premium-signup" element={<Navigate to="/signup" replace />} />
       <Route path="/register" element={<Navigate to="/signup" replace />} />
 
-      {/* Dashboard variants (kept for compatibility) */}
+      {/* Ultra dashboard (standalone, no DashboardLayout wrapper) */}
       <Route path="/ultra-dashboard" element={<ProtectedRoute><UltraDashboard /></ProtectedRoute>} />
-      <Route path="/premium-dashboard" element={<ProtectedRoute><PremiumDashboard /></ProtectedRoute>} />
 
       {/* ── Admin Routes ── */}
       <Route

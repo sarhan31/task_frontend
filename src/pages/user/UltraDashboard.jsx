@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Search,
@@ -35,13 +35,13 @@ const UltraDashboard = () => {
       label: "24",
       sublabel: "Active Projects",
       icon: FolderKanban,
-      tone: "bg-[#13856f]",
+      tone: "bg-brand",
     },
     {
       label: "89",
       sublabel: "Tasks Closed",
       icon: CheckCircle2,
-      tone: "bg-[#8d514f]",
+      tone: "bg-warm",
     },
   ];
 
@@ -99,7 +99,7 @@ const UltraDashboard = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#f7e3cf]">
+    <div className="min-h-screen bg-surface-page">
       <UltraSidebar
         collapsed={sidebarCollapsed}
         setCollapsed={setSidebarCollapsed}
@@ -111,7 +111,7 @@ const UltraDashboard = () => {
           sidebarCollapsed ? "lg:ml-20" : "lg:ml-72",
         )}
       >
-        <div className="sticky top-0 z-40 border-b border-[#ead8cb] bg-[#fff8f3]/90 backdrop-blur-sm">
+        <div className="sticky top-0 z-40 border-b border-border bg-surface-base/90 backdrop-blur-sm">
           <div className="flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
             <div>
               <h1 className="text-2xl font-display font-bold text-slate-900">
@@ -127,16 +127,16 @@ const UltraDashboard = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="hidden min-w-[240px] items-center gap-3 rounded-2xl border border-[#ead8cb] bg-white px-4 py-3 shadow-sm md:flex">
-                <Search className="h-4 w-4 text-[#13856f]" />
+              <div className="hidden min-w-[240px] items-center gap-3 rounded-2xl border border-border bg-white px-4 py-3 shadow-sm md:flex">
+                <Search className="h-4 w-4 text-brand" />
                 <input
                   type="text"
                   placeholder="Search"
                   className="w-full bg-transparent text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none"
                 />
               </div>
-              <div className="hidden items-center gap-2 rounded-2xl border border-[#ead8cb] bg-white px-4 py-2.5 text-sm font-medium text-slate-600 shadow-sm sm:flex">
-                <Calendar className="h-4 w-4 text-[#13856f]" />
+              <div className="hidden items-center gap-2 rounded-2xl border border-border bg-white px-4 py-2.5 text-sm font-medium text-slate-600 shadow-sm sm:flex">
+                <Calendar className="h-4 w-4 text-brand" />
                 {new Date().toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -154,13 +154,13 @@ const UltraDashboard = () => {
                 {...fadeUp(0)}
                 className="relative overflow-hidden rounded-[28px] border border-white/65 bg-white/88 p-7 shadow-[0_8px_40px_rgba(90,55,20,0.12)] backdrop-blur-sm"
               >
-                <div className="absolute left-0 top-8 bottom-8 w-1.5 rounded-full bg-[#13856f]" />
-                <div className="pointer-events-none absolute right-8 top-5 h-28 w-28 rounded-full bg-[#efbf91]/20 blur-2xl" />
-                <div className="pointer-events-none absolute right-28 bottom-2 h-20 w-20 rounded-full bg-[#13856f]/10 blur-2xl" />
+                <div className="absolute left-0 top-8 bottom-8 w-1.5 rounded-full bg-brand" />
+                <div className="pointer-events-none absolute right-8 top-5 h-28 w-28 rounded-full bg-warm-light/20 blur-2xl" />
+                <div className="pointer-events-none absolute right-28 bottom-2 h-20 w-20 rounded-full bg-brand/10 blur-2xl" />
 
                 <div className="flex flex-col gap-5 pl-6 lg:flex-row lg:items-center lg:justify-between">
                   <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#13856f]">
+                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-brand">
                       Ultra workspace
                     </p>
                     <h2 className="mt-1 font-display text-3xl font-bold text-slate-900">
@@ -172,7 +172,7 @@ const UltraDashboard = () => {
                       the app.
                     </p>
                   </div>
-                  <Button variant="custom" size="none" className="inline-flex items-center gap-2 self-start rounded-2xl bg-[#13856f] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-[#0f7260] hover:shadow-[0_12px_32px_rgba(19,133,111,0.36)]">
+                  <Button variant="custom" size="none" className="inline-flex items-center gap-2 self-start rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] transition hover:bg-brand-dark hover:shadow-[0_12px_32px_rgba(19,133,111,0.36)]">
                     <Sparkles className="h-4 w-4" />
                     Learn More
                   </Button>
@@ -193,7 +193,7 @@ const UltraDashboard = () => {
                         Tasks
                       </h3>
                     </div>
-                    <BarChart3 className="h-5 w-5 text-[#13856f]" />
+                    <BarChart3 className="h-5 w-5 text-brand" />
                   </div>
                   <TaskChart data={chartData} />
                 </motion.div>
@@ -238,7 +238,7 @@ const UltraDashboard = () => {
                       Tasks Progress
                     </h3>
                   </div>
-                  <Clock className="h-5 w-5 text-[#13856f]" />
+                  <Clock className="h-5 w-5 text-brand" />
                 </div>
 
                 <div className="space-y-5">
@@ -257,19 +257,19 @@ const UltraDashboard = () => {
                           className={cn(
                             "rounded-full px-2.5 py-1 text-xs font-semibold",
                             task.status === "Completed" &&
-                              "bg-[#e8f6f2] text-[#13856f]",
+                              "bg-brand-light text-brand",
                             task.status === "Ongoing" &&
-                              "bg-[#fff8ef] text-[#b5722a]",
+                              "bg-surface-hover text-warm-accent",
                             task.status === "Review" &&
-                              "bg-[#fdf0ef] text-[#8d514f]",
+                              "bg-[#fdf0ef] text-warm",
                           )}
                         >
                           {task.status}
                         </span>
                       </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-[#f4ddd0]">
+                      <div className="h-2 w-full overflow-hidden rounded-full bg-border-light">
                         <div
-                          className="h-full rounded-full bg-[#13856f]"
+                          className="h-full rounded-full bg-brand"
                           style={{ width: `${task.progress}%` }}
                         />
                       </div>
@@ -296,11 +296,11 @@ const UltraDashboard = () => {
                       Workspace Owner
                     </h3>
                   </div>
-                  <User className="h-5 w-5 text-[#13856f]" />
+                  <User className="h-5 w-5 text-brand" />
                 </div>
 
                 <div className="text-center">
-                  <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-[#13856f] text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)]">
+                  <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-brand text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)]">
                     <User className="h-10 w-10" />
                   </div>
                   <h4 className="font-display text-lg font-bold text-slate-900">
@@ -316,8 +316,8 @@ const UltraDashboard = () => {
                       className={cn(
                         "rounded-2xl p-4",
                         project.active
-                          ? "bg-[#13856f] text-white"
-                          : "border border-[#f4ddd0] bg-[#fffaf6]",
+                          ? "bg-brand text-white"
+                          : "border border-border-light bg-surface-card",
                       )}
                     >
                       <p
@@ -341,7 +341,7 @@ const UltraDashboard = () => {
                           "mt-3 inline-flex rounded-full px-2.5 py-1 text-xs font-semibold",
                           project.active
                             ? "bg-white/20 text-white"
-                            : "bg-white text-slate-600 border border-[#f4ddd0]",
+                            : "bg-white text-slate-600 border border-border-light",
                         )}
                       >
                         {project.progress}%
@@ -364,16 +364,16 @@ const UltraDashboard = () => {
                       Recent Activity
                     </h3>
                   </div>
-                  <TrendingUp className="h-5 w-5 text-[#13856f]" />
+                  <TrendingUp className="h-5 w-5 text-brand" />
                 </div>
 
                 <div className="space-y-4">
                   {teamUpdates.map((item) => (
                     <div
                       key={item.name}
-                      className="flex items-start gap-3 rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-3 transition hover:bg-white"
+                      className="flex items-start gap-3 rounded-2xl border border-border-light bg-surface-card p-3 transition hover:bg-white"
                     >
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#8d514f] text-sm font-semibold text-white">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-warm text-sm font-semibold text-white">
                         {item.avatar}
                       </div>
                       <div className="min-w-0 flex-1">
@@ -392,7 +392,7 @@ const UltraDashboard = () => {
                     </div>
                   ))}
                 </div>
-                <Button variant="custom" size="none" className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#13856f] transition-colors hover:text-[#0c6c59]">
+                <Button variant="custom" size="none" className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors hover:text-brand-darker">
                   View all <ArrowRight className="h-3.5 w-3.5" />
                 </Button>
               </motion.div>
@@ -410,16 +410,16 @@ const UltraDashboard = () => {
                       Daily Status
                     </h3>
                   </div>
-                  <Activity className="h-5 w-5 text-[#13856f]" />
+                  <Activity className="h-5 w-5 text-brand" />
                 </div>
                 <div className="space-y-3 text-sm text-slate-600">
-                  <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-3">
+                  <div className="rounded-2xl border border-border-light bg-surface-card p-3">
                     3 project updates posted today
                   </div>
-                  <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-3">
+                  <div className="rounded-2xl border border-border-light bg-surface-card p-3">
                     2 new approvals waiting for review
                   </div>
-                  <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-3">
+                  <div className="rounded-2xl border border-border-light bg-surface-card p-3">
                     1 meeting scheduled this afternoon
                   </div>
                 </div>

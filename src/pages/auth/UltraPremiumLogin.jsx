@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, ArrowRight } from "lucide-react";
@@ -34,10 +34,10 @@ const UltraPremiumLogin = () => {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#f7e3cf] p-3 sm:p-4">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-surface-page p-3 sm:p-4">
       {/* Soft ambient blobs */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#efbf91]/30 rounded-full blur-3xl opacity-60 animate-float" />
-      <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-[#13856f]/10 rounded-full blur-3xl opacity-80 animate-float animation-delay-400" />
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-warm-light/30 rounded-full blur-3xl opacity-60 animate-float" />
+      <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-brand/10 rounded-full blur-3xl opacity-80 animate-float animation-delay-400" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -50,8 +50,8 @@ const UltraPremiumLogin = () => {
           <div className="relative hidden flex-col justify-between overflow-hidden bg-[linear-gradient(180deg,_#fff6ee_0%,_#ffe7d6_100%)] p-10 lg:flex">
             {/* decorative circles */}
             <div className="absolute -top-20 -right-20 w-72 h-72 bg-white/50 rounded-full" />
-            <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-[#13856f]/10 rounded-full" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#efbf91]/10 rounded-full" />
+            <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-brand/10 rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-warm-light/10 rounded-full" />
 
             {/* Logo */}
             <motion.div
@@ -93,7 +93,7 @@ const UltraPremiumLogin = () => {
                 {[0, 1, 2].map((i) => (
                   <div
                     key={i}
-                    className={`h-2 rounded-full transition-all ${i === 0 ? "w-6 bg-[#13856f]" : "w-2 bg-[#d8c3b4]"}`}
+                    className={`h-2 rounded-full transition-all ${i === 0 ? "w-6 bg-brand" : "w-2 bg-[#d8c3b4]"}`}
                   />
                 ))}
               </div>
@@ -160,7 +160,7 @@ const UltraPremiumLogin = () => {
                   <label className="flex items-center gap-2 cursor-pointer group">
                     <input
                       type="checkbox"
-                      className="w-4 h-4 rounded border-[#d8c3b4] text-[#13856f] focus:ring-[#13856f]"
+                      className="w-4 h-4 rounded border-[#d8c3b4] text-brand focus:ring-brand"
                     />
                     <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
                       Remember me
@@ -168,7 +168,7 @@ const UltraPremiumLogin = () => {
                   </label>
                   <Link
                     to="/forgot-password"
-                    className="text-sm font-semibold text-[#13856f] hover:text-[#0c6c59] transition-colors"
+                    className="text-sm font-semibold text-brand hover:text-brand-darker transition-colors"
                   >
                     Forgot password?
                   </Link>
@@ -191,7 +191,7 @@ const UltraPremiumLogin = () => {
                 Don't have an account?{" "}
                 <Link
                   to="/signup"
-                  className="font-bold text-[#13856f] hover:text-[#0c6c59] transition-colors"
+                  className="font-bold text-brand hover:text-brand-darker transition-colors"
                 >
                   Sign Up
                 </Link>

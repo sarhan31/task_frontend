@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { 
   Calendar, User, Clock, Trash2, Tag, Send, Paperclip, 
   CheckCircle2, XCircle, Play, Check, X, ShieldAlert, 
@@ -243,7 +243,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
       <div className="space-y-6 pb-8">
         
         {/* Workflow Quick Action Buttons */}
-        <div className="bg-[#fffaf6] border border-[#ead8cb] rounded-[24px] p-5 shadow-sm space-y-4">
+        <div className="bg-surface-card border border-border rounded-[24px] p-5 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Workflow Command Panel</h4>
             <Badge className={`px-2.5 py-1 text-xs font-semibold border ${STATUS_TONES[task.status] || STATUS_TONES.todo}`}>
@@ -260,7 +260,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
                 </div>
                 {!showDenyForm ? (
                   <div className="flex gap-3">
-                    <Button onClick={handleAcceptAssignment} className="bg-[#13856f] text-white hover:bg-[#0f7260] rounded-xl font-semibold shadow-md">
+                    <Button onClick={handleAcceptAssignment} className="bg-brand text-white hover:bg-brand-dark rounded-xl font-semibold shadow-md">
                       <Check className="mr-1.5 h-4 w-4" /> Accept Assignment
                     </Button>
                     <Button onClick={() => setShowDenyForm(true)} className="bg-red-500 text-white hover:bg-red-600 rounded-xl font-semibold shadow-md">
@@ -288,7 +288,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
 
             {/* User Start Task (only if accepted) */}
             {canActOnTask && (task.assignmentStatus === 'accepted' || isTeamMember) && (task.status === 'Assigned' || task.status === 'Accepted' || task.status === 'todo') && (
-              <Button onClick={handleStartTask} className="bg-[#13856f] text-white hover:bg-[#0f7260] rounded-xl font-semibold shadow-md">
+              <Button onClick={handleStartTask} className="bg-brand text-white hover:bg-brand-dark rounded-xl font-semibold shadow-md">
                 <Play className="mr-1.5 h-4 w-4" /> Start Task
               </Button>
             )}
@@ -299,14 +299,14 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
                 <Button 
                   onClick={() => setShowProgressForm(!showProgressForm)} 
                   variant="outline" 
-                  className="border-[#ead8cb] text-slate-700 hover:bg-[#fffaf6] rounded-xl font-semibold"
+                  className="border-border text-slate-700 hover:bg-surface-card rounded-xl font-semibold"
                 >
                   {showProgressForm ? <ChevronUp className="mr-1.5 h-4 w-4" /> : <ChevronDown className="mr-1.5 h-4 w-4" />}
                   Update Progress
                 </Button>
 
                 {progressVal === 100 && (
-                  <Button onClick={handleRequestReview} className="bg-[#8d514f] text-white hover:bg-[#723f3d] rounded-xl font-semibold shadow-md">
+                  <Button onClick={handleRequestReview} className="bg-warm text-white hover:bg-warm-dark rounded-xl font-semibold shadow-md">
                     <CheckCircle2 className="mr-1.5 h-4 w-4" /> Request Review
                   </Button>
                 )}
@@ -323,10 +323,10 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
                       title: 'Approve task completion?',
                       message: 'This will mark the task as completed and confirm the submitted work.',
                       actionLabel: 'Approve Task',
-                      actionClass: 'bg-[#13856f] text-white hover:bg-[#0f7260]',
+                      actionClass: 'bg-brand text-white hover:bg-brand-dark',
                     })
                   }
-                  className="bg-[#13856f] text-white hover:bg-[#0f7260] rounded-xl font-semibold shadow-md flex-1 sm:flex-none"
+                  className="bg-brand text-white hover:bg-brand-dark rounded-xl font-semibold shadow-md flex-1 sm:flex-none"
                 >
                   <Check className="mr-1.5 h-4 w-4" /> Approve Task Completion
                 </Button>
@@ -341,7 +341,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
 
             {/* Admin Status Change Approvals */}
             {isAdmin && task.pendingStatusChange && task.pendingStatusChange.newStatus && !task.pendingStatusChange.approved && (
-              <div className="flex flex-col gap-3 w-full border-t border-[#f4ddd0] pt-4 mt-4">
+              <div className="flex flex-col gap-3 w-full border-t border-border-light pt-4 mt-4">
                 <div className="rounded-xl border border-orange-200 bg-orange-50 p-3 text-xs text-orange-800 font-medium flex items-center gap-2">
                   <ShieldAlert className="h-4 w-4 text-orange-600" />
                   <span>
@@ -350,7 +350,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
                 </div>
                 {!showApproveRejectForm ? (
                   <div className="flex gap-3">
-                    <Button onClick={handleApproveStatusChange} className="bg-[#13856f] text-white hover:bg-[#0f7260] rounded-xl font-semibold shadow-md">
+                    <Button onClick={handleApproveStatusChange} className="bg-brand text-white hover:bg-brand-dark rounded-xl font-semibold shadow-md">
                       <Check className="mr-1.5 h-4 w-4" /> Approve Status Change
                     </Button>
                     <Button onClick={() => setShowApproveRejectForm(true)} className="bg-red-500 text-white hover:bg-red-600 rounded-xl font-semibold shadow-md">
@@ -383,12 +383,12 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               onSubmit={handleProgressSubmit} 
-              className="mt-4 pt-4 border-t border-[#f4ddd0] space-y-4"
+              className="mt-4 pt-4 border-t border-border-light space-y-4"
             >
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs font-semibold text-slate-700">
                   <span>Current Completion Percentage</span>
-                  <span className="text-[#13856f] font-bold">{progressVal}%</span>
+                  <span className="text-brand font-bold">{progressVal}%</span>
                 </div>
                 <input
                   type="range"
@@ -396,7 +396,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
                   max="100"
                   value={progressVal}
                   onChange={(e) => setProgressVal(parseInt(e.target.value, 10))}
-                  className="w-full accent-[#13856f] h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full accent-brand h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
                 />
               </div>
 
@@ -407,7 +407,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
                   onChange={(e) => setProgressNote(e.target.value)}
                   placeholder="What have you completed in this milestone?"
                   rows={2}
-                  className="w-full px-3 py-2 text-xs border border-gray-200 rounded-xl focus:outline-none focus:border-[#13856f]"
+                  className="w-full px-3 py-2 text-xs border border-gray-200 rounded-xl focus:outline-none focus:border-brand"
                   required
                 />
               </div>
@@ -417,13 +417,13 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
                 <input
                   type="file"
                   onChange={(e) => setProgressFile(e.target.files[0])}
-                  className="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#e8f6f2] file:text-[#13856f] hover:file:bg-[#d5eff9]"
+                  className="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-light file:text-brand hover:file:bg-[#d5eff9]"
                 />
               </div>
 
               <div className="flex justify-end gap-2">
                 <Button type="button" variant="ghost" size="sm" onClick={() => setShowProgressForm(false)}>Cancel</Button>
-                <Button type="submit" size="sm" className="bg-[#13856f] text-white hover:bg-[#0f7260]">Save Progress</Button>
+                <Button type="submit" size="sm" className="bg-brand text-white hover:bg-brand-dark">Save Progress</Button>
               </div>
             </motion.form>
           )}
@@ -434,7 +434,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               onSubmit={handleReject} 
-              className="mt-4 pt-4 border-t border-[#f4ddd0] space-y-4"
+              className="mt-4 pt-4 border-t border-border-light space-y-4"
             >
               <div className="space-y-1.5">
                 <label className="block text-xs font-semibold text-red-600 flex items-center gap-1">
@@ -483,11 +483,11 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
         )}
 
         {/* Metadata Details Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-white/70 border border-[#ead8cb] rounded-2xl p-4 shadow-sm">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-white/70 border border-border rounded-2xl p-4 shadow-sm">
           <div>
             <p className="text-[10px] uppercase font-semibold text-slate-400">Current Status</p>
             <p className="text-xs font-bold text-slate-800 mt-1 flex items-center gap-1.5">
-              <span className={`inline-block h-2 w-2 rounded-full ${task.status === 'Completed' ? 'bg-[#13856f]' : task.status === 'Under Review' ? 'bg-[#efbf91]' : 'bg-[#f3b59e]'}`} />
+              <span className={`inline-block h-2 w-2 rounded-full ${task.status === 'Completed' ? 'bg-brand' : task.status === 'Under Review' ? 'bg-warm-light' : 'bg-warm-soft'}`} />
               {task.status.replace('_', ' ')}
             </p>
           </div>
@@ -502,7 +502,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
           <div>
             <p className="text-[10px] uppercase font-semibold text-slate-400">Assignee</p>
             <div className="flex items-center gap-1.5 mt-1">
-              <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#8d514f] text-[9px] font-bold text-white">
+              <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-warm text-[9px] font-bold text-white">
                 {task.assignee.charAt(0).toUpperCase()}
               </div>
               <span className="text-xs font-bold text-slate-700 truncate">{task.assignee}</span>
@@ -526,7 +526,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
         {/* Task Description */}
         <div>
           <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-2">Description</h3>
-          <p className="text-sm text-slate-600 leading-relaxed bg-[#fffaf6] border border-[#ead8cb] rounded-2xl p-4">
+          <p className="text-sm text-slate-600 leading-relaxed bg-surface-card border border-border rounded-2xl p-4">
             {task.description || 'No description provided for this task.'}
           </p>
         </div>
@@ -535,9 +535,9 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
         <div>
           <div className="flex items-center justify-between text-sm font-semibold mb-2">
             <span className="text-slate-800">Milestone Progress Meter</span>
-            <span className="text-[#13856f] font-bold">{task.progressPercentage || task.progress || 0}%</span>
+            <span className="text-brand font-bold">{task.progressPercentage || task.progress || 0}%</span>
           </div>
-          <div className="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden border border-[#ead8cb]">
+          <div className="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden border border-border">
             <div 
               className="h-full rounded-full bg-[linear-gradient(90deg,_#13856f_0%,_#1b9b82_100%)] transition-all duration-500"
               style={{ width: `${task.progressPercentage || task.progress || 0}%` }}
@@ -547,15 +547,15 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
 
         {/* Dynamic Activity Timeline Log */}
         {task.activityTimeline && task.activityTimeline.length > 0 && (
-          <div className="border-t border-[#f4ddd0] pt-6">
+          <div className="border-t border-border-light pt-6">
             <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[#13856f]" /> Live Audit Timeline
+              <Sparkles className="h-4 w-4 text-brand" /> Live Audit Timeline
             </h3>
 
-            <div className="relative border-l border-[#ead8cb] ml-3 pl-5 space-y-4">
+            <div className="relative border-l border-border ml-3 pl-5 space-y-4">
               {task.activityTimeline.map((item, idx) => (
                 <div key={idx} className="relative">
-                  <div className="absolute -left-[27px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-[#13856f] shadow-sm flex items-center justify-center">
+                  <div className="absolute -left-[27px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-brand shadow-sm flex items-center justify-center">
                     <div className="h-1 w-1 bg-white rounded-full" />
                   </div>
                   <div>
@@ -573,31 +573,31 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
 
         {/* Chronological Progress Updates Submissions Feed */}
         {currentUpdates.length > 0 && (
-          <div className="border-t border-[#f4ddd0] pt-6">
+          <div className="border-t border-border-light pt-6">
             <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-4">Milestone Submissions</h3>
             <div className="space-y-3.5 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
               {currentUpdates.map((up) => (
-                <div key={up._id || up.id} className="bg-white border border-[#ead8cb] rounded-2xl p-4.5 shadow-sm space-y-2">
+                <div key={up._id || up.id} className="bg-white border border-border rounded-2xl p-4.5 shadow-sm space-y-2">
                   <div className="flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2">
-                      <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#13856f] text-[9px] font-bold text-white">
+                      <div className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[9px] font-bold text-white">
                         {up.updatedBy?.name?.charAt(0).toUpperCase() || 'U'}
                       </div>
                       <span className="font-bold text-slate-800">{up.updatedBy?.name || 'Teammate'}</span>
                     </div>
-                    <span className="font-semibold text-[#13856f] bg-[#e8f6f2] px-2 py-0.5 rounded-md">{up.percentage}% Done</span>
+                    <span className="font-semibold text-brand bg-brand-light px-2 py-0.5 rounded-md">{up.percentage}% Done</span>
                   </div>
 
                   <p className="text-xs text-slate-600 leading- relaxed pl-7">"{up.note}"</p>
 
                   {up.attachment && (
                     <div className="pl-7 pt-1.5 flex items-center gap-2">
-                      <FileText className="h-4 w-4 text-[#13856f]" />
+                      <FileText className="h-4 w-4 text-brand" />
                       <a 
                         href={up.attachment.url} 
                         target="_blank" 
                         rel="noreferrer"
-                        className="text-xs font-semibold text-[#13856f] hover:underline truncate max-w-[200px]"
+                        className="text-xs font-semibold text-brand hover:underline truncate max-w-[200px]"
                       >
                         {up.attachment.name}
                       </a>
@@ -611,14 +611,14 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
         )}
 
         {/* Comments & Discussion System */}
-        <div className="border-t border-[#f4ddd0] pt-6">
+        <div className="border-t border-border-light pt-6">
           <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-4">Task Discussion</h3>
           
           <div className="space-y-4 max-h-60 overflow-y-auto pr-1 mb-4 custom-scrollbar">
             {task.comments && task.comments.length > 0 ? (
               task.comments.map((c) => (
-                <div key={c.id} className="flex gap-3 items-start bg-white border border-[#ead8cb] rounded-2xl p-3 shadow-sm">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#8d514f] text-xs font-bold text-white">
+                <div key={c.id} className="flex gap-3 items-start bg-white border border-border rounded-2xl p-3 shadow-sm">
+                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-warm text-xs font-bold text-white">
                     {c.user.charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0 flex-1">
@@ -646,9 +646,9 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
               placeholder="Post a comment..."
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-xs text-slate-800 focus:outline-none focus:border-[#13856f] transition"
+              className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-xs text-slate-800 focus:outline-none focus:border-brand transition"
             />
-            <Button type="submit" className="bg-[#13856f] text-white hover:bg-[#0f7260]">
+            <Button type="submit" className="bg-brand text-white hover:bg-brand-dark">
               <Send className="h-4 w-4" />
             </Button>
           </form>
@@ -656,7 +656,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
 
         {/* Delete Task Button */}
         {isAdmin && (
-          <div className="border-t border-[#f4ddd0] pt-6 flex justify-end">
+          <div className="border-t border-border-light pt-6 flex justify-end">
             <Button
               type="button"
               variant="outline"
@@ -685,7 +685,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
         size="sm"
       >
         <div className="space-y-5">
-          <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-4">
+          <div className="rounded-2xl border border-border-light bg-surface-card p-4">
             <div className="flex items-start gap-3">
               <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-[#fde7df] text-[#c65b3d]">
                 <AlertTriangle className="h-5 w-5" />
@@ -712,7 +712,7 @@ const TaskDetailsDrawer = ({ taskId, isOpen, onClose }) => {
             </Button>
             <Button
               type="button"
-              className={`rounded-xl px-4 py-2 font-semibold shadow-sm ${confirmAction?.actionClass || 'bg-[#13856f] text-white hover:bg-[#0f7260]'}`}
+              className={`rounded-xl px-4 py-2 font-semibold shadow-sm ${confirmAction?.actionClass || 'bg-brand text-white hover:bg-brand-dark'}`}
               onClick={() => {
                 if (confirmAction?.type === 'approve') {
                   handleApprove();

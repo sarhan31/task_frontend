@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+﻿import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
@@ -78,14 +78,14 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
       initial={false}
       animate={{ width: collapsed ? 88 : 288 }}
       transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-      className="fixed left-0 top-0 z-50 hidden h-screen flex-col border-r border-[#ead8cb] bg-[#fff8f3] shadow-[0_20px_60px_rgba(90,55,20,0.10)] lg:flex"
+      className="fixed left-0 top-0 z-50 hidden h-screen flex-col border-r border-border bg-surface-base shadow-[0_20px_60px_rgba(90,55,20,0.10)] lg:flex"
     >
-      <div className="pointer-events-none absolute left-[-3rem] top-[-3rem] h-40 w-40 rounded-full bg-[#efbf91]/20 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-2rem] right-[-2rem] h-32 w-32 rounded-full bg-[#13856f]/10 blur-3xl" />
+      <div className="pointer-events-none absolute left-[-3rem] top-[-3rem] h-40 w-40 rounded-full bg-warm-light/20 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-[-2rem] right-[-2rem] h-32 w-32 rounded-full bg-brand/10 blur-3xl" />
 
       <div
         className={cn(
-          "relative z-10 flex h-20 items-center border-b border-[#ead8cb]",
+          "relative z-10 flex h-20 items-center border-b border-border",
           collapsed
             ? "justify-between gap-2 px-3"
             : "justify-between gap-4 px-5",
@@ -101,7 +101,7 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
           variant="ghost"
           size="sm"
           onClick={() => setCollapsed(!collapsed)}
-          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-[#e6d6ca] bg-white text-slate-500 shadow-sm hover:border-[#13856f]/40 hover:bg-[#e8f6f2] hover:text-[#13856f]"
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-border-soft bg-white text-slate-500 shadow-sm hover:border-brand/40 hover:bg-brand-light hover:text-brand"
           title={collapsed ? "Show sidebar" : "Hide sidebar"}
         >
           {collapsed ? (
@@ -114,7 +114,7 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
 
       {!collapsed && (
         <div className="relative z-10 px-4 pt-4">
-          <div className="rounded-2xl border border-[#f4ddd0] bg-white px-4 py-3 shadow-sm">
+          <div className="rounded-2xl border border-border-light bg-white px-4 py-3 shadow-sm">
             <div className="flex items-center justify-between gap-3">
               <span className="text-sm font-semibold text-slate-800">
                 Initial project 1.0
@@ -153,8 +153,8 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
                   "group flex items-center rounded-2xl transition-all duration-200",
                   collapsed ? "justify-center px-3 py-3" : "gap-3 px-3 py-3",
                   isActive
-                    ? "bg-[#13856f] text-white shadow-[0_4px_14px_rgba(19,133,111,0.28)]"
-                    : "text-slate-600 hover:bg-[#e8f6f2] hover:text-[#13856f]",
+                    ? "bg-brand text-white shadow-[0_4px_14px_rgba(19,133,111,0.28)]"
+                    : "text-slate-600 hover:bg-brand-light hover:text-brand",
                 )
               }
             >
@@ -165,7 +165,7 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
                       "h-5 w-5 flex-shrink-0 transition-colors",
                       isActive
                         ? "text-white"
-                        : "text-slate-400 group-hover:text-[#13856f]",
+                        : "text-slate-400 group-hover:text-brand",
                     )}
                   />
                   {!collapsed && (
@@ -191,8 +191,8 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
                     cn(
                       "group relative flex items-center gap-3 rounded-2xl px-3 py-3 transition-all duration-200",
                       isActive
-                        ? "bg-[#13856f] text-white shadow-[0_4px_14px_rgba(19,133,111,0.28)]"
-                        : "text-slate-600 hover:bg-[#e8f6f2] hover:text-[#13856f]",
+                        ? "bg-brand text-white shadow-[0_4px_14px_rgba(19,133,111,0.28)]"
+                        : "text-slate-600 hover:bg-brand-light hover:text-brand",
                     )
                   }
                 >
@@ -203,7 +203,7 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
                           "h-5 w-5 flex-shrink-0 transition-colors",
                           isActive
                             ? "text-white"
-                            : "text-slate-400 group-hover:text-[#13856f]",
+                            : "text-slate-400 group-hover:text-brand",
                         )}
                       />
                       <span className="text-sm font-medium">{item.label}</span>
@@ -219,9 +219,9 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
         )}
       </nav>
 
-      <div className="relative z-10 border-t border-[#ead8cb] p-3">
+      <div className="relative z-10 border-t border-border p-3">
         {!collapsed && user?.role === 'admin' && (
-          <Button className="mb-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#13856f] px-4 py-3 text-sm text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] hover:bg-[#0f7260]">
+          <Button className="mb-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-4 py-3 text-sm text-white shadow-[0_8px_24px_rgba(19,133,111,0.28)] hover:bg-brand-dark">
             <Plus className="h-4 w-4" />
             <span>Add New Task</span>
           </Button>
@@ -229,11 +229,11 @@ const UltraSidebar = ({ collapsed, setCollapsed }) => {
 
         <div
           className={cn(
-            "rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-3",
+            "rounded-2xl border border-border-light bg-surface-card p-3",
             collapsed ? "flex justify-center" : "flex items-center gap-3",
           )}
         >
-          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#8d514f] text-white">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-warm text-white">
             <User className="h-5 w-5" />
           </div>
           {!collapsed && (

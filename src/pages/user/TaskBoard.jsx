@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Kanban, ArrowRight, Calendar, Tag, MoveRight, Clock, Check, Play, AlertCircle, AlertTriangle } from 'lucide-react';
 import { useTaskStore } from '@services/taskStore';
@@ -18,8 +18,8 @@ const TaskBoard = () => {
 
   const columns = [
     { id: 'todo', title: 'To Do', color: 'bg-slate-100/50 border-slate-200/60', text: 'text-slate-500' },
-    { id: 'in_progress', title: 'In Progress', color: 'bg-orange-50/40 border-orange-100/50', text: 'text-[#b5722a]' },
-    { id: 'completed', title: 'Completed', color: 'bg-[#e8f6f2]/40 border-[#b8e0d8]/50', text: 'text-[#13856f]' }
+    { id: 'in_progress', title: 'In Progress', color: 'bg-orange-50/40 border-orange-100/50', text: 'text-warm-accent' },
+    { id: 'completed', title: 'Completed', color: 'bg-brand-light/40 border-brand-muted/50', text: 'text-brand' }
   ];
 
   const getStatusColumnId = (status) => {
@@ -123,13 +123,13 @@ const TaskBoard = () => {
           return (
             <div
               key={column.id}
-              className={`rounded-[24px] border border-[#ead8cb] p-4 bg-white/60 shadow-sm min-h-[480px] flex flex-col`}
+              className={`rounded-[24px] border border-border p-4 bg-white/60 shadow-sm min-h-[480px] flex flex-col`}
             >
               {/* Column Header */}
               <div className="flex items-center justify-between mb-4.5 px-1.5">
                 <div className="flex items-center gap-2">
                   <span className={`h-2.5 w-2.5 rounded-full ${
-                    column.id === 'completed' ? 'bg-[#13856f]' : column.id === 'in_progress' ? 'bg-[#efbf91]' : 'bg-[#f3b59e]'
+                    column.id === 'completed' ? 'bg-brand' : column.id === 'in_progress' ? 'bg-warm-light' : 'bg-warm-soft'
                   }`} />
                   <h3 className="font-bold text-slate-800 text-sm font-display">{column.title}</h3>
                 </div>
@@ -145,14 +145,14 @@ const TaskBoard = () => {
                     <div
                       key={task.id}
                       onClick={() => handleCardClick(task.id)}
-                      className="bg-white border border-[#ead8cb] rounded-[20px] p-4 shadow-sm hover:shadow-md hover:border-[#13856f]/30 transition cursor-pointer flex flex-col justify-between min-h-[160px] h-auto group relative overflow-hidden"
+                      className="bg-white border border-border rounded-[20px] p-4 shadow-sm hover:shadow-md hover:border-brand/30 transition cursor-pointer flex flex-col justify-between min-h-[160px] h-auto group relative overflow-hidden"
                     >
                       <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-primary-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                       
                       <div className="space-y-2">
                         <div>
                           <div className="flex items-start justify-between gap-2 mb-1.5">
-                            <h4 className="font-semibold text-xs text-slate-800 line-clamp-1 group-hover:text-[#13856f] transition">
+                            <h4 className="font-semibold text-xs text-slate-800 line-clamp-1 group-hover:text-brand transition">
                               {task.title}
                             </h4>
                           </div>
@@ -175,7 +175,7 @@ const TaskBoard = () => {
                         )}
                       </div>
  
-                      <div className="border-t border-[#f4ddd0] pt-2.5 mt-2.5 flex items-center justify-between">
+                      <div className="border-t border-border-light pt-2.5 mt-2.5 flex items-center justify-between">
                         <div className={`flex items-center gap-1 ${isTaskOverdue(task) ? 'text-rose-600' : 'text-slate-400'}`}>
                           {isTaskOverdue(task) ? <AlertTriangle className="h-3 w-3" /> : <Calendar className="h-3 w-3" />}
                           <span className="text-[9px] font-bold">{formatDate(task.dueDate)}</span>
@@ -187,7 +187,7 @@ const TaskBoard = () => {
                           <select
                             value={getStatusColumnId(task.status)}
                             onChange={(e) => handleMoveStatus(task.id, e.target.value, e)}
-                            className="bg-[#fffaf6] border border-[#e6d6ca] text-[10px] font-bold text-slate-600 rounded-lg py-0.5 px-1 focus:outline-none cursor-pointer"
+                            className="bg-surface-card border border-border-soft text-[10px] font-bold text-slate-600 rounded-lg py-0.5 px-1 focus:outline-none cursor-pointer"
                           >
                             <option value="todo">To Do</option>
                             <option value="in_progress">In Progress</option>
@@ -198,7 +198,7 @@ const TaskBoard = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="border-2 border-dashed border-[#e6d6ca] rounded-2xl p-6 text-center text-slate-400 flex flex-col items-center justify-center gap-1.5 h-36">
+                  <div className="border-2 border-dashed border-border-soft rounded-2xl p-6 text-center text-slate-400 flex flex-col items-center justify-center gap-1.5 h-36">
                     <p className="text-xs font-semibold">No tasks in column</p>
                     <p className="text-[10px] text-slate-400">Drag or update task status to populate</p>
                   </div>

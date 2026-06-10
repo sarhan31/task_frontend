@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, XCircle, Clock, User, Calendar, ArrowRight, Loader2 } from 'lucide-react';
 import { taskService } from '@services/taskService';
 import { demoTaskStore } from '@services/demoTaskStore';
 import { useAuth } from '@hooks/useAuth';
-import toast from '@utils/toast';
+import { toast } from '@components/ui/Toaster';
 import { cn } from '@utils/cn';
 import Button from "@components/ui/Button";
 
@@ -80,16 +80,16 @@ const PendingApprovalsPanel = () => {
   if (loading) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#13856f] border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-brand border-t-transparent" />
       </div>
     );
   }
 
   if (pendingTasks.length === 0) {
     return (
-      <div className="rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-6 text-center sm:p-10">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#e8f6f2]">
-          <CheckCircle className="h-8 w-8 text-[#13856f]" />
+      <div className="rounded-2xl border border-border-light bg-surface-card p-6 text-center sm:p-10">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-light">
+          <CheckCircle className="h-8 w-8 text-brand" />
         </div>
         <h3 className="font-display text-lg font-bold text-slate-900">All Caught Up!</h3>
         <p className="mt-2 text-sm text-slate-600">No pending status change requests.</p>
@@ -112,7 +112,7 @@ const PendingApprovalsPanel = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: i * 0.08 }}
-          className="overflow-hidden rounded-2xl border border-[#f4ddd0] bg-white shadow-sm"
+          className="overflow-hidden rounded-2xl border border-border-light bg-white shadow-sm"
         >
           <div className="p-6">
             {/* task header */}
@@ -127,15 +127,15 @@ const PendingApprovalsPanel = () => {
             </div>
 
             {/* status change arrow */}
-            <div className="mb-4 flex items-center gap-4 rounded-xl border border-[#f4ddd0] bg-[#fffaf6] px-4 py-3">
+            <div className="mb-4 flex items-center gap-4 rounded-xl border border-border-light bg-surface-card px-4 py-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Current</p>
                 <p className="mt-0.5 font-semibold text-slate-800">{task.status}</p>
               </div>
-              <ArrowRight className="h-5 w-5 text-[#13856f]" />
+              <ArrowRight className="h-5 w-5 text-brand" />
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Requested</p>
-                <p className="mt-0.5 font-semibold text-[#13856f]">{task.pendingStatusChange?.newStatus}</p>
+                <p className="mt-0.5 font-semibold text-brand">{task.pendingStatusChange?.newStatus}</p>
               </div>
             </div>
 
@@ -163,7 +163,7 @@ const PendingApprovalsPanel = () => {
                   onChange={e => setRejectFeedback(p => ({ ...p, [task._id]: e.target.value }))}
                   placeholder="Provide feedback for rejection…"
                   rows={3}
-                  className="w-full resize-none rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#13856f] focus:bg-white focus:outline-none"
+                  className="w-full resize-none rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brand focus:bg-white focus:outline-none"
                 />
                 <div className="grid grid-cols-2 gap-3">
                   <Button variant="custom" size="none"
@@ -188,7 +188,7 @@ const PendingApprovalsPanel = () => {
                 <Button variant="custom" size="none"
                   onClick={() => handleApprove(task._id)}
                   disabled={busy === task._id}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-[#13856f] py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0f7260] disabled:opacity-60"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-brand py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-dark disabled:opacity-60"
                 >
                   {busy === task._id ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle className="h-4 w-4" />}
                   Approve

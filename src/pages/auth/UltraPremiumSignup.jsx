@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, Shield, ArrowRight } from "lucide-react";
@@ -73,9 +73,9 @@ const UltraPremiumSignup = () => {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-x-hidden bg-[#f7e3cf] p-3 sm:p-4">
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-[#efbf91]/30 rounded-full blur-3xl opacity-60 animate-float" />
-      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#13856f]/10 rounded-full blur-3xl opacity-80 animate-float animation-delay-400" />
+    <div className="relative flex min-h-screen items-center justify-center overflow-x-hidden bg-surface-page p-3 sm:p-4">
+      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-warm-light/30 rounded-full blur-3xl opacity-60 animate-float" />
+      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-brand/10 rounded-full blur-3xl opacity-80 animate-float animation-delay-400" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -87,7 +87,7 @@ const UltraPremiumSignup = () => {
           {/* LEFT – illustration (same as login) */}
           <div className="relative hidden flex-col justify-between overflow-hidden bg-[linear-gradient(180deg,_#fff6ee_0%,_#ffe7d6_100%)] p-10 lg:flex">
             <div className="absolute -top-20 -right-20 w-72 h-72 bg-white/50 rounded-full" />
-            <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-[#13856f]/10 rounded-full" />
+            <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-brand/10 rounded-full" />
 
             <motion.div
               initial={{ opacity: 0, y: -16 }}
@@ -126,7 +126,7 @@ const UltraPremiumSignup = () => {
                 {[0, 1, 2].map((i) => (
                   <div
                     key={i}
-                    className={`h-2 rounded-full transition-all ${i === 1 ? "w-6 bg-[#13856f]" : "w-2 bg-[#d8c3b4]"}`}
+                    className={`h-2 rounded-full transition-all ${i === 1 ? "w-6 bg-brand" : "w-2 bg-[#d8c3b4]"}`}
                   />
                 ))}
               </div>
@@ -256,15 +256,15 @@ const UltraPremiumSignup = () => {
                         onClick={() => setForm({ ...form, role })}
                         className={`flex items-center gap-3 rounded-xl border-2 px-3 py-2.5 transition-all duration-200 ${
                           form.role === role
-                            ? "border-[#13856f] bg-[#e8f6f2]"
+                            ? "border-brand bg-brand-light"
                             : "border-gray-200 bg-gray-50 hover:border-[#d8c3b4]"
                         }`}
                       >
                         <Shield
-                          className={`w-5 h-5 ${form.role === role ? "text-[#13856f]" : "text-gray-400"}`}
+                          className={`w-5 h-5 ${form.role === role ? "text-brand" : "text-gray-400"}`}
                         />
                         <span
-                          className={`text-sm font-semibold capitalize ${form.role === role ? "text-[#13856f]" : "text-gray-600"}`}
+                          className={`text-sm font-semibold capitalize ${form.role === role ? "text-brand" : "text-gray-600"}`}
                         >
                           {role}
                         </span>
@@ -292,7 +292,7 @@ const UltraPremiumSignup = () => {
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="font-bold text-[#13856f] hover:text-[#0c6c59] transition-colors"
+                  className="font-bold text-brand hover:text-brand-darker transition-colors"
                 >
                   Sign In
                 </Link>

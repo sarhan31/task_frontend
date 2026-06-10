@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Users,
@@ -26,35 +26,35 @@ import { formatDate, isTaskOverdue } from "@utils/formatters";
 import { getTaskAssigneeLabel } from "@utils/taskAssignment";
 
 const statusClasses = {
-  Assigned: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
-  assigned: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
-  Accepted: "bg-[#fff8ef] text-[#b5722a] border-[#f0d9be]",
-  accepted: "bg-[#fff8ef] text-[#b5722a] border-[#f0d9be]",
-  Started: "bg-[#fff8ef] text-[#b5722a] border-[#f0d9be]",
-  started: "bg-[#fff8ef] text-[#b5722a] border-[#f0d9be]",
-  Rejected: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
-  rejected: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
-  Denied: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
-  denied: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
-  completed: "bg-[#e8f6f2] text-[#13856f] border-[#b8e0d8]",
-  Completed: "bg-[#e8f6f2] text-[#13856f] border-[#b8e0d8]",
-  in_progress: "bg-[#fff8ef] text-[#b5722a] border-[#f0d9be]",
-  "In Progress": "bg-[#fff8ef] text-[#b5722a] border-[#f0d9be]",
-  todo: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
-  Pending: "bg-[#fdf0ef] text-[#8d514f] border-[#f4c5c1]",
-  in_review: "bg-[#fff4ef] text-[#c26a44] border-[#f1d3c7]",
-  "In Review": "bg-[#fff4ef] text-[#c26a44] border-[#f1d3c7]",
+  Assigned: "bg-[#fdf0ef] text-warm border-[#f4c5c1]",
+  assigned: "bg-[#fdf0ef] text-warm border-[#f4c5c1]",
+  Accepted: "bg-surface-hover text-warm-accent border-warm-pale",
+  accepted: "bg-surface-hover text-warm-accent border-warm-pale",
+  Started: "bg-surface-hover text-warm-accent border-warm-pale",
+  started: "bg-surface-hover text-warm-accent border-warm-pale",
+  Rejected: "bg-[#fdf0ef] text-warm border-[#f4c5c1]",
+  rejected: "bg-[#fdf0ef] text-warm border-[#f4c5c1]",
+  Denied: "bg-[#fdf0ef] text-warm border-[#f4c5c1]",
+  denied: "bg-[#fdf0ef] text-warm border-[#f4c5c1]",
+  completed: "bg-brand-light text-brand border-brand-muted",
+  Completed: "bg-brand-light text-brand border-brand-muted",
+  in_progress: "bg-surface-hover text-warm-accent border-warm-pale",
+  "In Progress": "bg-surface-hover text-warm-accent border-warm-pale",
+  todo: "bg-[#fdf0ef] text-warm border-[#f4c5c1]",
+  Pending: "bg-[#fdf0ef] text-warm border-[#f4c5c1]",
+  in_review: "bg-surface-muted text-[#c26a44] border-[#f1d3c7]",
+  "In Review": "bg-surface-muted text-[#c26a44] border-[#f1d3c7]",
 };
 
 const priorityClasses = {
-  urgent: "text-[#8d514f]",
-  Urgent: "text-[#8d514f]",
+  urgent: "text-warm",
+  Urgent: "text-warm",
   high: "text-[#c26a44]",
   High: "text-[#c26a44]",
-  medium: "text-[#b5722a]",
-  Medium: "text-[#b5722a]",
-  low: "text-[#13856f]",
-  Low: "text-[#13856f]"
+  medium: "text-warm-accent",
+  Medium: "text-warm-accent",
+  low: "text-brand",
+  Low: "text-brand"
 };
 
 const fadeUp = (delay = 0) => ({
@@ -142,13 +142,13 @@ const AdminDashboard = () => {
         if (statsRes.data?.recentActivities) {
           const mappedActivities = statsRes.data.recentActivities.map(act => {
             let icon = UserPlus;
-            let tone = "bg-[#e8f6f2] text-[#13856f]";
+            let tone = "bg-brand-light text-brand";
             if (act.text.includes('task') || act.text.includes('assignment')) {
               icon = ClipboardCheck;
-              tone = "bg-[#fff8ef] text-[#b5722a]";
+              tone = "bg-surface-hover text-warm-accent";
             } else if (act.text.includes('analytics') || act.text.includes('report')) {
               icon = BarChart3;
-              tone = "bg-[#fdf0ef] text-[#8d514f]";
+              tone = "bg-[#fdf0ef] text-warm";
             }
             return {
               id: act.id || act._id || Math.random().toString(),
@@ -161,7 +161,7 @@ const AdminDashboard = () => {
           setActivities(mappedActivities);
         } else {
           setActivities([
-            { id: 1, title: "Database reporting pipeline loaded", time: "Just now", icon: ShieldCheck, tone: "bg-[#e8f6f2] text-[#13856f]" }
+            { id: 1, title: "Database reporting pipeline loaded", time: "Just now", icon: ShieldCheck, tone: "bg-brand-light text-brand" }
           ]);
         }
 
@@ -197,13 +197,13 @@ const AdminDashboard = () => {
             {...fadeUp(0)}
             className="relative overflow-hidden rounded-[28px] border border-white/65 bg-white/88 p-7 shadow-[0_8px_40px_rgba(90,55,20,0.12)] backdrop-blur-sm"
           >
-            <div className="absolute left-0 top-8 bottom-8 w-1.5 rounded-full bg-[#13856f]" />
-            <div className="pointer-events-none absolute right-6 top-6 h-28 w-28 rounded-full bg-[#efbf91]/20 blur-2xl" />
-            <div className="pointer-events-none absolute right-24 bottom-1 h-20 w-20 rounded-full bg-[#13856f]/10 blur-2xl" />
+            <div className="absolute left-0 top-8 bottom-8 w-1.5 rounded-full bg-brand" />
+            <div className="pointer-events-none absolute right-6 top-6 h-28 w-28 rounded-full bg-warm-light/20 blur-2xl" />
+            <div className="pointer-events-none absolute right-24 bottom-1 h-20 w-20 rounded-full bg-brand/10 blur-2xl" />
 
             <div className="flex flex-col gap-5 pl-6 lg:flex-row lg:items-start lg:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#13856f]">
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-brand">
                   Admin overview
                 </p>
                 <h1 className="mt-1 font-display text-3xl font-bold leading-tight text-slate-900">
@@ -216,8 +216,8 @@ const AdminDashboard = () => {
               </div>
 
               <div className="flex w-full min-w-0 flex-col gap-3 sm:flex-row lg:w-auto">
-                <div className="flex w-full min-w-0 items-center gap-3 rounded-2xl border border-[#ead8cb] bg-white/90 px-4 py-3 shadow-sm sm:min-w-[220px]">
-                  <Search className="h-4 w-4 text-[#13856f]" />
+                <div className="flex w-full min-w-0 items-center gap-3 rounded-2xl border border-border bg-white/90 px-4 py-3 shadow-sm sm:min-w-[220px]">
+                  <Search className="h-4 w-4 text-brand" />
                   <input
                     type="text"
                     placeholder="Search users or tasks"
@@ -233,13 +233,13 @@ const AdminDashboard = () => {
               {[
                 {
                   label: `${stats.activeUsers} Active Users`,
-                  cls: "bg-[#e8f6f2] text-[#13856f]",
+                  cls: "bg-brand-light text-brand",
                 },
                 {
                   label: `${stats.pendingTasks} Pending Reviews`,
-                  cls: "bg-[#fff8ef] text-[#b5722a]",
+                  cls: "bg-surface-hover text-warm-accent",
                 },
-                { label: "Platform Secure", cls: "bg-[#fdf0ef] text-[#8d514f]" },
+                { label: "Platform Secure", cls: "bg-[#fdf0ef] text-warm" },
               ].map((pill) => (
                 <span
                   key={pill.label}
@@ -330,7 +330,7 @@ const AdminDashboard = () => {
                     System Health
                   </h2>
                 </div>
-                <ShieldCheck className="h-5 w-5 text-[#13856f]" />
+                <ShieldCheck className="h-5 w-5 text-brand" />
               </div>
 
               <div className="space-y-4">
@@ -339,19 +339,19 @@ const AdminDashboard = () => {
                     label: "Completion rate",
                     value: `${stats.taskCompletionRate}%`,
                     width: `${stats.taskCompletionRate}%`,
-                    tone: "bg-[#13856f]",
+                    tone: "bg-brand",
                   },
                   {
                     label: "Active user ratio",
                     value: `${stats.activeUserRatio}%`,
                     width: `${stats.activeUserRatio}%`,
-                    tone: "bg-[#efbf91]",
+                    tone: "bg-warm-light",
                   },
                   {
                     label: "Resolved alerts",
                     value: `${stats.resolvedAlerts}%`,
                     width: `${stats.resolvedAlerts}%`,
-                    tone: "bg-[#8d514f]",
+                    tone: "bg-warm",
                   },
                 ].map((item) => (
                   <div key={item.label}>
@@ -363,7 +363,7 @@ const AdminDashboard = () => {
                         {item.value}
                       </span>
                     </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-[#f4ddd0]">
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-border-light">
                       <div
                         className={`h-full rounded-full ${item.tone}`}
                         style={{ width: item.width }}
@@ -373,7 +373,7 @@ const AdminDashboard = () => {
                 ))}
               </div>
 
-              <div className="mt-6 rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-4">
+              <div className="mt-6 rounded-2xl border border-border-light bg-surface-card p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400">
                   Quick insight
                 </p>
@@ -388,7 +388,7 @@ const AdminDashboard = () => {
             {...fadeUp(0.3)}
             className="min-w-0 overflow-hidden rounded-[24px] border border-white/65 bg-white/88 shadow-[0_4px_24px_rgba(90,55,20,0.09)] backdrop-blur-sm"
           >
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#f4ddd0] px-6 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border-light px-6 py-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
                   Operations
@@ -401,8 +401,8 @@ const AdminDashboard = () => {
 
             <div className="overflow-x-auto">
               {recentTasksFiltered.length > 0 ? (
-                <table className="min-w-full divide-y divide-[#f4ddd0] text-left">
-                  <thead className="bg-[#fffaf6]">
+                <table className="min-w-full divide-y divide-border-light text-left">
+                  <thead className="bg-surface-card">
                     <tr className="text-xs uppercase tracking-[0.16em] text-slate-400">
                       <th className="px-6 py-4 font-semibold">Task</th>
                       <th className="px-6 py-4 font-semibold">Assignee</th>
@@ -411,11 +411,11 @@ const AdminDashboard = () => {
                       <th className="px-6 py-4 font-semibold">Progress</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#f4ddd0] bg-white/60">
+                  <tbody className="divide-y divide-border-light bg-white/60">
                     {recentTasksFiltered.map((task) => (
                       <tr
                         key={task.id}
-                        className="transition-colors hover:bg-[#fffaf6]"
+                        className="transition-colors hover:bg-surface-card"
                       >
                         <td className="px-6 py-4">
                           <p className="text-sm font-semibold text-slate-800">
@@ -448,9 +448,9 @@ const AdminDashboard = () => {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
-                            <div className="h-2 w-28 overflow-hidden rounded-full bg-[#f4ddd0]">
+                            <div className="h-2 w-28 overflow-hidden rounded-full bg-border-light">
                               <div
-                                className="h-full rounded-full bg-[#13856f]"
+                                className="h-full rounded-full bg-brand"
                                 style={{ width: `${Math.max(0, Math.min(100, task.progress))}%` }}
                               />
                             </div>
@@ -481,11 +481,11 @@ const AdminDashboard = () => {
                   Admin Panel
                 </h2>
               </div>
-              <Bell className="h-4 w-4 text-[#13856f]" />
+              <Bell className="h-4 w-4 text-brand" />
             </div>
 
-            <div className="flex items-center gap-3 rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#13856f] text-lg font-bold text-white">
+            <div className="flex items-center gap-3 rounded-2xl border border-border-light bg-surface-card p-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-lg font-bold text-white">
                 {user?.name?.charAt(0)?.toUpperCase() || "A"}
               </div>
               <div>
@@ -507,7 +507,7 @@ const AdminDashboard = () => {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-[#f4ddd0] bg-white p-3 text-center"
+                  className="rounded-2xl border border-border-light bg-white p-3 text-center"
                 >
                   <p className="text-lg font-bold text-slate-800">
                     {item.value}
@@ -530,7 +530,7 @@ const AdminDashboard = () => {
                   Recent Activity
                 </h2>
               </div>
-              <Activity className="h-4 w-4 text-[#13856f]" />
+              <Activity className="h-4 w-4 text-brand" />
             </div>
 
             <div className="space-y-3.5">
@@ -564,16 +564,16 @@ const AdminDashboard = () => {
                   Top Contributors
                 </h2>
               </div>
-              <Users className="h-4 w-4 text-[#13856f]" />
+              <Users className="h-4 w-4 text-brand" />
             </div>
             <div className="space-y-3">
               {contributors.length > 0 ? (
                 contributors.map((member, index) => (
                   <div
                     key={member.id || member._id}
-                    className="flex items-center gap-3 rounded-2xl border border-[#f4ddd0] bg-[#fffaf6] p-3"
+                    className="flex items-center gap-3 rounded-2xl border border-border-light bg-surface-card p-3"
                   >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#8d514f] text-sm font-semibold text-white">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-warm text-sm font-semibold text-white">
                       {member.name?.charAt(0)?.toUpperCase() || "U"}
                     </div>
                     <div className="min-w-0 flex-1">
@@ -584,7 +584,7 @@ const AdminDashboard = () => {
                         {member.role || 'User'}
                       </p>
                     </div>
-                    <span className="text-xs font-semibold text-[#13856f]">
+                    <span className="text-xs font-semibold text-brand">
                       {member.tasksCount} tasks
                     </span>
                   </div>
